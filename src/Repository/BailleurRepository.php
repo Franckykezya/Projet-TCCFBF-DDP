@@ -71,16 +71,4 @@ class BailleurRepository extends ServiceEntityRepository
         ;
     }
     */
-
-    /**
-      * @return bailleur[] Returns an array of bailleur objects
-    */
-    public function findAllVisible(): array
-    {
-        return $this->findVisibleQuery()
-            //->orderBy('b.nomBailleur', 'ASC')
-            ->getQuery()
-            ->getResult(); 
-    }
-
 }
