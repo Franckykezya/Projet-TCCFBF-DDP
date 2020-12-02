@@ -1,0 +1,79 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+    
+         <div id="page-wrapper" >
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                     <h2>Ajout bailleur / Secteur / Type financement / Taux d'interet</h2>   
+                        <h5>Formulaire pour ajouter le bailleur de fond / le secteur / le type financement / le taux d'interet</h5>
+                       
+                    </div>
+                </div>
+                 <!-- /. ROW  -->
+                 <hr />
+               <div class="row">
+                <div class="col-md-12">
+                    <!-- Form Elements -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Formulaire
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3>Creation de bailleur de fond</h3>
+                          {{ form_start(formBailleur) }}
+
+                              {{ form_row(formBailleur.nom, {'label' : 'Nom du bailleur' , 'attr' : {'placeholder':"Nom du bailleur"}}) }}
+                              {{ form_row(formBailleur.secteur, {'label' : 'Secteurs d\'intervention', 'attr' : {'placeholder':"Secteurs d'intervention"}}) }}
+                              <a class="dropdown-item" href="{{ path('create_secteur_intervention') }}">Ajout de secteur d'intervention</a>
+                              {{ form_row(formBailleur.typefinancement, {'label' : 'Type de financement', 'attr' : {'placeholder':"Type de financement"}}) }}
+                              {{ form_row(formBailleur.part_finance, {'label' : 'Part finance par le bailleur de fonds' ,'attr' : {'placeholder':"Part finance par le bailleur de fonds"}}) }}
+                              {{ form_row(formBailleur.maturite_facilite, {'label' : 'Maturite de la facilité', 'attr' : {'placeholder':"Maturite de la facilité"}}) }}
+                              {{ form_row(formBailleur.periode_grace, {'label' : 'Periode de grace de la facilité', 'attr' : {'placeholder':"Periode de grace de la facilité"}}) }}
+                              {{ form_row(formBailleur.taux, {'label' : 'Taux d\'interet', 'attr' : {'placeholder':"Taux d'interet"}}) }}
+                              {{ form_row(formBailleur.differentiel_interet, {'label' : 'Differentiel d\'interet', 'attr' : {'placeholder':"Differentiel d'interet"}}) }}
+                              {{ form_row(formBailleur.frais_gestion, {'label' : 'Frais de gestion', 'attr' : {'placeholder':"Frais de gestion"}}) }}
+                              {{ form_row(formBailleur.commission_engagement, {'label' : 'Commision d\'engagement', 'attr' : {'placeholder':"Commision d'engagement"}}) }}
+                              {{ form_row(formBailleur.commission_service, {'label' : 'Commission de service', 'attr' : {'placeholder':"Commission de service"}}) }}
+                              {{ form_row(formBailleur.commission_initiale, {'label' : 'Commision initial', 'attr' : {'placeholder':"Commision initial"}}) }}
+                              {{ form_row(formBailleur.commission_arrangement, {'label' : 'Commision d\'arrangement', 'attr' : {'placeholder':"Commision d'arrangement"}}) }}
+                              {{ form_row(formBailleur.commission_agent, {'label' : 'Commision d\'agent', 'attr' : {'placeholder':"Commision d'agent"}}) }}
+                              {{ form_row(formBailleur.maturite_lettre_credit, {'label' : 'Maturité de la lettre de credit', 'attr' : {'placeholder':"Maturité de la lettre de credit"}}) }}
+                              {{ form_row(formBailleur.frais_lies_lettre_credit, {'label' : 'Frais liés à la mise en place de la lettre de credit', 'attr' : {'placeholder':"Frais liés à la mise en place de la lettre de credit"}}) }}
+                              {{ form_row(formBailleur.frais_lies_refinancement, {'label' : 'Frais liés au refinancement de la lettre de credit', 'attr' : {'placeholder':"Frais liés au refinancement de la lettre de credit"}}) }}
+                              {{ form_row(formBailleur.frais_et_debours, {'label' : 'Frais et debours', 'attr' : {'placeholder':"Frais et debours"}}) }}
+                              {{ form_row(formBailleur.prime_assurance_et_frais_garantie, {'label' : 'Prime d\'assurance / Frais de garantie', 'attr' : {'placeholder':"Prime d'assurance / Frais de garantie"}}) }}
+                              {{ form_row(formBailleur.prime_attenuation_risque_credit, {'label' : 'Prime d\'attenuation du risque de credit', 'attr' : {'placeholder':"Prime d'attenuation du risque de credit"}}) }}
+
+                              <button type="Submit" class="btn btn-info" name="" id="" value="">
+                                Enregister
+                              </button>
+
+                          {{ form_end(formBailleur) }}
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- End Form Elements -->
+                </div>
+            </div>
+                <!-- /. ROW  -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>More Customization</h3>
+                         <p>
+                        For more customization for this template or its components please visit official bootstrap website i.e getbootstrap.com or <a href="http://getbootstrap.com/components/" target="_blank">click here</a> . We hope you will enjoy our template. This template is easy to use, light weight and made with love by binarycart.com 
+                        </p>
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+    </div>
+         
+
+{% endblock %}

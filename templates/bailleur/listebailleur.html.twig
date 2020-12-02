@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des bailleurs{% endblock %}
+
+{% block body %}
+    <div id="wrapper">
+        <!-- /. NAV SIDE  -->
+            <div id="page-wrapper" >
+                <div id="page-inner">
+                    <div class="row">
+                        <div class="col-md-12">
+                        <h2>Listes des bailleurs</h2>   
+                            <h5>Carte representé la liste des bailleurs de fond</h5>
+                        
+                        </div>
+                    </div>
+                    <!-- /. ROW  -->
+                    <hr />
+                <div class="row">
+                    {% for bailleur in bailleurs %}
+
+                    
+                        <div class="col-md-4 col-sm-4">
+                            <div class="panel panel-danger">
+                                <div class="panel-heading">
+                                {{bailleur.nom}}
+                                </div>
+                                <div class="panel-body">
+                                    <p>tanjona kezya test</p>
+                                </div>
+                                <div class="panel-footer">
+                                <a href="{{path('affiche_bailleur', {'id': bailleur.id})}}" class="btn btn-danger">Afficher</a>
+                                </div>
+                            </div>
+                        </div>
+                   
+                    {% endfor %}
+                 </div>
+                <!-- /. ROW  -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="{{path('create_bailleur')}}" class="btn btn-primary btn-lg" role="button">Ajout bailleur</a>
+                    </div>
+                </div>
+            <!-- /. ROW  -->
+
+
+            </div>
+            <!-- /. PAGE INNER  -->
+        </div>
+            <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+
+            {
+    {{knp_pagination_render(bailleurs)}}
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="../assets/js/jquery-1.10.2.js"></script>
+      <!-- BOOTSTRAP SCRIPTS -->
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="../assets/js/jquery.metisMenu.js"></script>
+      <!-- CUSTOM SCRIPTS -->
+    <script src="../assets/js/custom.js"></script>
+
+
+{% endblock %}

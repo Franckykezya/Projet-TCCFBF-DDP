@@ -1,0 +1,37 @@
+{% extends 'base.html.twig'%}
+{% block body %}
+    <h1>affiche bailleur</h1>
+
+    nom : {{bailleur.nom}} </br>
+    secteur d'intervention : {% for secteur in secteurs %} {{secteur.nom}},  {% endfor %} </br>
+    type de financement :  {% for financement in financements %} {{financement.nom}},  {% endfor %} </br>
+    part finance par le bailleurs de fond : {{bailleur.PartFinance}} % du coût du projet </br>
+    maturite de la facilite : {{bailleur.MaturiteFacilite}} ans </br>
+    periode de grace de la facilite : {{bailleur.PeriodeGrace}} ans </br>
+    taux d'interet : mbl tsi vita </br>
+    differentiel d'interet : {{bailleur.DifferentielInteret}} </br>
+    frais de gestion : {{bailleur.FraisGestion}} </br>
+    commission d'engagement : {{bailleur.commissionEngagement}} % </br>
+    commission de service : {{bailleur.CommissionService}} % </br>
+    commission initiale : {{bailleur.CommissionInitiale}} </br>
+    commission d'arrangement : {{bailleur.CommissionArrangement}}</br>
+    commission d'agent : {{bailleur.commissionAgent}} </br>
+    maturite de la lettre de credit : {{bailleur.MaturiteLettreCredit}}</br>
+    frais lies a la mise en place de la lettre de credit : {{bailleur.FraisLiesLettreCredit}}</br>
+    frais lies au refinancement de la lettre de credit : {{bailleur.FraisLiesRefinancement}}</br>
+    <hr>
+    element-don : mbla tsy vita :p </br>
+    <hr>
+    frais et debours : {{bailleur.FraisEtDebours}}</br>
+    prime d'assurance / frais de garantie : {{bailleur.PrimeAssuranceEtFraisGarantie}}</br>
+    prime d'attenuation du risque de credit : {{bailleur.PrimeAttenuationRisqueCredit}}</br>
+    <hr>
+    element-don (teneant compte frais et debours et si assurance payée par l'emprunteur) : mbl tsi vita ihani koa :p 
+    <hr>
+    taux d'interet effectif : mbl tsi vita :p 
+
+
+
+
+   
+{% endblock %}

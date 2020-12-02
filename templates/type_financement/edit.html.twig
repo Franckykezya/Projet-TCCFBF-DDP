@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit TypeFinancement{% endblock %}
+
+{% block body %}
+    <h1>Edit TypeFinancement</h1>
+
+    {{ include('type_financement/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('type_financement_index') }}">back to list</a>
+
+    {{ include('type_financement/_delete_form.html.twig') }}
+{% endblock %}

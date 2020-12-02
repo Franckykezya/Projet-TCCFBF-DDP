@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <h1>listes des secteurs <h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for secteur in secteurs %}
+                <tr>
+                    <td>{{ secteur.nom}}</td>
+                    <td>
+                        <a href="{{ path('secteur_editer', {'id': secteur.id}) }}">editer</a>
+                        <a href="#">suprimer</a>
+                    </td>
+                </tr>
+
+            {% endfor %}
+            
+        </tbody>
+    </table>
+   
+{% endblock %}
