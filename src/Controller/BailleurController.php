@@ -16,6 +16,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 use Knp\Component\Pager\Event\PaginationEvent;
 use Knp\Component\Pager\PaginatorInterface;
 
+
 class BailleurController extends AbstractController
 {
     /**
@@ -35,9 +36,16 @@ class BailleurController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('bailleur/index.html.twig', [
-            'controller_name' => 'BlogController',
-        ]);
+        if ($this->getUser() === null){
+            return $this->redirectToRoute('security_login');
+        }else
+        {
+            return $this->render('bailleur/index.html.twig', [
+                'controller_name' => 'BlogController',
+            ]);
+
+        }
+        
     }
     /**
      * @Route("/bailleur/ajout", name="create_bailleur")
@@ -69,7 +77,7 @@ class BailleurController extends AbstractController
     public function liste_bailleur(Request $request, PaginatorInterface $paginator, BailleurRepository $bailleurRepository) : Response
     {
         //$donnees = $this->getDoctrine()->getRepository(Bailleur::class)->findyBy();
-        $bailleurs = $paginator->paginate($this->bailleurRepository->findAll(), $request->query->getInt('page', 1), 6 );
+        $bailleurs = $paginator->paginate($this->bailleurRepository->findAll(), $request->query->getInt('page', 1), 4 );
         
         //$bailleurs = $bailleurRepository->findAll();
         //dump($bailleurs);
