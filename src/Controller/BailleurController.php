@@ -69,7 +69,7 @@ class BailleurController extends AbstractController
     public function liste_bailleur(Request $request, PaginatorInterface $paginator, BailleurRepository $bailleurRepository) : Response
     {
         //$donnees = $this->getDoctrine()->getRepository(Bailleur::class)->findyBy();
-        $bailleurs = $paginator->paginate($this->bailleurRepository->findAll(), $request->query->getInt('page', 1), 6 );
+        $bailleurs = $paginator->paginate($this->bailleurRepository->findAll(), $request->query->getInt('page', 1), 4 );
         
         //$bailleurs = $bailleurRepository->findAll();
         //dump($bailleurs);

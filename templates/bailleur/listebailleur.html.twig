@@ -37,6 +37,11 @@
                     {% endfor %}
                  </div>
                 <!-- /. ROW  -->
+
+                <div class="pagination">
+                    {{knp_pagination_render(bailleurs)}}
+                </div>
+                
                 <div class="row">
                     <div class="col-md-12">
                         <a href="{{path('create_bailleur')}}" class="btn btn-primary btn-lg" role="button">Ajout bailleur</a>
@@ -52,8 +57,6 @@
     </div>
     <!-- /. WRAPPER  -->
 
-            {
-    {{knp_pagination_render(bailleurs)}}
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->
     <script src="../assets/js/jquery-1.10.2.js"></script>
