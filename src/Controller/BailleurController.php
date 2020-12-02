@@ -57,17 +57,24 @@ class BailleurController extends AbstractController
         //  }
         $bailleur = new Bailleur();
         $form = $this->createForm(BailleurType::class, $bailleur);
+
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
         {
             $repo = $this->getDoctrine()->getManager();
+             //ajout element don
+            $element = new GrantElement($bailleur->getMaturiteFacilite(),$bailleur->getPeriodeGrace(),2,0,"Equal Principal Payment");
+            $val = $element->calcule_element_don();
+            dump($val);
+            $bailleur->setElementDon($val);
             $repo->persist($bailleur);
             $repo->flush();
             return $this->redirectToRoute('liste_bailleur');
         }
         return $this->render("bailleur/createbailleur.html.twig",[
-            'formBailleur' => $form->createView()
+            'formBailleur' => $form->createView(),
+
         ]);
     }
 
@@ -77,7 +84,7 @@ class BailleurController extends AbstractController
     public function liste_bailleur(Request $request, PaginatorInterface $paginator, BailleurRepository $bailleurRepository) : Response
     {
         //$donnees = $this->getDoctrine()->getRepository(Bailleur::class)->findyBy();
-        $bailleurs = $paginator->paginate($this->bailleurRepository->findAll(), $request->query->getInt('page', 1), 4 );
+        $bailleurs = $paginator->paginate($this->bailleurRepository->findAll(), $request->query->getInt('page', 1), 6);
         
         //$bailleurs = $bailleurRepository->findAll();
         //dump($bailleurs);
@@ -108,7 +115,7 @@ class BailleurController extends AbstractController
      */
     public function elementdon(){
         //$M, $G, $A, $R, $payementProfile
-        $element = new GrantElement(10,2.5,2,0.025,"Equal Principal Payment");
+        $element = new GrantElement(38,6,2,0.00,"Equal Principal Payment");
         $val = $element->calcule_element_don();
         dump($element);
 

@@ -120,6 +120,11 @@ class Bailleur
      */
     private $taux;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $elementdon;
+
     
 
     public function __construct()
@@ -393,6 +398,18 @@ class Bailleur
     public function setTaux(?TauxInteret $taux): self
     {
         $this->taux = $taux;
+
+        return $this;
+    }
+
+    public function getElementdon(): ?float
+    {
+        return $this->elementdon;
+    }
+
+    public function setElementdon(float $elementdon): self
+    {
+        $this->elementdon = $elementdon;
 
         return $this;
     }
