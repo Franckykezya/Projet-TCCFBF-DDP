@@ -68,6 +68,7 @@
         <!-- /. NAV SIDE  -->
             <div id="page-wrapper" >
                 <div id="page-inner">
+<<<<<<< HEAD
                     <h1>Type financement</h1>
 
                     <table class="table">
@@ -112,6 +113,40 @@
                 </div>   
             </div>
         </div>
+=======
+            <h1>TypeFinancement index</h1>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for type_financement in type_financements %}
+                    <tr>
+                        <td>{{ type_financement.id }}</td>
+                        <td>{{ type_financement.nom }}</td>
+                        <td>
+                            <a href="{{ path('type_financement_show', {'id': type_financement.id}) }}">show</a>
+                            <a href="{{ path('type_financement_edit', {'id': type_financement.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+    <a href="{{ path('type_financement_new') }}">Create new</a>
+    </div>
+    </div>
+>>>>>>> 6b65a20713a8a715e882d247422dcfad39a2750a
     </div>
 
 {% endblock %}
+            
