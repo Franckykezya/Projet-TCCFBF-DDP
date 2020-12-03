@@ -10,6 +10,7 @@ use App\Entity\Bailleur;
 use App\Entity\SecteurIntervention;
 use App\Form\BailleurType;
 use App\Form\SecteurInterventionType;
+use App\Form\TypeFinancementType;
 use App\Repository\BailleurRepository;
 use App\GrantElement;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -110,6 +111,38 @@ class BailleurController extends AbstractController
 
 
     }
+
+    /**
+     * @Route("/bailleur/editer/{id}", name="modifier_bailleur")
+     */
+    public function editer_bailleur(Request $request, Bailleur $bailleur)
+    {
+        $formBailleur = $this->createForm(BailleurType::class, $bailleur );
+        $formBailleur->handleRequest($request);
+
+        if ($formBailleur->isSubmitted() && $formBailleur->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('liste_bailleur');
+        }
+        return $this->render('bailleur/edit.html.twig',[
+            'bailleur' => $bailleur,
+            'formBailleur' => $formBailleur->createView()
+        ]);
+    }
+    /**
+     * @Route("/{id}", name="supprimer_bailleur", methods={"DELETE"})
+     */
+    public function delete(Request $request, Bailleur $bailleur): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$bailleur->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($bailleur);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('liste_bailleur');
+    }
+
     /**
      * @Route("/grantelement", name="grantelement")
      */
