@@ -3,6 +3,10 @@
 {% block title %}TypeFinancement{% endblock %}
 
 {% block body %}
+   <div id="wrapper">
+        <!-- /. NAV SIDE  -->
+            <div id="page-wrapper" >
+                <div id="page-inner">
     <h1>TypeFinancement</h1>
 
     <table class="table">
@@ -23,4 +27,7 @@
     <a href="{{ path('type_financement_edit', {'id': type_financement.id}) }}">edit</a>
 
     {{ include('type_financement/_delete_form.html.twig') }}
+    </div>
+    </div>
+    </div>
 {% endblock %}

@@ -3,9 +3,16 @@
 {% block title %}New TypeFinancement{% endblock %}
 
 {% block body %}
+   <div id="wrapper">
+        <!-- /. NAV SIDE  -->
+            <div id="page-wrapper" >
+                <div id="page-inner">
     <h1>Create new TypeFinancement</h1>
 
     {{ include('type_financement/_form.html.twig') }}
 
     <a href="{{ path('type_financement_index') }}">back to list</a>
+    </div>
+    </div>
+    </div>
 {% endblock %}
