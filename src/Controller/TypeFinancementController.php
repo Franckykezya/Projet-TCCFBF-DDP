@@ -16,12 +16,27 @@ use Symfony\Component\Routing\Annotation\Route;
 class TypeFinancementController extends AbstractController
 {
     /**
-     * @Route("/", name="type_financement_index", methods={"GET"})
+     * @Route("/", name="type_financement_index", methods={"GET","POST"})
+     * @Route("/ajout", name="type_financement_new", methods={"GET","POST"})
      */
-    public function index(TypeFinancementRepository $typeFinancementRepository): Response
+    public function index(Request $request, TypeFinancementRepository $typeFinancementRepository): Response
     {
+
+        $typeFinancement = new TypeFinancement();
+        $form = $this->createForm(TypeFinancementType::class, $typeFinancement);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($typeFinancement);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('type_financement_index');
+        }
+
         return $this->render('type_financement/index.html.twig', [
             'type_financements' => $typeFinancementRepository->findAll(),
+            'form' => $form->createView(),
         ]);
     }
 

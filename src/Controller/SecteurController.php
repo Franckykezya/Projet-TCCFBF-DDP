@@ -35,12 +35,27 @@ class SecteurController extends AbstractController
     }
     /**
      * @Route("/secteur/liste", name ="secteur_liste")
+     * @Route("/secteur/ajout", name="create_secteur_intervention")
      */
-    public function liste_secteur_intervention(SecteurInterventionRepository $secteur_repo): Response
+    public function liste_secteur_intervention(SecteurInterventionRepository $secteur_repo, Request $request): Response
     {
+        $secteurIntervention = new SecteurIntervention;
+        $form = $this->createForm(SecteurInterventionType::class, $secteurIntervention);
+        
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($secteurIntervention);
+            $em->flush();
+            return $this->redirectToRoute('secteur_liste');
+        }
+
         $secteurs = $secteur_repo->findAll();
         return $this->render("secteur/liste_secteur_intervention.html.twig", [
-            "secteurs" => $secteurs
+            "secteurs" => $secteurs,
+            'formSecteurIntervention' => $form->createView(),
         ]);
     }
     /**
