@@ -25,7 +25,7 @@ class TypeFinancementController extends AbstractController
         $typeFinancement = new TypeFinancement();
         $form = $this->createForm(TypeFinancementType::class, $typeFinancement);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($typeFinancement);
