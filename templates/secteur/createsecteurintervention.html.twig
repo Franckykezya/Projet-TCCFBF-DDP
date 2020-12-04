@@ -1,10 +1,7 @@
-
 {{ form_start(formSecteurIntervention) }}
-
-    {{ form_row(formSecteurIntervention.nom, {'label' : 'Nom du secteur' , 'attr' : {'placeholder':"Nom du secteur"}}) }}
-
-    <button type="Submit" class="btn btn-info" name="" id="" value="">
-        Enregister
+    {{ form_widget(formSecteurIntervention) }}
+    <button class="btn btn-success">
+        {{ button_label|default('Enregistrer') }}
     </button>
-
 {{ form_end(formSecteurIntervention) }}
+
