@@ -12,7 +12,7 @@ use App\Form\BailleurType;
 use App\Form\SecteurInterventionType;
 use App\Form\TypeFinancementType;
 use App\Repository\BailleurRepository;
-use App\GrantElement;
+use App\GrantElement1;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Knp\Component\Pager\Event\PaginationEvent;
 use Knp\Component\Pager\PaginatorInterface;
@@ -65,8 +65,8 @@ class BailleurController extends AbstractController
         {
             $repo = $this->getDoctrine()->getManager();
              //ajout element don
-            $element = new GrantElement($bailleur->getMaturiteFacilite(),$bailleur->getPeriodeGrace(),2,0,"Equal Principal Payment");
-            $val = $element->calcule_element_don();
+            $element = new GrantElement1(0.015,2,$bailleur->getPeriodeGrace(),$bailleur->getMaturiteFacilite());
+            $val = $element->calculElementDonSansCommission();
             dump($val);
             $bailleur->setElementDon($val);
             $repo->persist($bailleur);
@@ -148,9 +148,9 @@ class BailleurController extends AbstractController
      */
     public function elementdon(){
         //$M, $G, $A, $R, $payementProfile
-        $element = new GrantElement(38,6,2,0.00,"Equal Principal Payment");
-        $val = $element->calcule_element_don();
-        dump($element);
+        $element = new GrantElement1(0.015,2,5,25);
+        $val = $element->calculElementDonSansCommission();
+       // dump($element);
 
         return $this->render("bailleur/elementdon.html.twig",[
             'val' => $val

@@ -37,7 +37,7 @@ class GrantElement
         $this->DR = ($this->M - $this->INT);
 
         //I initial default 10%
-        $this->I = 0.1;
+        $this->I = 0.026;
 
         //calcule taux d'actualisation par periode
         $this->D = (pow((1+$this->I),(1/$this->A))-1);
