@@ -29,10 +29,10 @@
                                     <p>Element-don : {{bailleur.Elementdon}} %</p>
                                 </div>
                                 <div class="panel-footer">
-                                <div class = "row">
-                                   <div class = "col-md-3"> <a href="{{path('affiche_bailleur', {'id': bailleur.id})}}" class="btn btn-success"><span class="glyphicon glyphicon-show"> </span>Afficher</a></div>
+                                <div class = "btn-group">
+                                   <div class = "col-md-3"> <a href="{{path('affiche_bailleur', {'id': bailleur.id})}}" class="btn btn-success"><span class="glyphicon glyphicon-eye">_</span>Afficher</a></div>
                                     <div class = "col-md-4"><a href="{{path('modifier_bailleur', {'id': bailleur.id})}}" class="btn btn-info"><span class="glyphicon glyphicon-edit">_</span>Modifier</a></div>
-                                    <div class = "col-md-4">{{ include('bailleur/_delete_form.html.twig') }}</div>
+                                    <div class = "col-md-5">{{ include('bailleur/_delete_form.html.twig') }}</div>
                                 </div>
 
                                 </div>
