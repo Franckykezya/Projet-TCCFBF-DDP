@@ -1,20 +1,9 @@
-{% extends 'base.html.twig' %}
 
-{% block title %}Edit TypeFinancement{% endblock %}
+{{ form_start(form) }}
 
-{% block body %}
-   <div id="wrapper">
-        <!-- /. NAV SIDE  -->
-            <div id="page-wrapper" >
-                <div id="page-inner">
-    <h1>Edit TypeFinancement</h1>
+    {{ form_row(form.nom, {'label' : 'Nom du secteur' , 'attr' : {'placeholder':"Nom du secteur"}}) }}
 
-    {{ include('type_financement/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('type_financement_index') }}">back to list</a>
-
-    {{ include('type_financement/_delete_form.html.twig') }}
-    </div>
-    </div>
-    </div>
-{% endblock %}
+    <button type="Submit" class="btn btn-info" name="" id="" value="">
+        Enregister
+    </button>
+{{ form_end(form) }}
