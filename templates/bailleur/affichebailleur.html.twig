@@ -1,5 +1,12 @@
 {% extends 'base.html.twig'%}
+ {% block stylesheets %}
+        <link href = "/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+ {% endblock %}
 {% block body %}
+<div id="wrapper">
+        <!-- /. NAV SIDE  -->
+            <div id="page-wrapper" >
+                <div id="page-inner">
     <h1>affiche bailleur</h1>
 
     nom : {{bailleur.nom}} </br>
@@ -30,8 +37,7 @@
     <hr>
     taux d'interet effectif : mbl tsi vita :p 
 
-
-
-
-   
+    </div>
+    </div>
+    </div>
 {% endblock %}

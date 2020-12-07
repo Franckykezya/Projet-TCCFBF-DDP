@@ -27,7 +27,7 @@ class SecteurController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($secteurIntervention);
             $em->flush();
-            return $this->redirectToRoute('create_bailleur');
+            return $this->redirectToRoute('secteur_liste');
         }
         return $this->render("secteur/createsecteurintervention.html.twig",[
             'formSecteurIntervention' => $form->createView()
