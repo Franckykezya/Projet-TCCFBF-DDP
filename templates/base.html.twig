@@ -17,15 +17,20 @@
         <!-- GOOGLE FONTS-->
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
         <style>
-        .navbar-default{
-           margin : -09px 0px 0px 0px ;
-           
-           overflow: hidden;
-           /*background-color: #333;*/
-           position: fixed; /* Set the navbar to fixed position */
-           top: 0; /* Position the navbar at the top of the page */
-           /*width: 100%; /* Full width */
-        }
+            .navbar-default{
+               margin : -09px 0px 0px 0px ;
+
+               overflow: hidden;
+               /*background-color: #333;*/
+               position: fixed; /* Set the navbar to fixed position */
+               top: 0; /* Position the navbar at the top of the page */
+               /*width: 100%; /* Full width */
+            }
+            /* Style the active class (and buttons on mouse-over) */
+            .active, .btn:hover {
+                background-color: red;
+                color: #ff00ff;
+            }
         </style>
         {% block stylesheets %}{% endblock %}
     </head>
@@ -68,22 +73,22 @@
 
 
                         <li>
-                            <a class="active-menu" href="{{ path('blog') }}"><i class="fa fa-dashboard fa-2x"></i> Accueil</a>
+                            <a class = "" href="{{ path('blog') }}"><i class="fa fa-dashboard fa-2x"></i> Accueil</a>
                         </li>
                         {# <li>
                             <a href="ui.html"><i class="fa fa-desktop fa-3x"></i> ... </a>
                         </li> #}
-                        <li>
-                            <a href="{{path('liste_bailleur')}}"><i class="fa fa-list fa-2x"></i> Listes des bailleurs de fond</a>
+                        <li id = "btn">
+                            <a class="active" href="{{path('liste_bailleur')}}"><i class="fa fa-list fa-2x"></i> Listes des bailleurs de fond</a>
                         </li>
                         {# <li>
                             <a href="chart.html"><i class="fa fa-bar-chart-o fa-3x"></i> Graphe comparatif</a>
                         </li> #}
                         <li>
-                            <a href="table.html"><i class="fa fa-table fa-2x"></i> Tableau comparatif</a>
+                            <a  class = "active" href="table.html"><i class="fa fa-table fa-2x"></i> Tableau comparatif</a>
                         </li>
                         <li>
-                            <a href="{{ path('create_bailleur') }}"><i class="fa fa-edit fa-2x"></i> Ajout bailleur </a>
+                            <a  class = "active" href="{{ path('create_bailleur') }}"><i class="fa fa-edit fa-2x"></i> Ajout bailleur </a>
                         </li>
 
 
@@ -108,14 +113,13 @@
                                         <li>
                                             <a href="#">...</a>
                                         </li>
-
                                     </ul>
 
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="{{path('grant_element')}}"><i class="fa fa-square-o fa-2x"></i> Grant-Element</a>
+                            <a  class ="active" href="{{path('grant_element')}}"><i class="fa fa-square-o fa-2x"></i> Grant-Element</a>
                         </li>
                     </ul>
                 </div>
@@ -137,6 +141,24 @@
 
         {% block body %} {% endblock %}
         
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+        <script>
+            // Get the container element
+            var btnContainer = document.getElementById("btn");
+
+            // Get all buttons with class="btn" inside the container
+            var btns = btnContainer.getElementsByClassName("active");
+
+            // Loop through the buttons and add the active class to the current/clicked button
+            for (var i = 0; i < btns.length; i++) {
+              btns[i].addEventListener("click", function() {
+                var current = document.getElementsByClassName("active");
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += "-menu";
+              });
+            }
+}
+        </script>
+        {% endblock %}
     </body>
 </html>
