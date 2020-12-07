@@ -1,20 +1,85 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello GrantElementController!{% endblock %}
-
+{% block title %}GrantElementController!{% endblock %}
+ {% block stylesheets %}
+       <style>
+            h1{
+                text-align: center;
+            }
+       </style>
+ {% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div id="wrapper">
+    <div id="page-wrapper" >
+        <div id="page-inner">
+            <h1>calcul de l'élément-don</h1>
+            <div>
+                <form action="{{path('grant_element')}}">
+                    
+                    <div>
+                        <label for="pet-select">Select Repayment Profile</label>
+                        <select name="pets" id="pet-select">
+                            <option value="Equal Principal Payment">Equal Principal Payment</option>
+                            <option value="Annuity">Annuity</option>
+                            <option value="Lump Sum Principal">Lump Sum Principal</option>
+                            <option value="Lump Sum Principal & Interest">Lump Sum Principal & Interest</option>
+                            <option value="Lump Sum Principal & Compound Interest">Lump Sum Principal & Compound Interest </option>
+                        </select>
+                    </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+                    <div>
+                        <label for ="face">Face Value of Loan</label>
+                        <input type="number" min="0" id = "face" name = "face">
+                    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/kezya/Ddp/Projet/Projet-TCCFBF-DDP/src/Controller/GrantElementController.php'|file_link(0) }}">src/Controller/GrantElementController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/kezya/Ddp/Projet/Projet-TCCFBF-DDP/templates/grant_element/index.html.twig'|file_link(0) }}">templates/grant_element/index.html.twig</a></code></li>
-    </ul>
+                    <div>
+                        <label for ="grant">Grant (as part of financing package)</label>
+                        <input type="number" min="0" id = "grant" name = "grant">
+                    </div>
+
+                    <div>
+                        <label for ="commission">Upfront commission</label>
+                        <input type="number" min="0" id = "commission" name = "commission">
+                    </div>
+
+                    <div>
+                        <label for ="management_fees">Select Management fees, below:</label>
+                        <select name="management" id="management_fees">
+                            <option value="Per payment period">Per payment period</option>
+                            <option value="In percent of outstanding loan">In percent of outstanding loan</option>
+                        </select>
+                        <input type="number" min="0" id = "" name = "commission">
+                    </div>
+
+                    <div>
+                        <label for ="interest">Interest rate (per annum)</label>
+                        <input type="number" min="0" id = "interest" name = "interest">
+                    </div>
+
+                    <div>
+                        <label for ="maturity">Maturity</label>
+                        <input type="number" min="0" id = "maturity" name = "maturity">
+                    </div>
+
+                    <div>
+                        <label for ="payments">Payments per annum</label>
+                        <input type="number" min="0" id = "payments" name = "payments">
+                    </div>
+
+                    <div>
+                        <label for ="graceperiod">Grace period (in years)</label>
+                        <input type="number" min="0" id = "graceperiod" name = "graceperiod">
+                    </div>
+
+                    <div>
+                        <button type="submit" class ="btn btn-primary">calculer</button>
+                    </div>
+                     
+                </form>
+            </div>
+
+   
+        </div>
+    </div>
 </div>
 {% endblock %}
