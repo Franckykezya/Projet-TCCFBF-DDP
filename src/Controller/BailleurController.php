@@ -12,6 +12,9 @@ use App\Form\BailleurType;
 use App\Form\SecteurInterventionType;
 use App\Form\TypeFinancementType;
 use App\Repository\BailleurRepository;
+use App\Repository\SecteurInterventionRepository;
+use App\Repository\TypeFinancementRepository;
+use App\Repository\TauxInteretRepository;
 use App\GrantElement1;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Knp\Component\Pager\Event\PaginationEvent;
@@ -154,6 +157,24 @@ class BailleurController extends AbstractController
 
         return $this->render("bailleur/elementdon.html.twig",[
             'val' => $val
+        ]);
+    }
+
+      /**
+     * @Route("/bailleur/tableaucomparatif", name="tableau_comparatif")
+     */
+    public function tableaucomparatif(BailleurRepository $bailleurrep, SecteurInterventionRepository $secteurInterventionrep, TypeFinancementRepository $typefinancementrep, TauxInteretRepository $tauxinteretrep) : Response
+    {   
+        $bailleurs = $bailleurrep->findAll();
+        $secteur = $secteurInterventionrep->findAll();
+        $typefinancement = $typefinancementrep->findAll();
+        $tauxinteret = $tauxinteretrep->findAll();
+
+        return $this->render("bailleur/tableau_comparatif.html.twig",[
+            'bailleurs' => $bailleurs,
+            'secteur' => $secteur,
+            'typefinancement' => $typefinancement,
+            'tauxinteret' => $tauxinteret,
         ]);
     }
 }
