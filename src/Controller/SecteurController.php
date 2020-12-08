@@ -48,7 +48,7 @@ class SecteurController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($secteurIntervention);
             $em->flush();
-            return $this->redirectToRoute('create_bailleur');
+            return $this->redirectToRoute('secteur_liste');
         }
 
         $secteurs = $secteur_repo->findAll();
@@ -76,5 +76,19 @@ class SecteurController extends AbstractController
             "secteurs" => $secteur,
             "form" => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/secteur/delete/{id}", name="secteur_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, SecteurIntervention $secteur): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$secteur->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($secteur);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('secteur_liste');
     }
 }

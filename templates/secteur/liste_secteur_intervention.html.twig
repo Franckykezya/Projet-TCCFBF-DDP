@@ -47,7 +47,7 @@
         color: red;
         }
         .popup .close:hover {
-        color: #06D85F;
+        color: red;
         }
         .popup .content {
         max-height: 30%;
@@ -85,7 +85,7 @@
                         <td>
                             <a href="{{ path('secteur_editer', {'id': secteur.id}) }}" class="btn btn-info">Modifier</a>
                                 <td>
-                                    <form method="post" action=" " onsubmit="return confirm('Vous voulez supprimer ce secteur);">
+                                    <form method="post" action="{{ path('secteur_delete', {'id': secteur.id}) }}" onsubmit="return confirm('Vous voulez supprimer ce type de financement');">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ secteur.id) }}">
                                         <button class="btn btn-danger">Supprimer</button>
@@ -104,7 +104,7 @@
             <a href="#popup1" class="btn btn-success">Ajout secteur d'intervetion</a>
                 <div id="popup1" class="overlay">
                     <div class="popup">
-                        <h2>Ajout secteur d'intervetion</h2>
+                        <h2>Ajout secteur</h2>
                         <a class="close" href="{{ path('secteur_liste') }}">&times;</a>
                         <!-- input -->
                         {{ include('secteur/createsecteurintervention.html.twig') }}
