@@ -147,11 +147,11 @@ class BailleurController extends AbstractController
      * @Route("/grantelement", name="grantelement")
      */
     public function elementdon(){
-        //$M, $G, $A, $R, $payementProfile
+        //$R,$A,$INT,$M
         $element = new GrantElement1(0.015,2,5,25);
-        $val = $element->calculElementDonSansCommission();
+        $val = $element->calculeElementDon(1000000, 0, 632562);
        // dump($element);
-
+       
         return $this->render("bailleur/elementdon.html.twig",[
             'val' => $val
         ]);
