@@ -3,6 +3,7 @@ namespace App;
 class GrantElement1 
 {
     private $R,$A,$INT,$M,$I = 0.026,$D;
+    
 
     public function __construct($R,$A,$INT,$M)
     {
@@ -32,5 +33,33 @@ class GrantElement1
     
         return round($Gel,1);
     }
+
+     public function van ($tauxactualisation,$faceValue){
+         $N = ($this->M* $this->A);
+         //$N=5;
+         //$CF = array(2000,2500,3000,3000,3000);
+         $CF = array(7500,7500,7500,7500,7500,7500,7500,7500,7500,7500,32500,32313,32125,31938,31750,31563,31375,31188,31000,30813,30625,30438,30250,30063,29875,29688,29500,29313,29125,28938,28750,28563,28375,28188,28000,27813,27625,27438,27250,27063,26875,26688,26500,26313,26125,25938,25750,25563,25375,25188);
+         
+         $sum = 0;
+         for ($i=0 ; $i < $N ; $i++){
+            $sum = $sum + (($CF[$i]) / (pow((1+($tauxactualisation)),$i+1)));
+            dump($sum -$faceValue);
+         }
+         $van = -$faceValue + $sum;
+         dump($van);
+         return $van;
+     }
+    /**
+     * $Gelment = ((c6+c7-c32)/(c6+c7));
+     * c6 = face value (vola indramina)
+     * c7 = Grant(as part of financing package, in curency units)
+     * c32 = van(c27;H26:H225)+c30
+     * c27 = discount rate per period
+     */
+    public function calculeElementDon($faceValue, $grant){
+       $GrantElement  =  (($faceValue + $grant - $this->van($this->I,$faceValue)) / ($faceValue + $grant));
+       return $GrantElement*100;    
+    }
+
 
 }
