@@ -34,8 +34,37 @@ class GrantElement1
         return round($Gel,1);
     }
 
+    public function Calendrier_de_paiement($capital)
+    {
+        $N = ($this->M*$this->A);
+        $outstanding[-1] = $capital;
+        $j = 1;
+        for ($i = 0 ; $i < $N ; $i++)
+        {   
+            
+            $indice_annee[$i] = $N-$i ; 
+            $interest_rate [$i]= ($this->R / $this->A) * 100;
+            $pricipal[$i] = 0;
+            if( $i < $this->INT*$this->A)
+            {
+                $pricipal[$i] = 0 ;
+            }else{
+                $pricipal[$i] = $capital / (($this->M - $this->INT) * $this->A);
+            }
+            $payment[$i] = 0;
+            $free[$i] = 0;
+            $interest[$i] = 0;
+
+            $outstanding[$i] = $outstanding[$i-1] - $pricipal[$i];
+            //$outstanding[$i] = 1000000 - $pricipal[$i];
+            //dump( $outstanding[$i+1] );
+
+        }
+        $tab = array ($indice_annee, $interest_rate,$payment,$free,$interest,$pricipal,$outstanding);
+        return $tab;
+    }
      public function van ($tauxactualisation,$faceValue){
-         $N = ($this->M* $this->A);
+         $N = ($this->M*$this->A);
          //$N=5;
          //$CF = array(2000,2500,3000,3000,3000);
          $CF = array(7500,7500,7500,7500,7500,7500,7500,7500,7500,7500,32500,32313,32125,31938,31750,31563,31375,31188,31000,30813,30625,30438,30250,30063,29875,29688,29500,29313,29125,28938,28750,28563,28375,28188,28000,27813,27625,27438,27250,27063,26875,26688,26500,26313,26125,25938,25750,25563,25375,25188);
@@ -43,9 +72,10 @@ class GrantElement1
          $sum = 0;
          for ($i=0 ; $i < $N ; $i++){
             $sum = $sum + (($CF[$i]) / (pow((1+($tauxactualisation)),$i+1)));
-            dump($sum -$faceValue);
+            dump($sum);
          }
-         $van = -$faceValue + $sum;
+         //plus ganrd
+         $van = -$faceValue + $sum+5000;
          dump($van);
          return $van;
      }
@@ -57,7 +87,8 @@ class GrantElement1
      * c27 = discount rate per period
      */
     public function calculeElementDon($faceValue, $grant){
-       $GrantElement  =  (($faceValue + $grant - $this->van($this->I,$faceValue)) / ($faceValue + $grant));
+       $GrantElement  =  (($faceValue + $grant - 632562) / ($faceValue + $grant));
+       //dump($this->van($this->I,$faceValue));
        return $GrantElement*100;    
     }
 
