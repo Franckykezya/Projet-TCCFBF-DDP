@@ -19,7 +19,7 @@ use App\GrantElement1;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Knp\Component\Pager\Event\PaginationEvent;
 use Knp\Component\Pager\PaginatorInterface;
-
+use Symfony\Component\Validator\Constraints\Length;
 
 class BailleurController extends AbstractController
 {
@@ -169,6 +169,7 @@ class BailleurController extends AbstractController
         $secteur = $secteurInterventionrep->findAll();
         $typefinancement = $typefinancementrep->findAll();
         $tauxinteret = $tauxinteretrep->findAll();
+
 
         return $this->render("bailleur/tableau_comparatif.html.twig",[
             'bailleurs' => $bailleurs,
