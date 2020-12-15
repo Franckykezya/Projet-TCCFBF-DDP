@@ -8,9 +8,9 @@
             text-align : center;
         }
         .bg-danger{
-            background: rgb(96,34,195);
-background: linear-gradient(0deg, rgba(96,34,195,0.7539390756302521) 0%, rgba(253,45,70,0.8799894957983193) 100%);
-            
+            background: rgb(0,0,0);
+            /*background: linear-gradient(0deg, rgba(0,0,0,0.7539390756302521) 0%, rgba(247,0,0,0.7595413165266106) 83%);*/
+            color : white;
         }
         th{
             text-align : center;
@@ -41,20 +41,17 @@ background: linear-gradient(0deg, rgba(96,34,195,0.7539390756302521) 0%, rgba(25
                 </thead>
                 <tbody>         
                                         
-                                            {% for key in tabs[1]|keys %}
-                                               <tr>
-                                                    {% for i,val in tabs %}
-                                                        {% if i == 1 %}
-                                                            <td>{{val[key]}} %</td>
-                                                        {% else %}
-                                                            <td>{{val[key]}}</td>
-                                                        {% endif %}
-
-                                                    {% endfor %}
-                                               </tr> 
-                                            {% endfor %} 
-                                            
-                       
+                    {% for key in tabs[1]|keys %}
+                       <tr>
+                            {% for i,val in tabs %}
+                                {% if i == 1 %}
+                                    <td>{{val[key]}} %</td>
+                                {% else %}
+                                    <td>{{val[key]}}</td>
+                                {% endif %}
+                            {% endfor %}
+                       </tr> 
+                    {% endfor %}      
                 </tbody>
             </table>
         </div>  

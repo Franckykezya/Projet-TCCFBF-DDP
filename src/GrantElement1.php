@@ -54,6 +54,7 @@ class GrantElement1
             $payment[$i] = 0;
             $free[$i] = 0;
             $interest[$i] = 0;
+            //interest
 
             $outstanding[$i] = $outstanding[$i-1] - $pricipal[$i];
             //$outstanding[$i] = 1000000 - $pricipal[$i];
@@ -63,6 +64,16 @@ class GrantElement1
         $tab = array ($indice_annee, $interest_rate,$payment,$free,$interest,$pricipal,$outstanding);
         return $tab;
     }
+    // public function _interestAndPrincipal($rate=0, $per=0, $nper=0, $pv=0, $fv=0, $type=0) {
+    //     $pmt = self::PMT($rate, $nper, $pv, $fv, $type);
+    //     $capital = $pv;
+    //     for ($i = 1; $i<= $per; ++$i) {
+    //         $interest = ($type && $i == 1)? 0 : -$capital * $rate;
+    //         $principal = $pmt - $interest;
+    //         $capital += $principal;
+    //     }
+    //     return array($interest, $principal);
+    // }	
      public function van ($tauxactualisation,$faceValue){
          $N = ($this->M*$this->A);
          //$N=5;
