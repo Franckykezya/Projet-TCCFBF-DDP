@@ -33,7 +33,7 @@
                         <th>Remaining payments</th>
                         <th>Interest rate per period<br>fixed or variable</th>
                         <th>Payments per period</th>
-                        <th>Frees</th>
+                        <th>Fees</th>
                         <th>Interest</th>
                         <th>Pricipal</th>
                         <th>Outstanding</th>
@@ -44,14 +44,31 @@
                     {% for key in tabs[1]|keys %}
                        <tr>
                             {% for i,val in tabs %}
+                                {% if i == 0 %}
+                                    <td>{{val[key]}}</td>
+                                {% endif %}
                                 {% if i == 1 %}
                                     <td>{{val[key]}} %</td>
-                                {% else %}
-                                    <td>{{val[key]}}</td>
+                                {% endif %}
+                                {% if i == 2%}
+                                    <td>{{ val[key] | number_format(0,',','') }}</td>
+                                {% endif %}
+                                {% if i == 3%}
+                                    <td>{{ val[key] }}</td>
+                                {% endif %}
+                                {% if i == 4%}
+                                    <td>{{ val[key] | number_format(0,',','') }}</td>
+                                {% endif %}
+                                {% if i == 5%}
+                                    <td>{{ val[key] }}</td>
+                                {% endif %}
+                                {% if i == 6%}
+                                    <td>{{ val[key] }}</td>
                                 {% endif %}
                             {% endfor %}
                        </tr> 
                     {% endfor %}      
+
                 </tbody>
             </table>
         </div>  

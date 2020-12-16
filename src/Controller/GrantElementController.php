@@ -33,9 +33,12 @@ class GrantElementController extends AbstractController
      */
     public function actualisation (){
         $element1 = new GrantElement1((1.5/100),2,5,25);
+
         $tabs = $element1->Calendrier_de_paiement(1000000);
         return $this->render('grant_element/Calendrier_de_paiement.html.twig',[
             'tabs' => $tabs
         ]);
     }
+
+
 }

@@ -1,5 +1,8 @@
 <?php
 namespace App;
+
+use Symfony\Component\Validator\Constraints\Length;
+
 class GrantElement1 
 {
     private $R,$A,$INT,$M,$I = 0.026,$D;
@@ -54,26 +57,26 @@ class GrantElement1
             $payment[$i] = 0;
             $free[$i] = 0;
             $interest[$i] = 0;
-            //interest
-
+           
             $outstanding[$i] = $outstanding[$i-1] - $pricipal[$i];
             //$outstanding[$i] = 1000000 - $pricipal[$i];
-            //dump( $outstanding[$i+1] );
 
         }
+
+        //dump($N);
+         //interest
+         $interest = $this->CalculInteret($interest_rate, $indice_annee, $outstanding);
+        
+         //Payments per period
+        $payment = $this->CalculPaymentPeriod($pricipal, $interest, $free);
+
+        //fees
+        //$free = $this->CalculFees($indice_annee, $outstanding);
+
         $tab = array ($indice_annee, $interest_rate,$payment,$free,$interest,$pricipal,$outstanding);
         return $tab;
     }
-    // public function _interestAndPrincipal($rate=0, $per=0, $nper=0, $pv=0, $fv=0, $type=0) {
-    //     $pmt = self::PMT($rate, $nper, $pv, $fv, $type);
-    //     $capital = $pv;
-    //     for ($i = 1; $i<= $per; ++$i) {
-    //         $interest = ($type && $i == 1)? 0 : -$capital * $rate;
-    //         $principal = $pmt - $interest;
-    //         $capital += $principal;
-    //     }
-    //     return array($interest, $principal);
-    // }	
+    
      public function van ($tauxactualisation,$faceValue){
          $N = ($this->M*$this->A);
          //$N=5;
@@ -87,7 +90,7 @@ class GrantElement1
          }
          //plus ganrd
          $van = -$faceValue + $sum+5000;
-         dump($van);
+         //dump($van);
          return $van;
      }
     /**
@@ -103,5 +106,50 @@ class GrantElement1
        return $GrantElement*100;    
     }
 
+    public function CalculInteret($interest_rate, $indice_annee, $outstanding, $N = 50, $vc = 0, $type = 0){
+        for($i=0 ; $i < $N; $i++){
+            if(!is_numeric($interest_rate[$i]) || !is_numeric($indice_annee[$i]) || !is_numeric($outstanding[$i]) || !is_numeric($vc) || !is_numeric($type)):
+            return false;
+            endif;
+            
+            if($type > 1|| $type < 0):
+            return false;
+            endif;
+            
+            $tauxAct[$i] = pow(1 + $interest_rate[$i], - $indice_annee[$i]);
+            
+            if((1 - $tauxAct[$i]) == 0):
+            return 0;
+            endif;
+            
+            $vpm[$i] = ( ( ($outstanding[$i-1] + $vc * $tauxAct[$i]) * $interest_rate[$i] / (1 - $tauxAct[$i]) ) / (1 + $interest_rate[$i] * $type) ) / 100;
+       
+        }
+        return $vpm;
+    }
+    
+    public function CalculPaymentPeriod($pricipal, $interest, $free, $N=50){
+      
+        for($i=0 ; $i < $N; $i++){
+            $cpp[$i] = ((floatval( $pricipal[$i]) + floatval($interest[$i])) + floatval($free[$i]));
+        }
+        return $cpp;
+    }
+
+    // public function CalculFees($indice_annee, $outstanding, $management, $N=50){
+    //     for($i=0 ; $i < $N; $i++){
+    //         if($indice_annee[$i] > 0){
+    //             if($management == 'Per payment period'){
+    //                 $res_free[$i] = $_POST['fees'];
+    //             } else if ($management == 'In percent of outstanding loan'){
+    //                 $res_free[$i] = (($_POST['fees'] / 100) * (floatval($outstanding[$i]) / $_POST['payments']));
+    //             }
+    //         }
+    //         else{
+    //             echo $res_free[$i] = '...' ;
+    //         }
+    //     }
+    //     return $res_free;
+    // }
 
 }
