@@ -15,6 +15,22 @@
             .form-group{
                 padding : 20px;
             }
+              .title{
+            color : rgba(100, 45, 0 , 0.3);
+            text-align : center;
+        }
+        .bg-danger{
+            background: rgb(0,0,0);
+            /*background: linear-gradient(0deg, rgba(0,0,0,0.7539390756302521) 0%, rgba(247,0,0,0.7595413165266106) 83%);*/
+            color : white;
+        }
+        th{
+            text-align : center;
+            margin : 10px 10px 10px 10px;
+        }
+        td{
+             text-align : center;
+        }
        </style>
  {% endblock %}
 {% block body %}
@@ -23,7 +39,8 @@
         <div id="page-inner">
             <h1>calcul de l'élément-don</h1>
             <div>
-                <form action="{{path('grant_element')}}" method="post" >
+                {# <form action="{{path('grant_element')}}" method="post" > #}
+                <form action="" method="post" >
                    
                     <div class = "form-group">
                         <div class="col-md-4">
@@ -56,7 +73,7 @@
                             <label for ="grant">Grant (as part of financing package)</label>
                         </div>
                         <div class ="col-md-8">
-                            <input type="number" min="0" id = "grant" name = "grant" class="form-control">
+                            <input type="text" min="0" id = "grant" name = "grant" class="form-control">
                         </div>
                     </div>
 
@@ -65,7 +82,7 @@
                             <label for ="commission">Upfront commission</label>
                         </div>
                         <div class ="col-md-8">
-                            <input type="number" min="0" id = "commission" value ="0" name = "commission" class="form-control">
+                            <input type="text" min="0" id = "commission" value ="0" name = "commission" class="form-control">
                         </div>
                     </div>
 
@@ -78,7 +95,7 @@
                                 <option value="Per payment period">Per payment period</option>
                                 <option value="In percent of outstanding loan">In percent of outstanding loan</option>
                             </select>
-                            <input type="number" min="0" id = "" value ="0" name = "fees" class="form-control">
+                            <input type="text" min="0" id = "" value ="0" name = "val_management" class="form-control">
                         </div>
                        
                     </div>
@@ -88,7 +105,7 @@
                             <label for ="interest">Interest rate (per annum)</label>
                         </div>
                         <div class ="col-md-8">
-                            <input type="number" min="0" id = "interest" required name = "interest" class="form-control">
+                            <input type="text" min="0" id = "interest" required name = "interest" class="form-control">
                         </div>
                     </div>
 
@@ -129,6 +146,55 @@
             <hr>
             <div>
                 <h3 id = "gr">Grant element : {{controller_name}} % </h3>
+            </div>
+
+            <div>
+                <h1 class="title">Calendrier de paiement</h1>
+
+            <table class = "table table-striped table-dark" border = "2">
+                <thead>
+                    <tr class="bg-danger">
+                        <th>Remaining payments</th>
+                        <th>Interest rate per period<br>fixed or variable</th>
+                        <th>Payments per period</th>
+                        <th>Fees</th>
+                        <th>Interest</th>
+                        <th>Pricipal</th>
+                        <th>Outstanding</th>
+                    </tr>
+                </thead>
+                <tbody>         
+                    {% if test == 1 %}                   
+                    {% for key in tabs[1]|keys %}
+                       <tr>
+                            {% for i,val in tabs %}
+                                {% if i == 0 %}
+                                    <td>{{val[key]}}</td>
+                                {% endif %}
+                                {% if i == 1 %}
+                                    <td>{{val[key]}} %</td>
+                                {% endif %}
+                                {% if i == 2%}
+                                    <td>{{ val[key] | number_format(0,',','') }}</td>
+                                {% endif %}
+                                {% if i == 3%}
+                                    <td>{{ val[key] }}</td>
+                                {% endif %}
+                                {% if i == 4%}
+                                    <td>{{ val[key] | number_format(0,',','') }}</td>
+                                {% endif %}
+                                {% if i == 5%}
+                                    <td>{{ val[key] }}</td>
+                                {% endif %}
+                                {% if i == 6%}
+                                    <td>{{ val[key] }}</td>
+                                {% endif %}
+                            {% endfor %}
+                       </tr> 
+                    {% endfor %}      
+                {% endif %}
+                </tbody>
+            </table>
             </div>
             </div>
         </div>

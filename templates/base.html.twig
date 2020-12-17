@@ -17,20 +17,26 @@
         <!-- GOOGLE FONTS-->
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
         <style>
+            
+            .affix {
+              top: 2px;
+             /* z-index: 9999 !important;*/
+              width : 250px
+            }
             .navbar-default{
-               margin : -09px 0px 0px 0px ;
+               /*margin : -09px 0px 0px 0px ;
 
                overflow: hidden;
                /*background-color: #333;*/
-               position: fixed; /* Set the navbar to fixed position */
-               top: 0; /* Position the navbar at the top of the page */
+               /*position: fixed; /* Set the navbar to fixed position */
+               /*top: 0; /* Position the navbar at the top of the page */
                /*width: 100%; /* Full width */
             }
-            /* Style the active class (and buttons on mouse-over) */
+            /* Style the active class (and buttons on mouse-over) 
             .active, .btn:hover {
                 background-color: red;
                 color: #ff00ff;
-            }
+            }*/
         </style>
         {% block stylesheets %}{% endblock %}
     </head>
@@ -60,8 +66,8 @@
             </nav>
             <!-- /. NAV TOP  -->
             <nav class="navbar-default navbar-side" role="navigation">
-                <div class="sidebar-collapse">
-                    <ul class="nav" id="main-menu">
+                <div class="sidebar-collapse"> 
+                    <ul class="nav" data-spy="affix" data-offset-top="205" id="main-menu">
                         <li class="text-center">
                             <img src="../assets/img/find_user.png" class="user-image img-responsive" />
                             <center>

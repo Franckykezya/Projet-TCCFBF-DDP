@@ -5,15 +5,17 @@ use Symfony\Component\Validator\Constraints\Length;
 
 class GrantElement1 
 {
-    private $R,$A,$INT,$M,$I = 0.026,$D;
+    private $R,$A,$INT,$M,$I = 0.026,$D,$management,$val_management;
     
 
-    public function __construct($R,$A,$INT,$M)
+    public function __construct($R,$A,$INT,$M,$management,$val_management)
     {
         $this->R = $R;
         $this->A = $A;
         $this->INT = $INT;
         $this->M = $M;
+        $this->management = $management;
+        $this->val_management = $val_management;
 
         $this->D = (pow((1+$this->I),(1/$this->A))-1);
 
@@ -63,15 +65,15 @@ class GrantElement1
 
         }
 
-        //dump($N);
          //interest
-         $interest = $this->CalculInteret($interest_rate, $indice_annee, $outstanding);
+         $interest = $this->CalculInteret($interest_rate, $indice_annee, $outstanding,$N);
+          //fees
+        $free = $this->CalculFees($indice_annee, $outstanding,$N,$this->management,$this->val_management,$this->A);
         
          //Payments per period
-        $payment = $this->CalculPaymentPeriod($pricipal, $interest, $free);
+        $payment = $this->CalculPaymentPeriod($pricipal, $interest, $free, $N);
 
-        //fees
-        //$free = $this->CalculFees($indice_annee, $outstanding);
+       
 
         $tab = array ($indice_annee, $interest_rate,$payment,$free,$interest,$pricipal,$outstanding);
         return $tab;
@@ -93,6 +95,8 @@ class GrantElement1
          //dump($van);
          return $van;
      }
+
+
     /**
      * $Gelment = ((c6+c7-c32)/(c6+c7));
      * c6 = face value (vola indramina)
@@ -106,7 +110,7 @@ class GrantElement1
        return $GrantElement*100;    
     }
 
-    public function CalculInteret($interest_rate, $indice_annee, $outstanding, $N = 50, $vc = 0, $type = 0){
+    public function CalculInteret($interest_rate, $indice_annee, $outstanding, $N, $vc = 0, $type = 0){
         for($i=0 ; $i < $N; $i++){
             if(!is_numeric($interest_rate[$i]) || !is_numeric($indice_annee[$i]) || !is_numeric($outstanding[$i]) || !is_numeric($vc) || !is_numeric($type)):
             return false;
@@ -128,28 +132,39 @@ class GrantElement1
         return $vpm;
     }
     
-    public function CalculPaymentPeriod($pricipal, $interest, $free, $N=50){
+    public function CalculPaymentPeriod($pricipal, $interest, $free, $N){
       
         for($i=0 ; $i < $N; $i++){
             $cpp[$i] = ((floatval( $pricipal[$i]) + floatval($interest[$i])) + floatval($free[$i]));
         }
         return $cpp;
     }
+    public function moyenne($nb1,$nb2) { 
+        $somme = 0;
+         for($i = 0 ; $i < 2 ; $i++){
+             $somme = $nb1 + $nb2;
+         }
+         return $somme/2;
+     }
+    public function CalculFees($indice_annee, $outstanding,$N, $management, $val,$pay){
+        
+        for($i=0 ; $i < $N; $i++){
+            if($indice_annee[$i] > 0){
+                if($management == 'Per payment period'){
+                    $res_free[$i] = $val;
+                } else if ($management == 'In percent of outstanding loan' && $i <= 0){
+                    $res_free[$i] = (($val / 100) * (floatval($outstanding[$i]) / $pay));
+                   // $i = $this->R;
+                }else if($management == 'In percent of outstanding loan' && $i > 0){
+                    $res_free[$i] =round( (($val / 100) * ($this->moyenne( (floatval($outstanding[$i-1])) ,(floatval($outstanding[$i]))) / $pay)));
+                }
+            }
+            else{
+                echo $res_free[$i] = '...' ;
+            }
 
-    // public function CalculFees($indice_annee, $outstanding, $management, $N=50){
-    //     for($i=0 ; $i < $N; $i++){
-    //         if($indice_annee[$i] > 0){
-    //             if($management == 'Per payment period'){
-    //                 $res_free[$i] = $_POST['fees'];
-    //             } else if ($management == 'In percent of outstanding loan'){
-    //                 $res_free[$i] = (($_POST['fees'] / 100) * (floatval($outstanding[$i]) / $_POST['payments']));
-    //             }
-    //         }
-    //         else{
-    //             echo $res_free[$i] = '...' ;
-    //         }
-    //     }
-    //     return $res_free;
-    // }
+        }
+        return $res_free;
+    }
 
 }
