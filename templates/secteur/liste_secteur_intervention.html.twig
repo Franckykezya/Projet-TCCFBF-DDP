@@ -5,6 +5,8 @@
 {% block body %}
 
 <style>
+
+    {# Css creation secteur #}
         .overlay {
         position: fixed;
         top: 0;
@@ -62,6 +64,7 @@
             width: 70%;
         }
     }
+
 </style>
 
 
@@ -83,7 +86,7 @@
                     <tr>
                         <td>{{ secteur.nom }}</td>
                         <td>
-                            <a href="{{ path('secteur_editer', {'id': secteur.id}) }}" class="btn btn-info">Modifier</a>
+                            <a href="{{ path('secteur_editer', {'id': secteur.id}) }}" class="btn btn-info">Modifier</a>    
                                 <td>
                                     <form method="post" action="{{ path('secteur_delete', {'id': secteur.id}) }}" onsubmit="return confirm('Vous voulez supprimer ce type de financement');">
                                         <input type="hidden" name="_method" value="DELETE">

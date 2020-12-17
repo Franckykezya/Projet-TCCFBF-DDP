@@ -38,6 +38,8 @@ class SecteurController extends AbstractController
      */
     public function liste_secteur_intervention(SecteurInterventionRepository $secteur_repo, Request $request): Response
     {
+
+        //Creation secteur intervention
         $secteurIntervention = new SecteurIntervention;
         $form = $this->createForm(SecteurInterventionType::class, $secteurIntervention);
         
@@ -58,11 +60,11 @@ class SecteurController extends AbstractController
         ]);
     }
     /**
-     * @Route("/secteur/editer/{id}", name = "secteur_editer", methods={"GET","POST"})
+     * @Route("/secteur_editer/{id}", name = "secteur_editer", methods={"GET","POST"})
      */
     public function affiche_secteur_intervention(SecteurIntervention $secteur, Request $request)
     {
-        
+
 
         $form = $this->createForm(SecteurInterventionType::class, $secteur);
         $form->handleRequest($request);
@@ -74,7 +76,8 @@ class SecteurController extends AbstractController
         
         return $this->render("secteur/edit_secteur_intervention.html.twig",[
             "secteurs" => $secteur,
-            "form" => $form->createView()
+            "form" => $form->createView(),
+            
         ]);
     }
 

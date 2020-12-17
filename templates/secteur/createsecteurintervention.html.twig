@@ -1,6 +1,6 @@
 {{ form_start(formSecteurIntervention) }}
     {{ form_widget(formSecteurIntervention) }}
-    <button class="btn btn-success">
+    <button class="btn btn-success" onclick="alert('une fois');this.onclick=function(){};">
         {{ button_label|default('Enregistrer') }}
     </button>
 {{ form_end(formSecteurIntervention) }}
