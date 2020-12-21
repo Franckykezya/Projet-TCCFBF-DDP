@@ -86,14 +86,14 @@
                     <tr>
                         <td>{{ secteur.nom }}</td>
                         <td>
-                            <a href="{{ path('secteur_editer', {'id': secteur.id}) }}" class="btn btn-info">Modifier</a>    
-                                <td>
-                                    <form method="post" action="{{ path('secteur_delete', {'id': secteur.id}) }}" onsubmit="return confirm('Vous voulez supprimer ce type de financement');">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ secteur.id) }}">
-                                        <button class="btn btn-danger">Supprimer</button>
-                                    </form>
-                                </td>
+                            <a href="{{ path('secteur_editer', {'id': secteur.id}) }}" class="btn btn-info"><span class="glyphicon glyphicon-edit"></span></a>    
+                        </td>
+                        <td>
+                            <form method="post" action="{{ path('secteur_delete', {'id': secteur.id}) }}" onsubmit="return confirm('Vous voulez supprimer ce type de financement');">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ secteur.id) }}">
+                                <button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+                            </form>
                         </td>
                     </tr>
                 {% else %}
@@ -104,7 +104,7 @@
                 </tbody>
             </table>
 
-            <a href="#popup1" class="btn btn-success">Ajout secteur d'intervetion</a>
+            <a href="#popup1" class="btn btn-success"><span class="glyphicon glyphicon-plus">_</span>Ajout</a>
                 <div id="popup1" class="overlay">
                     <div class="popup">
                         <h2>Ajout secteur</h2>
