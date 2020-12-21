@@ -21,16 +21,43 @@
             .affix {
               top: 2px;
              /* z-index: 9999 !important;*/
-              width : 250px
+              width : 250px;
+              transition:2s;
+            }
+            .affix h3{
+                color : #ffffff;
+            }
+            .affix h5{
+                color : #ffff;
             }
             .navbar-default{
-               /*margin : -09px 0px 0px 0px ;
+               margin : 0px 0px 0px 0px ;
 
                overflow: hidden;
-               /*background-color: #333;*/
+               background-color: rgb(243,243,243);
                /*position: fixed; /* Set the navbar to fixed position */
                /*top: 0; /* Position the navbar at the top of the page */
                /*width: 100%; /* Full width */
+            }
+            .img-logo{
+                display : block;
+                margin-left : auto;
+                margin-right : auto;
+                width : 50%;
+
+            }
+            .banner{
+                background-image: url("../assets/img/banner.png");
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+            }
+            #text {
+               margin : 100px 0px 200px 500px;
+                /* display : block;*/
+               
+               /* width : 50%;*/
+                color : #e0bc00;
+                font-size : 25px;
             }
             /* Style the active class (and buttons on mouse-over) 
             .active, .btn:hover {
@@ -43,16 +70,14 @@
     <body>
 
          <div id="wrapper">
-            <nav class="">
-                <div class="text-center">
-                    <img style=" width: 200px; height: 100px;" src="../assets/img/logo_finance.png" class="img-logo" alt="..."><br>
+            <nav class="banner">
+                
+                    <img style=" width: 225px; height: 100px;" src="../assets/img/logo_finance.png" class="img-logo" alt="..."><br>
                     <!--<img style=" width: 150px; height: 50px;" src="assets/img/logo_tresor.jpg" class="img-logo" alt="..."><br>-->
-                    <center>
-                        <a class="" href="index.html" style="color: rgb(255, 255, 255)">
-                            <h4>Direction de la Dette Publique</h4>
-                        </a>
-                    </center>
-                </div>
+                    <a id = "text" href="index.html" >
+                        Direction de la Dette Publique
+                    </a>
+               
             </nav>
             <nav class="" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
@@ -69,9 +94,11 @@
                 <div class="sidebar-collapse"> 
                     <ul class="nav" data-spy="affix" data-offset-top="205" id="main-menu">
                         <li class="text-center">
+                            <h3>DDP</h3>
                             <img src="../assets/img/find_user.png" class="user-image img-responsive" />
                             <center>
-                                <div style="color: rgb(255, 255, 255)" class="">{{app.user.username}} &nbsp; <br/>
+                                <div>
+                                    <h5>{{app.user.username}} &nbsp;</h5>
                                     <a href="{{path('logout')}}" class="btn btn-danger">Déconnexion</a>
                                 </div>
                             </center>
@@ -79,27 +106,27 @@
 
 
                         <li>
-                            <a class = "" href="{{ path('blog') }}"><i class="fa fa-dashboard fa-2x"></i> Accueil</a>
+                            <a class = "" href="{{ path('blog') }}"><i class="fa fa-dashboard "></i> Accueil</a>
                         </li>
                         {# <li>
                             <a href="ui.html"><i class="fa fa-desktop fa-3x"></i> ... </a>
                         </li> #}
                         <li id = "btn">
-                            <a class="active" href="{{path('liste_bailleur')}}"><i class="fa fa-list fa-2x"></i> Listes des bailleurs de fond</a>
+                            <a class="active" href="{{path('liste_bailleur')}}"><i class="fa fa-list "></i> Listes des bailleurs de fond</a>
                         </li>
                         {# <li>
                             <a href="chart.html"><i class="fa fa-bar-chart-o fa-3x"></i> Graphe comparatif</a>
                         </li> #}
                         <li>
-                            <a  class = "active" href="{{ path('tableau_comparatif') }}"><i class="fa fa-table fa-2x"></i> Tableau comparatif</a>
+                            <a  class = "active" href="{{ path('tableau_comparatif') }}"><i class="fa fa-table "></i> Tableau comparatif</a>
                         </li>
                         <li>
-                            <a  class = "active" href="{{ path('create_bailleur') }}"><i class="fa fa-edit fa-2x"></i> Ajout bailleur </a>
+                            <a  class = "active" href="{{ path('create_bailleur') }}"><i class="fa fa-edit "></i> Ajout bailleur </a>
                         </li>
 
 
                         <li>
-                            <a href="#"><i class="fa fa-sitemap fa-2x"></i>Ajout / Affichage / Mofication / Suppression<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-sitemap "></i>Ajout / Affichage / Mofication / Suppression<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="{{path('secteur_liste')}}">Secteur d'intervention</a>
@@ -125,7 +152,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a  class ="active" href="{{path('grant_element')}}"><i class="fa fa-square-o fa-2x"></i> Grant-Element</a>
+                            <a  class ="active" href="{{path('grant_element')}}"><i class="fa fa-square-o"></i> Grant-Element</a>
                         </li>
                     </ul>
                 </div>
