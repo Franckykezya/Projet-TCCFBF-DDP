@@ -39,8 +39,8 @@
         <div id="page-inner">
             <h1>calcul de l'élément-don</h1>
             <div>
-                {# <form action="{{path('grant_element')}}" method="post" > #}
-                <form action="" method="post" >
+                <form action="{{path('grant_element')}}" method="post" >
+                {# <form action="" method="post" > #}
                    
                     <div class = "form-group">
                         <div class="col-md-4">
@@ -64,7 +64,7 @@
                             <label for ="face">Face Value of Loan</label>
                         </div>
                         <div  class ="col-md-8">
-                             <input type="number" min="0" required id = "face" name = "face" class="form-control">
+                             <input type="number" min="0" required id = "face" name = "face" class="form-control" value ="<?php if (isset($_POST['face'])){echo $_POST['face'];} ?>">
                         </div> 
                     </div>
 
@@ -183,7 +183,13 @@
                                     <td>{{ val[key] }}</td>
                                 {% endif %}
                                 {% if i == 4%}
-                                    <td>{{ val[key] | number_format(0,',','') }}</td>
+                                    <td>
+                                        {# {% if val[key] == 0 %} #}
+                                            {# {{ val[key] }} #}
+                                        {# {% else %} #}
+                                            {{ val[key] | number_format(0,',','') }}
+                                        {# {% endif %} #}
+                                    </td>
                                 {% endif %}
                                 {% if i == 5%}
                                     <td>{{ val[key] }}</td>
