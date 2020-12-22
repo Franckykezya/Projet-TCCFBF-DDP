@@ -1,43 +1,75 @@
 {% extends 'base.html.twig'%}
- {% block stylesheets %}
-        <link href = "/bootstrap.min.css" rel="stylesheet" type="text/css"/>
- {% endblock %}
+
+{% block title %}Bailleur{% endblock %}
+
 {% block body %}
 <div id="wrapper">
         <!-- /. NAV SIDE  -->
             <div id="page-wrapper" >
                 <div id="page-inner">
-    <h1>affiche bailleur</h1>
+                  <div class="row">
+                    <div class="col-md-12">
+                        <h2>Information du bailleur de fond : " {{bailleur.nom}} "   </h2>
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+                <hr />
 
-    nom : {{bailleur.nom}} </br>
-    secteur d'intervention : {% for secteur in secteurs %} {{secteur.nom}},  {% endfor %} </br>
-    type de financement :  {% for financement in financements %} {{financement.nom}},  {% endfor %} </br>
-    part finance par le bailleurs de fond : {{bailleur.PartFinance}} % du coût du projet </br>
-    maturite de la facilite : {{bailleur.MaturiteFacilite}} ans </br>
-    periode de grace de la facilite : {{bailleur.PeriodeGrace}} ans </br>
-    taux d'interet : mbl tsi vita </br>
-    differentiel d'interet : {{bailleur.DifferentielInteret}} </br>
-    frais de gestion : {{bailleur.FraisGestion}} </br>
-    commission d'engagement : {{bailleur.commissionEngagement}} % </br>
-    commission de service : {{bailleur.CommissionService}} % </br>
-    commission initiale : {{bailleur.CommissionInitiale}} </br>
-    commission d'arrangement : {{bailleur.CommissionArrangement}}</br>
-    commission d'agent : {{bailleur.commissionAgent}} </br>
-    maturite de la lettre de credit : {{bailleur.MaturiteLettreCredit}}</br>
-    frais lies a la mise en place de la lettre de credit : {{bailleur.FraisLiesLettreCredit}}</br>
-    frais lies au refinancement de la lettre de credit : {{bailleur.FraisLiesRefinancement}}</br>
-    <hr>
-    element-don : {{bailleur.Elementdon}} %</br>
-    <hr>
-    frais et debours : {{bailleur.FraisEtDebours}}</br>
-    prime d'assurance / frais de garantie : {{bailleur.PrimeAssuranceEtFraisGarantie}}</br>
-    prime d'attenuation du risque de credit : {{bailleur.PrimeAttenuationRisqueCredit}}</br>
-    <hr>
-    element-don (teneant compte frais et debours et si assurance payée par l'emprunteur) : mbl tsi vita ihani koa :p 
-    <hr>
-    taux d'interet effectif : mbl tsi vita :p 
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="panel panel-back noti-box">
+                                <span class="icon-box bg-color-red">
+                                     <i class="fa fa-fw fa-eur" aria-hidden="true"></i>
+                                </span>
+                                <div class="text-box">
+                                    <p class="main-text">{{bailleur.nom}}</p>
+                                    <p class="text-muted">Voici l'information du bailleur de fond {{bailleur.nom}}.</p>
+                                    <p class="text-muted"> <b> Nom :</b> {{bailleur.nom}} </br> </p>
+                                    <p class="text-muted"> <b> Secteur d'intervention :</b> {% for secteur in secteurs %} {{secteur.nom}},  {% endfor %} </br> </p>
+                                    <p class="text-muted"> <b> Type de financement : </b> {% for financement in financements %} {{financement.nom}},  {% endfor %} </br> </p>
+                                    <p class="text-muted"> <b> Part finance par le bailleurs de fond :</b>  {{bailleur.PartFinance}} % du coût du projet </br> </p>
+                                    <p class="text-muted"> <b> Maturite de la facilite :</b> {{bailleur.MaturiteFacilite}} ans </br></p>
+                                    <p class="text-muted"> <b> Periode de grace de la facilite :</b>  {{bailleur.PeriodeGrace}} ans </br> </p>
+                                    <p class="text-muted"> <b> Taux d'interet : </b> mbl tsi vita </br> </p>
+                                    <p class="text-muted"> <b> Differentiel d'interet :  </b> {{bailleur.DifferentielInteret}}  </br> </p>
+                                    <p class="text-muted"> <b> Frais de gestion :</b>  {{bailleur.FraisGestion}} </br>  </p>
+                                    <p class="text-muted"> <b> Commission d'engagement : </b>  {{bailleur.commissionEngagement}} % </br> </p>
+                                    <p class="text-muted"> <b> Commission de service : </b>   {{bailleur.CommissionService}} % </br> </p>
+                                    <p class="text-muted"> <b> Commission initiale :</b> {{bailleur.CommissionInitiale}} </br> </p>
+                                    <p class="text-muted"> <b> Commission d'arrangement : </b> {{bailleur.CommissionArrangement}}</br> </p>
+                                    <p class="text-muted"> <b> Commission d'agent :  </b>  {{bailleur.commissionAgent}} </br> </p>
+                                    <p class="text-muted"> <b> Maturite de la lettre de credit :</b>  {{bailleur.MaturiteLettreCredit}}</br>  </p>
+                                    <p class="text-muted"> <b> Frais lies a la mise en place de la lettre de credit : </b>  {{bailleur.FraisLiesLettreCredit}}</br> </p>
+                                    <p class="text-muted"> <b> Frais lies au refinancement de la lettre de credit :</b>  {{bailleur.FraisLiesRefinancement}}</br> </p>
+                    
+                                    <hr />
+                                    <p class="text-muted">
+                                        <span class="text-muted color-bottom-txt"><i class="fa fa-fw fa-trello" aria-hidden="true"></i> Element-don : </span>
+                                         {{bailleur.Elementdon}} %</br>
+                                    </p>
 
-    </div>
-    </div>
+                                    <hr /> 
+                                    <p class="text-muted"> <b> Frais et debours :</b>  {{bailleur.FraisEtDebours}} </br> </p>
+                                    <p class="text-muted"> <b> Prime d'assurance / frais de garantie :</b> {{bailleur.PrimeAssuranceEtFraisGarantie}}</br></p>
+                                    <p class="text-muted"> <b> Prime d'attenuation du risque de credit : </b>  {{bailleur.PrimeAttenuationRisqueCredit}} </br> </p>
+
+                                    <hr />
+                                    <p class="text-muted">
+                                        <span class="text-muted color-bottom-txt"><i class="fa fa-fw fa-trello" aria-hidden="true"></i>  Element-don (Teneant compte frais et debours et si assurance payée par l'emprunteur) : </span>
+                                           mbl tsi vita ihany koa </br>
+                                    </p>
+
+                                    <hr />
+                                    <p class="text-muted">
+                                        <span class="text-muted color-bottom-txt"><i class="fa fa-fw fa-tumblr" aria-hidden="true"></i> Taux d'interet effectif : </span>
+                                             mbl tsi vita :p  </br>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+             </div>
+        </div>
     </div>
 {% endblock %}

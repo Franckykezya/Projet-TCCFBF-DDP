@@ -98,7 +98,7 @@ class BailleurController extends AbstractController
     }
 
     /**
-     * @Route("/bailleur/affiche/{id}",name = "affiche_bailleur")
+     * @Route("/afficheBAILLEUR/{id}",name = "affiche_bailleur")
      */
     public function affiche_bailleur($id,BailleurRepository $bailleurRepository){
         $bailleur = $bailleurRepository->find($id);
@@ -116,7 +116,7 @@ class BailleurController extends AbstractController
     }
 
     /**
-     * @Route("/bailleur/editer/{id}", name="modifier_bailleur")
+     * @Route("/editerBAILLEUR/{id}", name="modifier_bailleur")
      */
     public function editer_bailleur(Request $request, Bailleur $bailleur)
     {
@@ -133,7 +133,7 @@ class BailleurController extends AbstractController
         ]);
     }
     /**
-     * @Route("/{id}", name="supprimer_bailleur", methods={"DELETE"})
+     * @Route("supprimerBAILLEUR/{id}", name="supprimer_bailleur", methods={"DELETE"})
      */
     public function delete(Request $request, Bailleur $bailleur): Response
     {

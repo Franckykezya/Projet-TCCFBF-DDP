@@ -10,14 +10,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/financement")
- */
 class TypeFinancementController extends AbstractController
 {
     /**
-     * @Route("/", name="type_financement_index", methods={"GET","POST"})
-     * @Route("/ajout", name="type_financement_new", methods={"GET","POST"})
+     * @Route("financement/", name="type_financement_index", methods={"GET","POST"})
+     * @Route("/ajoutFINANCEMENT", name="type_financement_new", methods={"GET","POST"})
      */
     public function index(Request $request, TypeFinancementRepository $typeFinancementRepository): Response
     {
@@ -41,7 +38,7 @@ class TypeFinancementController extends AbstractController
     }
 
     /**
-     * @Route("/ajout", name="type_financement_new", methods={"GET","POST"})
+     * @Route("/ajoutFINANCEMENT", name="type_financement_new", methods={"GET","POST"})
      */
     public function ajout(Request $request): Response
     {
@@ -64,7 +61,7 @@ class TypeFinancementController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="type_financement_show", methods={"GET"})
+     * @Route("FINANCEMENT/{id}", name="type_financement_show", methods={"GET"})
      */
     public function show(TypeFinancement $typeFinancement): Response
     {
@@ -74,7 +71,7 @@ class TypeFinancementController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="type_financement_edit", methods={"GET","POST"})
+     * @Route("editFINANCEMENT/{id}", name="type_financement_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, TypeFinancement $typeFinancement): Response
     {
@@ -94,7 +91,7 @@ class TypeFinancementController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="type_financement_delete", methods={"DELETE"})
+     * @Route("deleteFINANCEMENT/{id}", name="type_financement_delete", methods={"DELETE"})
      */
     public function delete(Request $request, TypeFinancement $typeFinancement): Response
     {

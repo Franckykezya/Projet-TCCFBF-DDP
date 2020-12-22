@@ -89,7 +89,7 @@
                             <a href="{{ path('secteur_editer', {'id': secteur.id}) }}" class="btn btn-info"><span class="glyphicon glyphicon-edit"></span></a>    
                         </td>
                         <td>
-                            <form method="post" action="{{ path('secteur_delete', {'id': secteur.id}) }}" onsubmit="return confirm('Vous voulez supprimer ce type de financement');">
+                            <form method="post" action="{{ path('secteur_delete', {'id': secteur.id}) }}" onsubmit="return confirm('Vous voulez supprimer ce secteur');">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ secteur.id) }}">
                                 <button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>

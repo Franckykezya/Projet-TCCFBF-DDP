@@ -7,20 +7,38 @@
         <!-- /. NAV SIDE  -->
             <div id="page-wrapper" >
                 <div id="page-inner">
-    <h1>Modification Bailleur</h1>
-            
-                                    {{ form_start(formBailleur) }}
+                 <div class="row">
+                    <div class="col-md-12">
+                     <h2>Modifier bailleur</h2>   
+                        <h5>Formulaire pour modifier le bailleur de fond</h5>
+                       
+                    </div>
+                  </div>
+                  <!-- /. ROW  -->
+                  <hr />
+                  <div class="row">
+                      <div class="col-md-12">
+                          <!-- Form Elements -->
+                          <div class="panel panel-default">
+                              <div class="panel-heading">
+                                  Modification du bailleur de fond
+                              </div>
+                              <div class="panel-body">
+                                  <div class="row">
+                                      <div class="col-md-6">
+                
+                                        {{ form_start(formBailleur) }}
 
-                                    {{ form_row(formBailleur.nom, {'label' : 'Nom du bailleur' , 'attr' : {'placeholder':"Nom du bailleur"}}) }}
-                                    {{ form_row(formBailleur.secteur, {'label' : 'Secteurs d\'intervention', 'attr' : {'placeholder':"Secteurs d'intervention"}}) }}
-                                    <a class="dropdown-item" href="{{ path('create_secteur_intervention') }}">Ajout de secteur d'intervention</a>
-                                    {{ form_row(formBailleur.typefinancement, {'label' : 'Type de financement', 'attr' : {'placeholder':"Type de financement"}}) }}
-                                    {{ form_row(formBailleur.part_finance, {'label' : 'Part finance par le bailleur de fonds' ,'attr' : {'placeholder':"Part finance par le bailleur de fonds"}}) }}
-                                    {{ form_row(formBailleur.maturite_facilite, {'label' : 'Maturite de la facilité', 'attr' : {'placeholder':"Maturite de la facilité"}}) }}
-                                    {{ form_row(formBailleur.periode_grace, {'label' : 'Periode de grace de la facilité', 'attr' : {'placeholder':"Periode de grace de la facilité"}}) }}
-                                    {{ form_row(formBailleur.taux, {'label' : 'Taux d\'interet', 'attr' : {'placeholder':"Taux d'interet"}}) }}
-                                    {{ form_row(formBailleur.differentiel_interet, {'label' : 'Differentiel d\'interet', 'attr' : {'placeholder':"Differentiel d'interet"}}) }}
-                                    {{ form_row(formBailleur.frais_gestion, {'label' : 'Frais de gestion', 'attr' : {'placeholder':"Frais de gestion"}}) }}
+                                        {{ form_row(formBailleur.nom, {'label' : 'Nom du bailleur' , 'attr' : {'placeholder':"Nom du bailleur"}}) }}
+                                        {{ form_row(formBailleur.secteur, {'label' : 'Secteurs d\'intervention', 'attr' : {'placeholder':"Secteurs d'intervention"}}) }}
+                                        <a class="dropdown-item" href="{{ path('create_secteur_intervention') }}">Ajout de secteur d'intervention</a>
+                                        {{ form_row(formBailleur.typefinancement, {'label' : 'Type de financement', 'attr' : {'placeholder':"Type de financement"}}) }}
+                                        {{ form_row(formBailleur.part_finance, {'label' : 'Part finance par le bailleur de fonds' ,'attr' : {'placeholder':"Part finance par le bailleur de fonds"}}) }}
+                                        {{ form_row(formBailleur.maturite_facilite, {'label' : 'Maturite de la facilité', 'attr' : {'placeholder':"Maturite de la facilité"}}) }}
+                                        {{ form_row(formBailleur.periode_grace, {'label' : 'Periode de grace de la facilité', 'attr' : {'placeholder':"Periode de grace de la facilité"}}) }}
+                                        {{ form_row(formBailleur.taux, {'label' : 'Taux d\'interet', 'attr' : {'placeholder':"Taux d'interet"}}) }}
+                                        {{ form_row(formBailleur.differentiel_interet, {'label' : 'Differentiel d\'interet', 'attr' : {'placeholder':"Differentiel d'interet"}}) }}
+                                        {{ form_row(formBailleur.frais_gestion, {'label' : 'Frais de gestion', 'attr' : {'placeholder':"Frais de gestion"}}) }}
                                
                                 </div>
                                 <div class="col-md-6">
@@ -37,13 +55,24 @@
                                     {{ form_row(formBailleur.prime_assurance_et_frais_garantie, {'label' : 'Prime d\'assurance / Frais de garantie', 'attr' : {'placeholder':"Prime d'assurance / Frais de garantie"}}) }}
                                     {{ form_row(formBailleur.prime_attenuation_risque_credit, {'label' : 'Prime d\'attenuation du risque de credit', 'attr' : {'placeholder':"Prime d'attenuation du risque de credit"}}) }}
 
-                              <button type="Submit" class="btn btn-info" name="" id="" value="">
-                                Enregister
+                              <button type="Submit" class="btn btn-info pull-right" name="" id="" value="">
+                                 <span class="glyphicon glyphicon-floppy-saved">_</span>Enregister
                               </button>
 
                              {{ form_end(formBailleur) }}
    
-    </div>
-    </div>
+                            </div>
+                        </div>
+                      </div>
+                      <!-- End Form Elements -->
+                </div>
+            </div>
+                <!-- /. ROW  -->
+                <div class="row">
+                    <div class="col-md-12">
+                         <p><center> ---------------- </center></p>
+                    </div>
+                </div>
+                <!-- /. ROW  -->
     </div>
 {% endblock %}

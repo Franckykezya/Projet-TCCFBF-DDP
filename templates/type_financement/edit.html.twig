@@ -1,9 +1,28 @@
 
-{{ form_start(form) }}
+<!-- BOOTSTRAP STYLES-->
+<link href="../assets/css/bootstrap.css" rel="stylesheet" />
+<!-- BOOTSTRAP SCRIPTS -->
+<script src="../assets/js/bootstrap.min.js"></script>
 
-    {{ form_row(form.nom, {'label' : 'Nom du secteur' , 'attr' : {'placeholder':"Nom du secteur"}}) }}
 
-    <button type="Submit" class="btn btn-info" name="" id="" value="">
-        Enregister
-    </button>
-{{ form_end(form) }}
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modification type financement</h5>
+        <a class="close" href="{{ path('type_financement_index') }}">&times;</a>
+      </div>
+      <div class="modal-body">
+        <p>
+        {{ form_start(form) }}
+            {{ form_row(form.nom, {'label' : 'Nom du type financement' , 'attr' : {'placeholder':"Nom du secteur"}}) }} 
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary">
+            {{ button_label|default('Enregistrer') }}
+        </button>
+        <a href="{{ path('type_financement_index') }}" type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</a>
+        {{ form_end(form) }}  
+      </div>
+    </div>
+  </div>
