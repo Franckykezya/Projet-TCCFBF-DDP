@@ -6,9 +6,10 @@ use Symfony\Component\Validator\Constraints\Length;
 class GrantElement1 
 {
     private $R,$A,$INT,$M,$I = 0.026,$D,$management,$val_management;
+    private $don, $commission;
     
 
-    public function __construct($R,$A,$INT,$M,$management,$val_management)
+    public function __construct($R,$A,$INT,$M,$management,$val_management,$commission)
     {
         $this->R = $R;
         $this->A = $A;
@@ -16,6 +17,7 @@ class GrantElement1
         $this->M = $M;
         $this->management = $management;
         $this->val_management = $val_management;
+        $this->commission = $commission;
 
         $this->D = (pow((1+$this->I),(1/$this->A))-1);
 
@@ -45,8 +47,7 @@ class GrantElement1
         $outstanding[-1] = $capital;
         $j = 1;
         for ($i = 0 ; $i < $N ; $i++)
-        {   
-            
+        {    
             $indice_annee[$i] = $N-$i ; 
             $interest_rate [$i]= ($this->R / $this->A) * 100;
             $pricipal[$i] = 0;
@@ -65,37 +66,26 @@ class GrantElement1
 
         }
 
-         //interest
+        //interest
          $interest = $this->CalculInteret($interest_rate, $indice_annee, $outstanding,$N);
-          //fees
+        //fees
         $free = $this->CalculFees($indice_annee, $outstanding,$N,$this->management,$this->val_management,$this->A);
-        
-         //Payments per period
+        //Payments per period
         $payment = $this->CalculPaymentPeriod($pricipal, $interest, $free, $N);
 
-       
-
+        //calcul VAN
+        $van = 0;
+        for($i = 0; $i < $N ; $i++){
+            $fva = 1 / pow(1 + $this->I, $i);
+            $van += $pricipal[$i] * $fva;
+        }
+        $this->don = $van+($capital * $this->commission/100);
+        $c30 = $capital * $this->commission/100;
+        dump($c30);
         $tab = array ($indice_annee, $interest_rate,$payment,$free,$interest,$pricipal,$outstanding);
+        //return $van;
         return $tab;
     }
-    
-     public function van ($tauxactualisation,$faceValue){
-         $N = ($this->M*$this->A);
-         //$N=5;
-         //$CF = array(2000,2500,3000,3000,3000);
-        $CF = array(7500,7500,7500,7500,7500,7500,7500,7500,7500,7500,32500,32313,32125,31938,31750,31563,31375,31188,31000,30813,30625,30438,30250,30063,29875,29688,29500,29313,29125,28938,28750,28563,28375,28188,28000,27813,27625,27438,27250,27063,26875,26688,26500,26313,26125,25938,25750,25563,25375,25188);
-
-         $sum = 0;
-         for ($i=0 ; $i < $N ; $i++){
-            $sum = $sum + (($CF[$i]) / (pow((1+($tauxactualisation)),$i+1)));
-            dump($sum);
-         }
-         //plus ganrd
-         $van = -$faceValue + $sum+5000;
-         //dump($van);
-         return $van;
-     }
-
 
     /**
      * $Gelment = ((c6+c7-c32)/(c6+c7));
@@ -105,8 +95,13 @@ class GrantElement1
      * c27 = discount rate per period
      */
     public function calculeElementDon($faceValue, $grant){
-       $GrantElement  =  (($faceValue + $grant - 632562) / ($faceValue + $grant));
-       //dump($this->van($this->I,$faceValue));
+       //$GrantElement  =  (($faceValue + $grant - 632562) / ($faceValue + $grant));
+       $this->Calendrier_de_paiement($faceValue,$this->commission);
+      // $van = $this->don;
+       $GrantElement  =  (($faceValue + $grant - $this->don) / ($faceValue + $grant));
+    //    $GrantElement  =  (($faceValue + $grant - 632562) / ($faceValue + $grant));
+
+      // dump($this->don);
        return $GrantElement*100;    
     }
 
@@ -167,4 +162,15 @@ class GrantElement1
         return $res_free;
     }
 
+    public function van()
+    {  
+        $tauxactualisation = 0.026;
+        $CF = array(7500,7500,7500,7500,7500,7500,7500,7500,7500,7500,32500,32313,32125,31938,31750,31563,31375,31188,31000,30813,30625,30438,30250,30063,29875,29688,29500,29313,29125,28938,28750,28563,28375,28188,28000,27813,27625,27438,27250,27063,26875,26688,26500,26313,26125,25938,25750,25563,25375,25188); 
+        $v = 0 ;
+        for($i = 0; $i < 50 ; $i++){
+            $fva = 1 / pow(1 + $tauxactualisation, $i);
+            $v += $CF[$i] * $fva;
+        }
+        return $v;
+    }
 }
