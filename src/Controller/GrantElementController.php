@@ -26,7 +26,7 @@ class GrantElementController extends AbstractController
             $val = $element->calculeElementDon($_POST['face'],0);
             $d = $element->Calendrier_de_paiement(1000000);
             $test = 1;
-
+            
            // dump($d);
             // return $this->redirectToRoute('grant_element');
        // dump($element);

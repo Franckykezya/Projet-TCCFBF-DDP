@@ -68,8 +68,9 @@ class BailleurController extends AbstractController
         {
             $repo = $this->getDoctrine()->getManager();
              //ajout element don
-            $element = new GrantElement1(0.015,2,$bailleur->getPeriodeGrace(),$bailleur->getMaturiteFacilite());
-            $val = $element->calculElementDonSansCommission();
+            $somme_commission = $bailleur->getDifferentielInteret()+$bailleur->getFraisGestion()+$bailleur->getCommissionEngagement()+$bailleur->getCommissionService()+$bailleur->getCommissionInitiale()+$bailleur->getCommissionArrangement()+$bailleur->getCommissionAgent()+$bailleur->getMaturiteLettreCredit()+$bailleur->getFraisLiesLettreCredit()+$bailleur->getFraisLiesRefinancement();
+            $element = new GrantElement1(0.015,2,$bailleur->getPeriodeGrace(),$bailleur->getMaturiteFacilite(),"In percent of outstanding loan",0,$somme_commission);
+            $val = $element->calculeElementDonBailleur(100,0);
             dump($val);
             $bailleur->setElementDon($val);
             $repo->persist($bailleur);
@@ -78,7 +79,6 @@ class BailleurController extends AbstractController
         }
         return $this->render("bailleur/createbailleur.html.twig",[
             'formBailleur' => $form->createView(),
-
         ]);
     }
 
@@ -151,7 +151,7 @@ class BailleurController extends AbstractController
      */
     public function elementdon(){
         //$R,$A,$INT,$M
-        $element = new GrantElement1(0.015,2,5,25);
+        $element = new GrantElement1(0.015,2,5,25,"In percent of outstanding loan",0,0);
         $val = $element->calculeElementDon(1000000, 0,632562);
        // dump($element);
        

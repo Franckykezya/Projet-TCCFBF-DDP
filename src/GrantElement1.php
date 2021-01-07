@@ -104,6 +104,12 @@ class GrantElement1
       // dump($this->don);
        return $GrantElement*100;    
     }
+    //calcul element-don ajout Bailleur test
+    public function calculeElementDonBailleur($faceValue, $grant){
+        $this->Calendrier_de_paiement($faceValue,$this->commission);
+        $GrantElement  =  (($faceValue + $grant - $this->don) / ($faceValue + $grant));
+        return $GrantElement*100;    
+     }
 
     public function CalculInteret($interest_rate, $indice_annee, $outstanding, $N, $vc = 0, $type = 0){
         for($i=0 ; $i < $N; $i++){
@@ -161,7 +167,7 @@ class GrantElement1
         }
         return $res_free;
     }
-
+                        
     public function van()
     {  
         $tauxactualisation = 0.026;
