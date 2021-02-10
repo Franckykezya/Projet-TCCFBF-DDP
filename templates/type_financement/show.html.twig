@@ -3,31 +3,31 @@
 {% block title %}Type Financement{% endblock %}
 
 {% block body %}
-   <div id="wrapper">
+   {# <div id="wrapper">
         <!-- /. NAV SIDE  -->
-            <div id="page-wrapper" >
+            <div id="page-wrapper" > #}
                 <div id="page-inner">
-    <h1>Type Financement</h1>
+                    <h1>Type Financement</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ type_financement.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ type_financement.nom }}</td>
-            </tr>
-        </tbody>
-    </table>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>Id</th>
+                                <td>{{ type_financement.id }}</td>
+                            </tr>
+                            <tr>
+                                <th>Nom</th>
+                                <td>{{ type_financement.nom }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-    <a href="{{ path('type_financement_index') }}">back to list</a>
+                    <a href="{{ path('type_financement_index') }}">back to list</a>
 
-    <a href="{{ path('type_financement_edit', {'id': type_financement.id}) }}">edit</a>
+                    <a href="{{ path('type_financement_edit', {'id': type_financement.id}) }}">edit</a>
 
-    {{ include('type_financement/_delete_form.html.twig') }}
-    </div>
-    </div>
-    </div>
+                    {{ include('type_financement/_delete_form.html.twig') }}
+                </div>
+         {# </div>
+    </div> #}
 {% endblock %}

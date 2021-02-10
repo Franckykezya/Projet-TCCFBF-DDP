@@ -7,8 +7,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Bailleur;
+use App\Entity\TauxFixe;
+use App\Entity\TauxVariable;
 use App\Entity\SecteurIntervention;
 use App\Form\BailleurType;
+use App\Form\TauxFixeType;
+use App\Form\TauxVariableType;
 use App\Form\SecteurInterventionType;
 use App\Form\TypeFinancementType;
 use App\Repository\BailleurRepository;
@@ -56,29 +60,44 @@ class BailleurController extends AbstractController
      */
     public function ajout_bailleur(Request $request)
     {
+        ////// Bailleur //////////
         //  if($bailleur == null){
         //      $bailleur = new Bailleur();
         //  }
         $bailleur = new Bailleur();
         $form = $this->createForm(BailleurType::class, $bailleur);
-
         $form->handleRequest($request);
 
+        $tauxfixe = new TauxFixe();
+        $formfixe = $this->createForm(TauxFixeType::class, $tauxfixe);
+        $formfixe->handleRequest($request);
+
+        $tauxvariable = new TauxVariable();
+        $formVariable = $this->createForm(TauxVariableType::class, $tauxvariable);
+        $formVariable->handleRequest($request);
+
+       
         if($form->isSubmitted() && $form->isValid())
         {
             $repo = $this->getDoctrine()->getManager();
-             //ajout element don
+            //ajout element don
             $somme_commission = $bailleur->getDifferentielInteret()+$bailleur->getFraisGestion()+$bailleur->getCommissionEngagement()+$bailleur->getCommissionService()+$bailleur->getCommissionInitiale()+$bailleur->getCommissionArrangement()+$bailleur->getCommissionAgent()+$bailleur->getMaturiteLettreCredit()+$bailleur->getFraisLiesLettreCredit()+$bailleur->getFraisLiesRefinancement();
             $element = new GrantElement1(0.015,2,$bailleur->getPeriodeGrace(),$bailleur->getMaturiteFacilite(),"In percent of outstanding loan",0,$somme_commission);
             $val = $element->calculeElementDonBailleur(100,0);
             dump($val);
             $bailleur->setElementDon($val);
+
             $repo->persist($bailleur);
+            $repo->persist($tauxfixe);
+            $repo->persist($tauxvariable);
             $repo->flush();
             return $this->redirectToRoute('liste_bailleur');
-        }
+            }
+
         return $this->render("bailleur/createbailleur.html.twig",[
             'formBailleur' => $form->createView(),
+            'formTauxFixe' => $formfixe->createView(),
+            'formTauxVariable' => $formVariable->createView(),
         ]);
     }
 
@@ -88,7 +107,7 @@ class BailleurController extends AbstractController
     public function liste_bailleur(Request $request, PaginatorInterface $paginator, BailleurRepository $bailleurRepository) : Response
     {
         //$donnees = $this->getDoctrine()->getRepository(Bailleur::class)->findyBy();
-        $bailleurs = $paginator->paginate($this->bailleurRepository->findAll(), $request->query->getInt('page', 1), 6);
+        $bailleurs = $paginator->paginate($this->bailleurRepository->findAll(), $request->query->getInt('page', 1), 12);
         
         //$bailleurs = $bailleurRepository->findAll();
         //dump($bailleurs);
@@ -104,12 +123,13 @@ class BailleurController extends AbstractController
         $bailleur = $bailleurRepository->find($id);
         $secteurs = $bailleurRepository->secteur($id);
         $financements = $bailleurRepository->financement($id);
-        //dump($financements);
+        $tauxinteretfixe = $bailleurRepository->tauxinteretfixe($id);
 
         return $this->render("bailleur/affichebailleur.html.twig",[
             'bailleur' => $bailleur,
             'secteurs' => $secteurs,
-            'financements' => $financements
+            'financements' => $financements,
+            'tauxinteretfixe' => $tauxinteretfixe
         ]);
 
 
@@ -118,18 +138,30 @@ class BailleurController extends AbstractController
     /**
      * @Route("/editerBAILLEUR/{id}", name="modifier_bailleur")
      */
-    public function editer_bailleur(Request $request, Bailleur $bailleur)
+    public function editer_bailleur(Request $request, Bailleur $bailleur, TauxFixe $tauxfixe)
     {
-        $formBailleur = $this->createForm(BailleurType::class, $bailleur );
+        $formBailleur = $this->createForm(BailleurType::class, $bailleur);
         $formBailleur->handleRequest($request);
+
+        $formfixe = $this->createForm(TauxFixeType::class, $tauxfixe);
+        $formfixe->handleRequest($request);
+
+        // $formVariable = $this->createForm(TauxVariableType::class, $tauxvariable);
+        // $formVariable->handleRequest($request);
 
         if ($formBailleur->isSubmitted() && $formBailleur->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', 'Le groupe a bien été modifié');
+
             return $this->redirectToRoute('liste_bailleur');
         }
         return $this->render('bailleur/edit.html.twig',[
             'bailleur' => $bailleur,
-            'formBailleur' => $formBailleur->createView()
+            'tauxfixe' => $tauxfixe,
+            // 'tauxvariable' => $tauxvariable,
+            'formBailleur' => $formBailleur->createView(),
+            'formTauxFixe' => $formfixe->createView(),
+            // 'formTauxVariable' => $formVariable->createView()
         ]);
     }
     /**
@@ -163,19 +195,20 @@ class BailleurController extends AbstractController
       /**
      * @Route("/bailleur/tableaucomparatif", name="tableau_comparatif")
      */
-    public function tableaucomparatif(BailleurRepository $bailleurrep, SecteurInterventionRepository $secteurInterventionrep, TypeFinancementRepository $typefinancementrep, TauxInteretRepository $tauxinteretrep) : Response
+    //public function tableaucomparatif(BailleurRepository $bailleurrep, SecteurInterventionRepository $secteurInterventionrep, TypeFinancementRepository $typefinancementrep, TauxInteretRepository $tauxinteretrep) : Response
+    public function tableaucomparatif(BailleurRepository $bailleurrep, SecteurInterventionRepository $secteurInterventionrep, TypeFinancementRepository $typefinancementrep) : Response
     {   
         $bailleurs = $bailleurrep->findAll();
         $secteur = $secteurInterventionrep->findAll();
         $typefinancement = $typefinancementrep->findAll();
-        $tauxinteret = $tauxinteretrep->findAll();
+        //$tauxinteret = $tauxinteretrep->findAll();
 
 
         return $this->render("bailleur/tableau_comparatif.html.twig",[
             'bailleurs' => $bailleurs,
             'secteur' => $secteur,
             'typefinancement' => $typefinancement,
-            'tauxinteret' => $tauxinteret,
+            //'tauxinteret' => $tauxinteret,
         ]);
     }
 }

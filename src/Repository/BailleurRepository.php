@@ -43,6 +43,18 @@ class BailleurRepository extends ServiceEntityRepository
 
     } 
 
+    public function tauxinteretfixe($id){
+        $req = "SELECT taux_fixe.base FROM bailleur
+            INNER JOIN taux_interet_type ON bailleur.id = taux_interet_type.bailleur_id
+            INNER JOIN taux_fixe ON taux_interet_type.tauxfixe_id = taux_fixe.id
+            WHERE bailleur.id = $id
+        ";
+        $a = $this->getEntityManager()->getConnection()->prepare($req);
+        $a->execute([]);
+        return $a->fetchAll();
+
+    } 
+
     // /**
     //  * @return Bailleur[] Returns an array of Bailleur objects
     //  */

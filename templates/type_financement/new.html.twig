@@ -3,17 +3,17 @@
 {% block title %}Ajout type financement{% endblock %}
 
 {% block body %}
-   <div id="wrapper">
+   {# <div id="wrapper">
         <!-- /. NAV SIDE  -->
-            <div id="page-wrapper" >
+            <div id="page-wrapper" > #}
                 <div id="page-inner">
-    <h1>Ajout type financement</h1>
+                    <h1>Ajout type financement</h1>
 
-    {{ include('type_financement/_form.html.twig') }}
-    
-    <a href="{{ path('type_financement_index') }}">Liste</a>
-    </div>
-    </div>
-    </div>
+                    {{ include('type_financement/_form.html.twig') }}
+                    
+                    <a href="{{ path('type_financement_index') }}">Liste</a>
+                </div>
+            {# </div>
+    </div> #}
 
 {% endblock %}

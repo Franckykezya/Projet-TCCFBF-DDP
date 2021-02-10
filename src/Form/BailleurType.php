@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Bailleur;
 use App\Entity\SecteurIntervention;
-use App\Entity\TauxInteret;
 use App\Entity\TypeFinancement;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -42,11 +41,6 @@ class BailleurType extends AbstractType
                  'class' => TypeFinancement::class,
                  'choice_label' => 'nom',
                  'multiple' => true
-             ])
-             ->add('taux', EntityType::class,[
-                 'class' => TauxInteret::class,
-                 'choice_label' => 'taux',
-                 'multiple' => false
              ])
         ;
     }

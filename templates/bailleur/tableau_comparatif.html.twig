@@ -1,37 +1,12 @@
- <meta charset="UTF-8">
-        <title>{% block title %}Tableau!{% endblock %}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <!-- BOOTSTRAP STYLES-->
-        <link href="../assets/css/bootstrap.css" rel="stylesheet" />
-        <!-- FONTAWESOME STYLES-->
-        <link href="../assets/css/font-awesome.css" rel="stylesheet" />
-        <!-- MORRIS CHART STYLES-->
-        <link href="../assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
-        <!-- CUSTOM STYLES-->
-        <link href="../assets/css/custom.css" rel="stylesheet" />
-        <!-- GOOGLE FONTS-->
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-        <style>
-            .navbar-default{
-               margin : -09px 0px 0px 0px ;
+{% extends 'base.html.twig' %}
 
-               overflow: hidden;
-               /*background-color: #333;*/
-               position: fixed; /* Set the navbar to fixed position */
-               top: 0; /* Position the navbar at the top of the page */
-               /*width: 100%; /* Full width */
-            }
-            /* Style the active class (and buttons on mouse-over) */
-            .active, .btn:hover {
-                background-color: red;
-                color: #ff00ff;
-            }
-            .el{
-                background-color: red;
-            }
-        </style>
-
-
+{% block title %}Liste des bailleurs{% endblock %}
+{% block stylesheets %}
+       <style>
+           
+       </style>
+ {% endblock %}
+ 
 {% block body %}
     <div id="" >
             <div id="page-inner">
@@ -111,9 +86,9 @@
                                 </tr>
                                  <tr>
                                     <th scope="row">TAUX D'INTERET</th>
-                                      {% for ti in tauxinteret %}
+                                      {# {% for ti in tauxinteret %}
                                         <th scope="col">{{ti.taux}}</th>
-                                    {% endfor %}
+                                    {% endfor %} #}
                                 </tr>
                                  <tr>
                                     <th scope="row">DIFFERENTIEL D'INTERET</th>

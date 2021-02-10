@@ -8,15 +8,16 @@
  {% endblock %}
 
 {% block body %}
-    <div id="wrapper">
+    {# <div id="wrapper">
         <!-- /. NAV SIDE  -->
-            <div id="page-wrapper" >
+            <div id="page-wrapper" > #}
                 <div id="page-inner">
                     <div class="row">
                         <div class="col-md-12">
-                        <h2>Listes des bailleurs</h2>   
-                            <h5>Carte representé la liste des bailleurs de fond</h5>
-                        
+                        <center>
+                            <h2>Listes des bailleurs</h2>   
+                            <h5>Cette carte represente la liste des bailleurs de fond</h5>
+                        </center>
                         </div>
                     </div>
                     <!-- /. ROW  -->
@@ -54,27 +55,20 @@
                 <!-- /. ROW  -->
                 <div class = "text-center">
                     <div class = "page">
-                    <div class="pagination">
-                        {{knp_pagination_render(bailleurs)}}
-                    </div>
-                    </div>
-                </div>
-                
-                
-                <div class="row">
-                    <div class="col-md-12">
-                        <a href="{{path('create_bailleur')}}" class="btn btn-primary btn-lg pull-right" role="button"><span class="glyphicon glyphicon-plus">_</span>Ajout</a>
+                        <div class="pagination">
+                            {{knp_pagination_render(bailleurs)}}
+                              <a href="{{path('create_bailleur')}}" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-plus">_</span>Ajout bailleur de fond</a></center>
+                        </div>
+                  
                     </div>
                 </div>
             <!-- /. ROW  -->
-
-
             </div>
             <!-- /. PAGE INNER  -->
-        </div>
+        {# </div>
             <!-- /. PAGE WRAPPER  -->
     </div>
-    <!-- /. WRAPPER  -->
+    <!-- /. WRAPPER  --> #}
 
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->

@@ -116,16 +116,14 @@ class Bailleur
     private $typefinancement;
 
     /**
-     * @ORM\ManyToOne(targetEntity=TauxInteret::class, inversedBy="bailleur")
-     */
-    private $taux;
-
-    /**
      * @ORM\Column(type="float")
      */
     private $elementdon;
 
-    
+    /**
+     * @ORM\OneToOne(targetEntity=TauxInteretType::class, cascade={"persist", "remove"})
+     */
+    private $tauxinteret;
 
     public function __construct()
     {
@@ -390,18 +388,6 @@ class Bailleur
         return $this;
     }
 
-    public function getTaux(): ?TauxInteret
-    {
-        return $this->taux;
-    }
-
-    public function setTaux(?TauxInteret $taux): self
-    {
-        $this->taux = $taux;
-
-        return $this;
-    }
-
     public function getElementdon(): ?float
     {
         return $this->elementdon;
@@ -413,5 +399,16 @@ class Bailleur
 
         return $this;
     }
-    
+
+    public function getTauxinteret(): ?TauxInteretType
+    {
+        return $this->tauxinteret;
+    }
+
+    public function setTauxinteret(?TauxInteretType $tauxinteret): self
+    {
+        $this->tauxinteret = $tauxinteret;
+
+        return $this;
+    }  
 }
