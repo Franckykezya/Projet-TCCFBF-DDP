@@ -7,35 +7,46 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\GrantElement1;
+use App\Repository\BailleurRepository;
 
 class GrantElementController extends AbstractController
 {
     /**
      * @Route("/grantelementcalcul", name="grant_element")
      */
-    public function index(Request $request): Response
+    public function index(Request $request,BailleurRepository $bailleurRepository): Response
     {
         //dump($request);
-        $val = 0;
-        $d = 0;
+        $val  = 0; $vallumpsum = 0;
+        $d = 0; $dlumpsum = 0;
         $test = 0;
         if($request->request->count() > 0){
             
             $element = new GrantElement1(($_POST['interest']/100),$_POST['payments'],$_POST['graceperiod'],$_POST['maturity'],$_POST['management'], $_POST['val_management'],$_POST['commission']);
             //$val = $element->calculElementDonSansCommission();
             $val = $element->calculeElementDon($_POST['face'],0);
-            $d = $element->Calendrier_de_paiement(1000000);
+            $d = $element->Calendrier_de_paiement($_POST['face']);
             $test = 1;
+
+            $vallumpsum = $element->calculeElementDon_lump_sum($_POST['face'],0);
+            $dlumpsum = $element->Calendrier_de_paiement_lump_sum($_POST['face']);
+
+
             
            // dump($d);
             // return $this->redirectToRoute('grant_element');
        // dump($element);
         }
-        
+        //maka bailleur
+        $bailleurs = $bailleurRepository->findAll();
+        dump($bailleurs);
         return $this->render('grant_element/index.html.twig', [
             'controller_name' => $val,
             'test' => $test,
-            'tabs' => $d
+            'tabs' => $d,
+            'vallumpsum' => $vallumpsum,
+            'dlumpsum' => $dlumpsum,
+            'bailleurs' => $bailleurs
         ]);
     }
     /**

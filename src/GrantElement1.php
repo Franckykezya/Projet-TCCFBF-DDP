@@ -40,7 +40,7 @@ class GrantElement1
     
         return round($Gel,1);
     }
-
+    //equal pp
     public function Calendrier_de_paiement($capital)
     {
         $N = ($this->M*$this->A);
@@ -49,7 +49,8 @@ class GrantElement1
         for ($i = 0 ; $i < $N ; $i++)
         {    
             $indice_annee[$i] = $N-$i ; 
-            $interest_rate [$i]= ($this->R / $this->A) * 100;
+           // $interest_rate [$i]= ($this->R / $this->A) * 100;
+            $interest_rate [$i] = ((pow((1+$this->R),(1/$this->A))-1)*100);
             $pricipal[$i] = 0;
             if( $i < $this->INT*$this->A)
             {
@@ -77,11 +78,73 @@ class GrantElement1
         $van = 0;
         for($i = 0; $i < $N ; $i++){
             $fva = 1 / pow(1 + $this->I, $i);
-            $van += $pricipal[$i] * $fva;
+            $van += $payment[$i] * $fva;
         }
         $this->don = $van+($capital * $this->commission/100);
         $c30 = $capital * $this->commission/100;
-        dump($c30);
+        //dump($this->don);
+        //dump($c30);
+        $tab = array ($indice_annee, $interest_rate,$payment,$free,$interest,$pricipal,$outstanding);
+        //return $van;
+        return $tab;
+    }
+    //lump-sum
+    public function Calendrier_de_paiement_lump_sum($capital)
+    {
+        $N = ($this->M*$this->A);
+        $outstanding[-1] = $capital;
+        $j = 1;
+        for ($i = 0 ; $i < $N; $i++)
+        {    
+            $indice_annee[$i] = $N-$i ;
+            
+            $interest_rate [$i] = (pow((1+$this->R),(1/$this->A))-1)*100;
+            $pricipal[$i] = 0;
+            // if( $i < $this->INT*$this->A)
+            // {
+            //     $pricipal[$i] = 0 ;
+            // }else{
+            //     $pricipal[$i] = $capital / (($this->M - $this->INT) * $this->A);
+            // }
+            //if($indice_annee[$i] > 0){
+            if($indice_annee[$i] > 0){                                  
+                if($indice_annee[$i] > ($indice_annee[$i]-($indice_annee[$i]-1))){
+                    $pricipal[$i] = 0;
+                }else{
+                    $pricipal[$i] = $capital;
+                   // dump($indice_annee[$i]); 
+                }
+            }
+            //dump($principal[$i]);
+            // $payment[$i] = 0;
+            // $free[$i] = 0;
+            // $interest[$i] = 0;
+           
+            $outstanding[$i] =round( $outstanding[$i-1] - $pricipal[$i],5);
+            //dump()
+            //$outstanding[$i] = 1000000 - $pricipal[$i];
+
+        }
+        $payment[$i] = 0;
+        $free[$i] = 0;
+        $interest[$i] = 0;
+        //interest
+         $interest = $this->CalculInteret($interest_rate, $indice_annee, $outstanding,$N);
+        //fees
+        $free = $this->CalculFees($indice_annee, $outstanding,$N,$this->management,$this->val_management,$this->A);
+        //Payments per period
+        $payment = $this->CalculPaymentPeriod($pricipal, $interest, $free, $N);
+
+        //calcul VAN
+        $van = 0;
+        for($i = 0; $i < $N ; $i++){
+            $fva = 1 / pow(1 + $this->I, $i);
+            $van += $payment[$i] * $fva;
+        }
+        $this->don = $van+($capital * $this->commission/100);
+        $c30 = $capital * $this->commission/100;
+        //dump($this->don);
+        //dump($c30);
         $tab = array ($indice_annee, $interest_rate,$payment,$free,$interest,$pricipal,$outstanding);
         //return $van;
         return $tab;
@@ -97,13 +160,29 @@ class GrantElement1
     public function calculeElementDon($faceValue, $grant){
        //$GrantElement  =  (($faceValue + $grant - 632562) / ($faceValue + $grant));
        $this->Calendrier_de_paiement($faceValue,$this->commission);
+
       // $van = $this->don;
        $GrantElement  =  (($faceValue + $grant - $this->don) / ($faceValue + $grant));
-    //    $GrantElement  =  (($faceValue + $grant - 632562) / ($faceValue + $grant));
+      // $GrantElement  =  (($faceValue + $grant - 1396168) / ($faceValue + $grant));
 
       // dump($this->don);
        return $GrantElement*100;    
     }
+    //calcul element-don lump-sum
+    public function calculeElementDon_lump_sum($faceValue, $grant){
+        //$GrantElement  =  (($faceValue + $grant - 632562) / ($faceValue + $grant));
+        $this->Calendrier_de_paiement_lump_sum($faceValue,$this->commission);
+       // $van = $this->don;
+        $GrantElement  =  (($faceValue + $grant - $this->don) / ($faceValue + $grant));
+       // $GrantElement  =  (($faceValue + $grant - 1396168) / ($faceValue + $grant));
+ 
+       // dump($this->don);
+        return $GrantElement*100;    
+     }
+
+
+     //annuity
+     
     //calcul element-don ajout Bailleur test
     public function calculeElementDonBailleur($faceValue, $grant){
         $this->Calendrier_de_paiement($faceValue,$this->commission);
@@ -121,15 +200,22 @@ class GrantElement1
             return false;
             endif;
             
-            $tauxAct[$i] = pow(1 + $interest_rate[$i], - $indice_annee[$i]);
-            
+            $tauxAct[$i] = round( pow(1 + $interest_rate[$i], - $indice_annee[$i]),1);
+                        
             if((1 - $tauxAct[$i]) == 0):
+            //if((1- $interest_rate[$i]) == 0):
             return 0;
             endif;
+            if(($indice_annee[$i] == 0)){
+                $vpm[$i] = (( ( ($outstanding[$i-1] + $vc * $tauxAct[$i]) * $interest_rate[$i] / (1 - $tauxAct[$i]) ) / (1 + $interest_rate[$i] * $type) ) / 100);
+            }else{
+                $moy = ($outstanding[$i-1]+$outstanding[$i])/2;
+                $vpm[$i] = (( ( ($moy + $vc * $tauxAct[$i]) * $interest_rate[$i] / (1 - $tauxAct[$i]) ) / (1 + $interest_rate[$i] * $type) ) / 100);
+            }
+            //$vpm[$i] = ( ( ($outstanding[$i-1] + $vc * $interest_rate[$i]) * $interest_rate[$i] / (1 - $interest_rate[$i]) ) / (1 + $interest_rate[$i] * $type) ) / 100;
             
-            $vpm[$i] = ( ( ($outstanding[$i-1] + $vc * $tauxAct[$i]) * $interest_rate[$i] / (1 - $tauxAct[$i]) ) / (1 + $interest_rate[$i] * $type) ) / 100;
-       
         }
+        dump($vpm);
         return $vpm;
     }
     
@@ -143,7 +229,7 @@ class GrantElement1
     public function moyenne($nb1,$nb2) { 
         $somme = 0;
          for($i = 0 ; $i < 2 ; $i++){
-             $somme = $nb1 + $nb2;
+             $somme = round(($nb1 + $nb2),0);
          }
          return $somme/2;
      }
@@ -179,4 +265,7 @@ class GrantElement1
         }
         return $v;
     }
+    // public function effective_interest_rate(){
+    //     $interest = $this->CalculPaymentPeriod();
+    // }
 }
