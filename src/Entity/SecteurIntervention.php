@@ -25,13 +25,13 @@ class SecteurIntervention
     private $nom;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Bailleur::class, mappedBy="secteur")
+     * @ORM\ManyToMany(targetEntity=Projet::class, mappedBy="secteur")
      */
-    private $bailleurs;
+    private $projets;
 
     public function __construct()
     {
-        $this->bailleurs = new ArrayCollection();
+        $this->projets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -52,27 +52,27 @@ class SecteurIntervention
     }
 
     /**
-     * @return Collection|Bailleur[]
+     * @return Collection|Projet[]
      */
-    public function getBailleurs(): Collection
+    public function getProjets(): Collection
     {
-        return $this->bailleurs;
+        return $this->projets;
     }
 
-    public function addBailleur(Bailleur $bailleur): self
+    public function addProjet(Projet $projet): self
     {
-        if (!$this->bailleurs->contains($bailleur)) {
-            $this->bailleurs[] = $bailleur;
-            $bailleur->addSecteur($this);
+        if (!$this->projets->contains($projet)) {
+            $this->projets[] = $projet;
+            $projet->addSecteur($this);
         }
 
         return $this;
     }
 
-    public function removeBailleur(Bailleur $bailleur): self
+    public function removeProjet(projet $projet): self
     {
-        if ($this->bailleurs->removeElement($bailleur)) {
-            $bailleur->removeSecteur($this);
+        if ($this->projets->removeElement($projet)) {
+            $projet->removeSecteur($this);
         }
 
         return $this;

@@ -36,8 +36,8 @@ function onlyNumber()
                 <div class="row">
                     <div class="col-md-12">
                     <center>
-                        <h2>Ajout bailleur</h2>   
-                        <h5>Formulaire pour ajouter le bailleur de fond</h5>
+                        <h2>Ajout projet</h2>   
+                        <h5>Formulaire pour ajouter le projet</h5>
                     </center>
                     </div>
                 </div>
@@ -48,7 +48,7 @@ function onlyNumber()
                     <!-- Form Elements -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Création du bailleur de fond
+                            Création du projet
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -56,8 +56,8 @@ function onlyNumber()
 
                                     {{ form_start(formBailleur) }}
                                 
-
-                                        {{ form_row(formBailleur.nom, {'label' : 'Nom du bailleur' , 'attr' : {'placeholder':"Nom du bailleur"}}) }}
+                                        {{ form_row(formBailleur.bailleur, {'label' : 'Nom du bailleur'}) }}
+                                        {{ form_row(formBailleur.nom, {'label' : 'Nom du projet' , 'attr' : {'placeholder':"Nom du projet"}}) }}
                                         <a class="dropdown-item" href="{{ path('create_secteur_intervention') }}">Ajout...</a>
                                         {{ form_row(formBailleur.secteur, {'label' : 'Secteurs d\'intervention', 'attr' : {'placeholder':"Secteurs d'intervention"}}) }}
                                         <a class="dropdown-item" href="{{ path('type_financement_new') }}">Ajout...</a>
@@ -83,7 +83,7 @@ function onlyNumber()
                                                                 {{ form_row(formTauxFixe.base, {'label' : "Taux d'interet base", 'attr' : {'placeholder':"Taux d'interet base"}}) }}                                                           
                                                                 {{ form_row(formTauxFixe.valeur, {'label' : 'Valeur (en %)', 'attr' : {'placeholder':"Valeur (en %)"}}) }}
                                                                 {{ form_row(formTauxFixe.valeur_element_don, {'label' : "Valeur pour l'element don (en %)", 'attr' : {'placeholder':"Valeur pour l'element don (en %)"}}) }}
-                                                            {{ form_end(formTauxFixe) }}
+                                                            {# {{ form_end(formTauxFixe) }} #}
                                                             </div>
                                                         </p>
                                                     </div>
@@ -99,7 +99,7 @@ function onlyNumber()
                                                                 {{ form_row(formTauxVariable.Total, {'label' : "Valeur total (en %)", 'attr' : {'placeholder':"Valeur total (en %)", 'onblur': "calcul()", 'disabled':"disabled" }}) }}    
                                                                
                                                                 {{ form_row(formTauxVariable.valeur_element_don, {'label' : "Valeur pour l'element don (en %)", 'attr' : {'placeholder':"Valeur pour l'element don (en %)" }}) }}         
-                                                            {{ form_end(formTauxVariable) }}
+                                                            {# {{ form_end(formTauxVariable) }} #}
                                                             </div>
                                                         </p>
                                                     </div>
@@ -125,7 +125,7 @@ function onlyNumber()
                                         {{ form_row(formBailleur.prime_attenuation_risque_credit, {'label' : 'Prime d\'attenuation du risque de credit (en %)', 'attr' : {'placeholder':"Prime d'attenuation du risque de credit (en %)"}}) }}
 
                                         <button type="Submit" class="btn btn-info pull-right" name="" id="" value="">
-                                        <span class="glyphicon glyphicon-floppy-saved">_</span>Enregistrer
+                                        <span class="glyphicon glyphicon-floppy-saved">&nbsp;</span>Enregistrer
                                         </button>
                                         
                                         {{ form_end(formBailleur) }}

@@ -349,13 +349,13 @@
                         <a class = "" href="{{ path('blog') }}"><i class="fa fa-home"></i> Accueil</a>
                     </li>
                     <li id = "btn">
-                        <a class="active" href="{{path('liste_bailleur')}}"><i class="fa fa-list "></i> Listes des bailleurs de fond</a>
+                        <a class="active" href="{{path('liste_projet')}}"><i class="fa fa-list "></i> Listes des bailleurs de fond</a>
                     </li>
                     <li>
                         <a class="active" href="{{ path('tableau_comparatif') }}"><i class="fa fa-table "></i> Tableau comparatif</a>
                     </li>
                     <li>
-                        <a class="active" href="{{ path('create_bailleur') }}"><i class="fa fa-edit "></i> Ajout bailleur </a>
+                        <a class="active" href="{{ path('bailleur_index') }}"><i class="fa fa-edit "></i> Ajout bailleur </a>
                     </li>
                     <li>
                         <a class="active" href="{{ path('create_bailleur') }}"><i class="fa fa-edit "></i> Ajout projet </a>
@@ -522,7 +522,7 @@
                 this.className += "-menu";
               });
             }
-        }
+        
         </script>
         
         {% endblock %}

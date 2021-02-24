@@ -1,193 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Bailleur index{% endblock %}
 
 {% block body %}
-    {# <div id="wrapper">
-        <!-- /. NAV SIDE  -->
-        <div id="page-wrapper"> #}
-            <div id="page-inner">
-                <div class="row">
-                    <div class="col-md-12">
-                        <center><h2>Instructions on Calculating the Grant Element of a Loan</h2></center>
-                        <center><h5> Latest update: October 2014 </h5></center>
-                    </div>
-                </div>
-                <!-- /. ROW  -->
-                <h4> This file assists in: (i) calculating the grant element; and (ii) recording of currency-specific Commercial Interest Reference Rates (CIRRs). </h4>
-                <hr />
-                 <!-- /. ROW  -->
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="panel panel-primary text-center no-boder bg-color-green">
-                                <div class="panel-footer back-footer-green">
-                                    <i class=""></i> 
-                                        On October 11, 2013, the Executive Boards of the Fund and of the Bank adopted a new methodology setting a single, unified discount rate (5%) to calculate the grant element of individual loans. The concessionality calculator has been modified  to include the new unified discount rate in the list of available rates. Use of the new methodology will be phased in:
-                                            <ul>
-                                                <li>
-                                                    For countries without a Fund-supported program in place, the unified discount rate methodology already applies to concessionality assessments;
-                                                </li>
-                                                <li>
-                                                    For countries with a Fund-supported program in place, the unified methodology will only apply once modification of the related conditionality (as laid out in the Technical Memorandum of Understanding) has been approved by the Fund’s Executive Board. Such modifications are usually achieved in the context of program reviews. Pending these modifications, the old methodology based on currency-specific and maturity-dependent discount rates will apply to concessionality assessments.
-                                                </li>
-                                            </ul>
-                                </div>
-                            </div>
-                        </div>  
-                    </div>
-                <!-- /. ROW  -->
-                <div class="row">
-                    
-                        <div class="col-md-12 col-sm-6 col-xs-6">
-                            <div class="panel panel-back noti-box">
-                                <span class="icon-box bg-color-green set-icon">
-                                    <i class="fa fa-bars"></i>
-                                </span>
-                                <div class="text-box">
-                                    <p class="main-text">Grant element: </p>
-                                    <br class="text-muted">
-                                        The grant element measures the concessionality of a loan. It is defined as the difference between its nominal value (face value) and the sum of the discounted future debt-service payments (net present value) to be made by the borrower, expressed as a percentage of the face value of the loan:
-                                        Whenever the interest rate charged for a loan is lower than the appropriate discount rate, the resulting present value of the debt is smaller than its face value, with the difference reflecting the grant element of the loan. Upfront commissions and/or management fees throughout the lifetime of the loan constitute a cost of contracting/managing the loan and therefore an implicit interest cost, which should be included in calculating the level of concessionality. This template takes into account such commissions and fees as well as alternative standard repayment profiles (equal principal payments, annuity based principal payments, lump-sum principal and interest payment at maturity, and a customizable schedule). It can also calculate the grant element for packages that combine a grant with a (non)concessional loan. For any given combination of interest rate, commission, and fees, the minimum grant element of 35 percent can be simulated by using the “goal seek” function, i.e., what would be the maximum interest rate, commission, or fee that would bring a hypothetical loan at or above the required 35 percent grant element. </br></br>
-                                          <center> <img src="../assets/img/calcul.jpg" > </center>
-                                    </p>
-                                    <p>
-                                        The workbook contains an Input-Output sheet and six alternative worksheets that calculate the grant element for debt ceiling purposes based on (i) an equal principal repayment schedule (GE-Calculation Equal-PP); (ii) an annuity schedule (GE-Calculation Annuity); (iii) a lump sum principal payment at maturity (GE-Calculation Lump-Sum); (iv) a lump sum  principal and simple interest payment at maturity (GE-Calculation Lump-Sum P/I), (v) a lump sum  principal and compound interest payment at maturity (GE-Calculation Lump-Sum P/CompoundedI) and (vi) a manually entered debt service profile (GE-Calculation Custom) for loans that do not fit any of the standard terms, e.g. graduated principal repayment (most loans use the equal repayment schedule). All six worksheets allow for taking into account upfront commissions paid for contracting the loan and recurrent management fees of the loan. In cases where management fees are not paid on a set schedule, they have to be entered manually.
-                                    </p>
-                                    <p>
-                                        Two additional worksheets can be used to assess loans under Islamic law and other IsDB instruments.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                    <!-- /. ROW  -->
-                    <hr />
-                    <div class="row">
-        
+    <h1>Bailleur index</h1>
 
-                        <div class="col-md-12 col-sm-12 col-xs-6">
-                            <div class="panel back-dash">
-                                <i class="fa fa-plus-circle fa-3x"></i><strong> &nbsp; Input needed for the calculation of the grant element (entered in the Input-Output sheet): </strong>
-                                <p class="text-muted">
-                                    <ul>
-                                        <li>
-                                            Currency (repayment currency) of the loan, face value of the loan, upfront commission in percent, recurrent management fees, the interest rate charged on the loan, the maturity in years, the number of payments per annum, the grace period in years, and the principal repayment profile. The currency-specific CIRR discount rate is automatically obtained by selecting the currency in cell E13 in the Input–Output sheet. If a loan is contracted in a non-OECD currency (i.e., no CIRR is available), the SDR rate should be used. Please note that by choosing “other” as the currency, the calculator automatically selects the SDR rate.
-                                        </li>
-                                        <li>
-                                            The grace period is defined as the period during which only the interest and no principal payments are payable by borrower to the creditor.
-                                        </li>
-                                        <li>
-                                            Based on the currency of the loan and maturity, the currency-specific CIRR interest rate is automatically taken from either six-month or ten-year averages from the sheet called <br>6-Month-10-Year CIRRs</br> and margins reflecting the maturity of the loan are automatically added to derive the discount rate. The spreadsheets will return the grant element in percent. Six-month averages are used for loans with a maturity of less than 15 years (column C). For all other loans the ten-year averages are used (column E). The following margins are added to the CIRRs: maturity "inferior" 15 years, 0.75 percent; maturity ≥15 years and "inferior" 20 years, 1.00 percent; maturity "superior or equal" 20 years and "inferior" ul 30 years, 1.15 percent; and maturity "superior or equal" 30 years, 1.25 percent. The discount rate used in the grant element calculation is the CIRR plus the relevant margin.
-                                        </li>
-                                        <li>
-                                            All sheets calculate the grant element for financial packages that have a grant and a loan component.
-                                        </li>
-                                        <li>
-                                            Variable interest rates can be dealt with by manually entering applicable interest rates per payment period in “Column F,” of the relevant spread sheet based on the loan contract.
-                                        </li>
-                                        <li>
-                                            Management fees not paid on a set schedule (i.e., per payment period or as a percentage of the outstanding loan amount) need to be entered manually (column H of the relevant worksheet).
-                                        </li>
-                                        <li>
-                                            For a custom principal repayment schedule, enter principal payments in column J of the relevant worksheet.
-                                        </li>
-                                    </ul>
-                                </p>
-                            </div>
-                        </div>
-                
-                    <!-- /. ROW  -->
-                    <class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for bailleur in bailleurs %}
+            <tr>
+                <td>{{ bailleur.id }}</td>
+                <td>{{ bailleur.nom }}</td>
+                <td>{{ bailleur.description }}</td>
+                <td>
+                    <a href="{{ path('bailleur_show', {'id': bailleur.id}) }}">show</a>
+                    <a href="{{ path('bailleur_edit', {'id': bailleur.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-                            <div class="chat-panel panel panel-default chat-boder chat-panel-head">
-                                <div class="panel-heading">
-                                    <i class="fa fa-bars" aria-hidden="true"></i>
-                                </div>
-
-                                <div class="panel-body">
-                                    <ul class="chat-box">
-                                        <li class="left clearfix">
-                                            <span class="chat-img pull-left">
-                                            <img src="assets/img/1.png" alt="User" class="img-circle" />
-                                        </span>
-                                            <div class="chat-body">
-                                                <strong>CIRRs:</strong>
-                                                <p>
-                                                   CIRRs are updated regularly. They are used to calculate the discount rates for the grant element calculation.
-                                                </p>
-                                            </div>
-                                        </li>
-                                        <li class="left clearfix">
-                                            <span class="chat-img pull-left">
-                                            <img src="assets/img/3.png" alt="User" class="img-circle" />
-                                        </span>
-                                            <div class="chat-body clearfix">
-                                                <strong>Latest-CIRRs:</strong>                   
-                                                <p>
-                                                    Chart and data on latest CIRRs from the OECD website (updated mid-monthly). These rates are not used in direct grant element calculations but rather serve to provide a general sense of direction of the rates. They are used to compute currency specific CIRR averages.
-                                                </p>
-                                                <p>
-                                                    As of August 15th 2008, the six month average SDR Rate is 4.50 under the new methodology and 4.46 under the old one. The ten year average rate will be calculated based on the new methodology at the next update in December 2008.
-                                                 </p>
-                                            </div>
-                                        </li>
-                                        <li class="left clearfix">
-                                            <span class="chat-img pull-left">
-                                            <img src="assets/img/1.png" alt="User" class="img-circle" />
-                                        </span>
-                                            <div class="chat-body">
-                                                <strong>6-Month-10-Year CIRRs: </strong>
-                                                <p>
-                                                   Shows six-month and ten-year CIRR averages, used in calculations of the grant element for debt-ceilings in Fund programs. Six-month averages are updated mid February and mid-August, and ten-year CIRR averages are updated mid-December. The former cover a period of six months, and the latter cover the period of 10 years preceding the date of the update.
-                                                </p>
-                                            </div>
-                                        </li>
-                                        <li class="left clearfix">
-                                            <span class="chat-img pull-left">
-                                            <img src="assets/img/1.png" alt="User" class="img-circle" />
-                                        </span>
-                                            <div class="chat-body">
-                                                <strong>Current-CIRR-SDR: </strong>
-                                                <p>
-                                                   Shows how the SDR CIRR rate is calculated. For past SDR rates, input the historical currency rates.
-                                                </p>
-                                            </div>
-                                        </li>
-                                            <li class="left clearfix">
-                                            <span class="chat-img pull-left">
-                                            <img src="assets/img/1.png" alt="User" class="img-circle" />
-                                        </span>
-                                            <div class="chat-body">
-                                                <strong>CIRR-Series: </strong>
-                                                <p>
-                                                   CIRR series from July 15, 1988 to present.
-                                                </p>
-                                            </div>
-                                        </li>
-                                            <li class="left clearfix">
-                                            <span class="chat-img pull-left">
-                                            <img src="assets/img/1.png" alt="User" class="img-circle" />
-                                        </span>
-                                            <div class="chat-body">
-                                                <strong>DSA-CIRRs: </strong>
-                                                <p>
-                                                  Six-month CIRR averages, used in the (HIPC) DSA exercise (not for calculating the grant element of a loan). The averages are updated twice a year, in mid-June and mid-December, to reflect the end of the fiscal/calendar year consistent with the debt data used in the DSA. The averages are a simple arithmetic average of the six months preceding the time of the update.
-                                                </p>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- /. ROW  -->
-                {# </div>
-                <!-- /. PAGE INNER  -->
-            </div>
-            <!-- /. PAGE WRAPPER  --> #}
-
-           
-            
+    <a href="{{ path('bailleur_new') }}">Create new</a>
 {% endblock %}

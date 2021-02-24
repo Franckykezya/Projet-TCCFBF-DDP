@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bailleur{% endblock %}
+
+{% block body %}
+    <h1>Bailleur</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ bailleur.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ bailleur.nom }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ bailleur.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('bailleur_index') }}">back to list</a>
+
+    <a href="{{ path('bailleur_edit', {'id': bailleur.id}) }}">edit</a>
+
+    {{ include('bailleur/_delete_form.html.twig') }}
+{% endblock %}

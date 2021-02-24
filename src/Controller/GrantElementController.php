@@ -8,13 +8,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\GrantElement1;
 use App\Repository\BailleurRepository;
+use App\Repository\ProjetRepository;
 
 class GrantElementController extends AbstractController
 {
     /**
      * @Route("/grantelementcalcul", name="grant_element")
      */
-    public function index(Request $request,BailleurRepository $bailleurRepository): Response
+    public function index(Request $request,ProjetRepository $projetRepository): Response
     {
         //dump($request);
         $val  = 0; $vallumpsum = 0;
@@ -38,16 +39,41 @@ class GrantElementController extends AbstractController
        // dump($element);
         }
         //maka bailleur
-        $bailleurs = $bailleurRepository->findAll();
-        dump($bailleurs);
+        $projets = $projetRepository->findAll();
+        dump($projets);
         return $this->render('grant_element/index.html.twig', [
             'controller_name' => $val,
             'test' => $test,
             'tabs' => $d,
             'vallumpsum' => $vallumpsum,
             'dlumpsum' => $dlumpsum,
-            'bailleurs' => $bailleurs
+            'projets' => $projets
         ]);
+    }
+     
+    /**
+     * @Route("/selectoption/{id}", name ="selectoption")
+     */
+    public function selectoption($id, ProjetRepository $projetRepository,BailleurRepository $bailleurRepository){
+        $projet = $projetRepository->find($id);
+        $bailleur = $bailleurRepository->projetbailleur($id);
+            
+        //$data = array();
+        $data = array($projet->getMaturiteFacilite());
+        array_push($data, $projet->getPeriodeGrace());
+        $ba = array();
+        dump($bailleur);
+        // foreach ($bailleur as  $value) {
+            
+        //     $ba = array_push($ba, $value);
+        // }
+        
+         return $this->json([
+             'code' => 200,
+             'projet' => $data,
+             //'bailleur' => $ba
+
+         ],200);
     }
     /**
      * @Route("/Calendrier_de_paiement", name ="Calendrier_de_paiement")
@@ -74,6 +100,22 @@ class GrantElementController extends AbstractController
         return $this->render('grant_element/testvan.html.twig',[
                     'v' => round($v)
         ]);
+        
+    }
+    /**
+     * @Route("/tri", name = "tri")
+     */
+    public function tri(){
+        $TRI= 0;
+        $MD = array(1000,2500,3000,3000,3000,3500);
+        $MI = 10000;
+        for($i=0 ; $i<count($MD) ; $i++){
+             $TRI = $TRI + pow(($MD[$i] / $MI),(1/$i)) - 1;
+        }
+        dump($TRI);
+        return $this->render('grant_element/testvan.html.twig',[
+                 'v' => $TRI
+             ]);
         
     }
 

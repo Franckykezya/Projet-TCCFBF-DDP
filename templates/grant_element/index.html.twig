@@ -15,31 +15,39 @@
             .form-group{
                 padding : 20px;
             }
-              .title{
+            .title{
             color : rgba(100, 45, 0 , 0.3);
             text-align : center;
-        }
-        .bg-danger{
-            background: rgb(0,0,0);
-            /*background: linear-gradient(0deg, rgba(0,0,0,0.7539390756302521) 0%, rgba(247,0,0,0.7595413165266106) 83%);*/
-            color : white;
-        }
-        th{
-            text-align : center;
-            margin : 10px 10px 10px 10px;
-        }
-        td{
-             text-align : center;
-        }
-        h1{
-            color : red;
-        }
+            }
+            .bg-danger{
+                background: rgb(0,0,0);
+                /*background: linear-gradient(0deg, rgba(0,0,0,0.7539390756302521) 0%, rgba(247,0,0,0.7595413165266106) 83%);*/
+                color : white;
+            }
+            th{
+                text-align : center;
+                margin : 10px 10px 10px 10px;
+            }
+            td{
+                 text-align : center;
+            }
+            h1{
+                color : red;
+            }
+            p{
+                color : red;
+                border : 2;
+                display : none;
+            }
+            .data{
+                display : none;
+            }
        </style>
  {% endblock %}
 {% block body %}
 {# <div id="wrapper">
     <div id="page-wrapper" > #}
-        <div id="page-inner">
+        {# <div id="page-inner"> #}
             <h1 class= "title">calcul de l'élément-don</h1>
             
                 
@@ -62,8 +70,60 @@
                         </div> 
                     </div> #}
                    
+                    <div class = "form-group">
+                        <div class ="col-md-4">
+                            <label for ="projet">Projet</label>
+                        </div>
+                        <div class ="col-md-6">
+                            <select name="projet" id="projet" class="form-control">
+                                    <option value="">----projet----</option>
+                                {% for projet in projets %}
+                                    <option value="{{ projet.id}}"><a href="">{{ projet.nom}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        </br>
+                    </div>
+
+                {# eto le afficher caracteristique #}
+                <div >
+                     <p>maturity : <span class="matval"></span></p>
+                     <p>grace periode : <span class="periodval"></span></p>
                     
+                     {# <input type="text" name = "maturityval" id="maturityval"> #}
+                     {# <input type="text" name = "periodeval" id="periodeval"> #}
+                </div>
+                <div class = "form-group">
+                        <div class ="col-md-4">
+                            <label for ="face">Maturité</label>
+                        </div>
+                         <div  class ="col-md-6">
+                             <input type="text" id = "maturityval" name = "maturityval" class="form-control" >
+                        </div>  
+                       
+                </div>
+                 <div class = "form-group">
+                        <div class ="col-md-4">
+                            <label for ="face">Période de grace</label>
+                        </div>
+                         <div  class ="col-md-6">
+                             <input type="text" id = "periodeval" name = "periodeval" class="form-control" >
+                        </div>  
+                       
+                </div>
+                <div class = "form-group">
+                        <div class ="col-md-4">
+                            <label for ="face">Face Value of Loan</label>
+                        </div>
+                         <div  class ="col-md-6">
+                             <input type="number" min="0" required id = "face" name = "face" class="form-control" >
+                        </div>  
+                       
+                </div>
                    
+
+
+{#                    
                     <div class = "form-group">
                         <div class ="col-md-4">
                             <label for ="face">Face Value of Loan</label>
@@ -140,7 +200,7 @@
                         <div class ="col-md-6">
                             <input type="number" min="0" id = "graceperiod" required name = "graceperiod" class="form-control">
                         </div>
-                    </div>
+                    </div> #}
 
                     <div class = "form-group">
                         <div class = "col-md-12">
@@ -305,4 +365,32 @@
         </div>
     {# </div>
 </div> #}
+{% endblock %}
+
+{% block javascripts %}
+    <script src ="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+       
+        $(document).ready(function(){
+           $('#projet').change(function(){
+               var projet_id = $(this).val();
+               const url = "/selectoption/"+projet_id;
+               console.log(url);
+               const spanmat = document.querySelector('span.matval');
+               const spanper = document.querySelector('span.periodval');
+               console.log(spanmat);
+               axios.get(url).then(function (response){
+                   console.log(response);
+                   spanmat.textContent = response.data.projet[0];
+                   spanper.textContent = response.data.projet[1];
+                   $('input[name=maturityval]').val(response.data.projet[0]);
+                   $('input[name=periodeval]').val(response.data.projet[1]);
+
+
+               })
+              
+
+           });
+        });
+    </script>
 {% endblock %}

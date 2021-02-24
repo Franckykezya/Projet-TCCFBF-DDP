@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Entity\Bailleur;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Migrations\Query\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,42 +18,17 @@ class BailleurRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Bailleur::class);
     }
-    public function secteur($id){
-        $req = "SELECT secteur_intervention.nom FROM bailleur
-            INNER JOIN bailleur_secteur_intervention ON bailleur.id = bailleur_secteur_intervention.bailleur_id
-            INNER JOIN secteur_intervention ON bailleur_secteur_intervention.secteur_intervention_id = secteur_intervention.id
-            WHERE bailleur.id = $id
+    public function projetbailleur($id){
+        $req = "SELECT bailleur.nom FROM projet
+            INNER JOIN projet_bailleur ON projet.id = projet_bailleur.projet_id
+            INNER JOIN bailleur ON projet_bailleur.bailleur_id = bailleur.id
+            WHERE projet.id = $id
         ";
         $a = $this->getEntityManager()->getConnection()->prepare($req);
         $a->execute([]);
         return $a->fetchAll();
 
     } 
-    
-    public function financement($id){
-        $req = "SELECT type_financement.nom FROM bailleur
-            INNER JOIN bailleur_type_financement ON bailleur.id = bailleur_type_financement.bailleur_id
-            INNER JOIN type_financement ON bailleur_type_financement.type_financement_id = type_financement.id
-            WHERE bailleur.id = $id
-        ";
-        $a = $this->getEntityManager()->getConnection()->prepare($req);
-        $a->execute([]);
-        return $a->fetchAll();
-
-    } 
-
-    public function tauxinteretfixe($id){
-        $req = "SELECT taux_fixe.base FROM bailleur
-            INNER JOIN taux_interet_type ON bailleur.id = taux_interet_type.bailleur_id
-            INNER JOIN taux_fixe ON taux_interet_type.tauxfixe_id = taux_fixe.id
-            WHERE bailleur.id = $id
-        ";
-        $a = $this->getEntityManager()->getConnection()->prepare($req);
-        $a->execute([]);
-        return $a->fetchAll();
-
-    } 
-
     // /**
     //  * @return Bailleur[] Returns an array of Bailleur objects
     //  */

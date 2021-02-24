@@ -3,9 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Bailleur;
-use App\Entity\SecteurIntervention;
-use App\Entity\TypeFinancement;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,32 +13,8 @@ class BailleurType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('part_finance')
-            ->add('maturite_facilite')
-            ->add('periode_grace')
-            ->add('differentiel_interet')
-            ->add('frais_gestion')
-            ->add('commission_engagement')
-            ->add('commission_service')
-            ->add('commission_initiale')
-            ->add('commission_arrangement')
-            ->add('commission_agent')
-            ->add('maturite_lettre_credit')
-            ->add('frais_lies_lettre_credit')
-            ->add('frais_lies_refinancement')
-            ->add('frais_et_debours')
-            ->add('prime_assurance_et_frais_garantie')
-            ->add('prime_attenuation_risque_credit')
-             ->add('secteur',EntityType::class, [
-                 'class' => SecteurIntervention::class,
-                  'choice_label' => 'nom',
-                  'multiple' => true
-             ])
-             ->add('typefinancement',EntityType::class,[
-                 'class' => TypeFinancement::class,
-                 'choice_label' => 'nom',
-                 'multiple' => true
-             ])
+            ->add('description')
+            // ->add('projet')
         ;
     }
 

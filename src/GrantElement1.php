@@ -81,8 +81,12 @@ class GrantElement1
             $van += $payment[$i] * $fva;
         }
         $this->don = $van+($capital * $this->commission/100);
+        // calcul TRI
+        
+
         $c30 = $capital * $this->commission/100;
         //dump($this->don);
+
         //dump($c30);
         $tab = array ($indice_annee, $interest_rate,$payment,$free,$interest,$pricipal,$outstanding);
         //return $van;
