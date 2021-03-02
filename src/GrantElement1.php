@@ -1,12 +1,15 @@
 <?php
 namespace App;
-
+use IRRCalculator;
 use Symfony\Component\Validator\Constraints\Length;
+// use App\Iir;
+// use IRRCalculator;
 
-class GrantElement1 
+
+class GrantElement1
 {
     private $R,$A,$INT,$M,$I = 0.026,$D,$management,$val_management;
-    private $don, $commission;
+    private $don, $commission,$pay;
     
 
     public function __construct($R,$A,$INT,$M,$management,$val_management,$commission)
@@ -73,7 +76,22 @@ class GrantElement1
         $free = $this->CalculFees($indice_annee, $outstanding,$N,$this->management,$this->val_management,$this->A);
         //Payments per period
         $payment = $this->CalculPaymentPeriod($pricipal, $interest, $free, $N);
+        $this->pay = $this->CalculPaymentPeriod($pricipal, $interest, $free, $N);
 
+        //calcule IIR
+
+        //$pay = $this->CalculPaymentPeriod($pricipal, $interest, $free, $N);
+        //$ex = new IRRCalculator();
+        //$pay = array( 42623250.0,-221350.0,-196350.0,-221350.0,-196350.0,-221350.0,-196350.0,-221350.0,-196350.0,-2771350.0,-2736532.5,-2751715.0,-2716897.5,-2732080.0,-2697262.5,-2712445.0,-2677627.5,-2692810.0,-2657992.5,-2673175.0,-2638357.5,-2653540.0,-2618722.5,-2633905.0,-2599087.5,-2614270.0,-2579452.5,-2594635.0,-2559817.5);
+        // array_splice($pay,0, 0, $capital);
+        // dump($pay);
+        //$exiir = $ex->calculateFromCashFlow($pay);
+        //$iir = IRRCalculator::calculateFromCashFlow($payment,100000);
+        //dump($exiir * 100);
+        //(1 + TRI(N25:N225/1000000) ) ^ 2-1
+        //$tri = (1+pow(($exiir*100),2)) - 1;
+        //dump(round($tri,2));
+        
         //calcul VAN
         $van = 0;
         for($i = 0; $i < $N ; $i++){
@@ -81,7 +99,6 @@ class GrantElement1
             $van += $payment[$i] * $fva;
         }
         $this->don = $van+($capital * $this->commission/100);
-        // calcul TRI
         
 
         $c30 = $capital * $this->commission/100;
@@ -184,6 +201,24 @@ class GrantElement1
         return $GrantElement*100;    
      }
 
+     /**calcule Efective interest rat**/
+
+     public function calculeInterestrate($faceValue){
+        $ex = new IRRCalculator();
+        $this->Calendrier_de_paiement($faceValue);
+        $tab = $this->pay;
+        dump($tab);
+        $pay = array( 42623250.0,-221350.0,-196350.0,-221350.0,-196350.0,-221350.0,-196350.0,-221350.0,-196350.0,-2771350.0,-2736532.5,-2751715.0,-2716897.5,-2732080.0,-2697262.5,-2712445.0,-2677627.5,-2692810.0,-2657992.5,-2673175.0,-2638357.5,-2653540.0,-2618722.5,-2633905.0,-2599087.5,-2614270.0,-2579452.5,-2594635.0,-2559817.5);
+        // array_splice($pay,0, 0, $capital);
+        // dump($pay);
+        $exiir = $ex->calculateFromCashFlow($pay);
+        dump($exiir * 100);
+        //(1 + TRI(N25:N225/1000000) ) ^ 2-1
+        $tri = (1+pow(($exiir*100),2)) - 1;
+        dump(round($tri,2));
+        return $tri;
+     }
+
 
      //annuity
      
@@ -219,7 +254,7 @@ class GrantElement1
             //$vpm[$i] = ( ( ($outstanding[$i-1] + $vc * $interest_rate[$i]) * $interest_rate[$i] / (1 - $interest_rate[$i]) ) / (1 + $interest_rate[$i] * $type) ) / 100;
             
         }
-        dump($vpm);
+        //dump($vpm);
         return $vpm;
     }
     
