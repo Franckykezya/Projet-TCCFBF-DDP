@@ -12,21 +12,33 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Tableau comparatif des bailleurs de fond</h2>   
-                        <h5>Ce tableau représente les comparaisons des bailleurs de fond.</h5>
-                        
-                        <a href="{{path('liste_projet')}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-th-list">_</span>Afficher les bailleurs</a>
-                        <a href="{{path('create_bailleur')}}"  class="btn btn-info btn-sm"><span class="glyphicon glyphicon-edit">_</span>Créer un bailleur</a>
-                        <a href="{{path('blog')}}"  class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-repeat">_</span>Retour à l'accueil</a>
-                        <button class="btn btn-success pull-right"><span class="glyphicon glyphicon-print"></span></button>
-                        <button class="btn btn-success pull-right"><span class="glyphicon glyphicon-download-alt"></span></button>
-                   
+                        <center>
+                            <h2>Tableau comparatif des bailleurs de fond</h2>   
+                            <h5>Ce tableau représente les comparaisons des bailleurs de fond.</h5>
+                         </center>
+                         
+                        <div class="row">
+                            <form class="form-inline my-2 my-lg-0">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Bailleur" aria-label="Search">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Secteur d'intervention" aria-label="Search">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Type financement" aria-label="Search">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Taux d'interet" aria-label="Search">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Element don" aria-label="Search">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Taux d'interet effectif" aria-label="Search">
+                                <button class="btn btn-success" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </form>
+                            <div class="ml-md-auto">
+                                <a href="{{path('tableaucomparatif_Excel')}}" class="btn btn-success pull-right"><span class="glyphicon glyphicon-download-alt"></br>Excel</span></a> 
+                                {# <a href="{{path('tableau_comparatif_pdf')}}" class="btn btn-success pull-right"><span class="glyphicon glyphicon-download-alt"></br>pdf</span></a> #}
+                            </div>
+                        </div>
                     </div>
-                    </div>
+                
+                </div>
                     <!-- /. ROW  -->
                     <hr/>
                
-            <div class="row">
+                <div class="row">
 
               
                     <!-- Advanced Tables -->
@@ -84,12 +96,12 @@
                                         <th scope="col">{{bailleur.PeriodeGrace}}</th>
                                     {% endfor %}
                                 </tr>
-                                 <tr>
+                                 {# <tr>
                                     <th scope="row">TAUX D'INTERET</th>
-                                      {# {% for ti in tauxinteret %}
+                                      {% for ti in tauxinteret %}
                                         <th scope="col">{{ti.taux}}</th>
-                                    {% endfor %} #}
-                                </tr>
+                                    {% endfor %}
+                                </tr> #}
                                  <tr>
                                     <th scope="row">DIFFERENTIEL D'INTERET</th>
                                      {% for bailleur in bailleurs %}

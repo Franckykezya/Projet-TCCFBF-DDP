@@ -3,7 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\Bailleur;
+use App\Entity\BailleurRecherche;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Query\QueryBuilder;
+use Doctrine\Migrations\Query\Query;
+use Doctrine\ORM\Query as ORMQuery;
+use Doctrine\ORM\QueryBuilder as ORMQueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -29,6 +34,42 @@ class BailleurRepository extends ServiceEntityRepository
         return $a->fetchAll();
 
     } 
+    
+    /**
+     * @return Bailleur[]
+     */
+    public function findAllVisibleQuery(BailleurRecherche $recherche): Array
+    {   
+        if ($recherche->getNomBailleur())
+        {//mitady par nom bailleur
+                return $this->findVisibleQuery()
+                ->where('b.nom = :nombailleur' )
+                ->setParameter('nombailleur',  $recherche->getNomBailleur())
+                ->getQuery()
+                ->getResult();
+        }
+
+        else
+        {
+            return $this->findVisibleQuery()
+                        ->getQuery()
+                        ->getResult();
+        }
+    }
+
+    public function findAllQuery(): array
+    {
+        return $this->findVisibleQuery()
+                    ->getQuery()
+                    ->getResult();
+    }
+
+   
+    private function findVisibleQuery(): ORMQueryBuilder
+    {
+        return $this->createQueryBuilder('b');
+    }
+
     // /**
     //  * @return Bailleur[] Returns an array of Bailleur objects
     //  */

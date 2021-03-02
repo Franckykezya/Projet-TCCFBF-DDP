@@ -1,0 +1,94 @@
+<html>
+ <head>
+  <title>Tableau comparatif du bailleur</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/dt/jq-2.1.4,jszip-2.5.0,pdfmake-0.1.18,dt-1.10.9,af-2.0.0,b-1.0.3,b-colvis-1.0.3,b-html5-1.0.3,b-print-1.0.3,se-1.0.1/datatables.min.css"/>
+  <script type="text/javascript" src="https://cdn.datatables.net/r/dt/jq-2.1.4,jszip-2.5.0,pdfmake-0.1.18,dt-1.10.9,af-2.0.0,b-1.0.3,b-colvis-1.0.3,b-html5-1.0.3,b-print-1.0.3,se-1.0.1/datatables.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  
+ </head>
+    <body>
+        <div class="container box">
+            <h3 align="center">Exportation</h3>
+            <br />
+             <div class="table-responsive">
+                <table id="customer_data" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>BAILLEURS DE FONDS</th>
+                                  
+                            <th >SECTEURS D'INTERVENTION</th>
+                        
+                            <th>TYPE DE FINANCEMENT</th>
+                                 
+                            <th>PART FINANCE PAR LE BAILLEUR DE FONDS</th>
+                                  
+                            <th>MATURITE DE LA FACILITE</th>
+                                 
+                            <th>PERIODE DE GRACE DE LA FACILITE</th>
+                                    
+                            <th>TAUX D'INTERET</th>
+                                     
+                            <th>DIFFERENTIEL D'INTERET</th>
+                                  
+                            <th>FRAIS DE GESTION</th>   
+                                
+                            <th>COMMISSION D'ENGAGEMENT</th>
+            
+                            <th>COMMISSION DE SERVICE</th>
+                                  
+                            <th>COMMISSION INITIALE</th>
+            
+                            <th>COMMISSION D'ARRANGEMENT</th>
+
+                            <th>COMMISSION D'AGENT</th>
+
+                            <th>MATURITE DE LA LETTRE DE CREDIT</th>
+                    
+                            <th>FRAIS LIES A LA MISE EN PLACE DE LA LETTRE DE CREDIT</th>
+                                   
+                            <th>FRAIS LIES AU REFINANCEMENT DE LA LETTRE DE CREDIT</th>
+                                   
+                            <th>ELEMENT-DON (niveau de concessionnalité de la facilité)</th>
+                               
+                            <th>FRAIS ET DEBOURS</th>
+                                     
+                            <th>PRIME D'ASSURANCE / FRAIS DE GARANTIE</th>
+                                   
+                            <th>PRIME D'ATTENUATION DU RISQUE DE CREDIT</th>
+                                  
+                            <th>ELEMENT-DON (tenant compte frais et débours  et si assurance payée par l'emprunteur)</th>
+                                
+                            <th>TAUX D'INTERET EFFECTIF</th>
+
+                        </tr>
+                    </thead>
+                 </table>
+            </div>
+         </div>
+        <br />
+        <br />
+    </body>
+</html>
+
+<script type="text/javascript" language="javascript" >
+ $(document).ready(function(){
+
+    $('#customer_data').DataTable({
+        "processing" : true,
+        "serverSide" : true,
+        "ajax" : {
+            url:"fetch.php",
+            type:"POST"
+        },
+        dom: 'lBfrtip',
+        buttons: [
+            'excel', 'csv', 'copy'
+        ],
+        "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]
+    });
+  
+});
+ 
+</script>

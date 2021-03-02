@@ -14,6 +14,7 @@ class TauxVariableType extends AbstractType
         $builder
             ->add('base')
             ->add('valeur')
+            ->add('valeur_calcul_element_don')
             ->add('marge')
             ->add('Total')
             ->add('valeur_element_don')

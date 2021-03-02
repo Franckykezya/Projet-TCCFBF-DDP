@@ -3,8 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Projet;
+use App\Entity\ProjetRecherche;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Migrations\Query\Query;
+use Doctrine\ORM\Query as ORMQuery;
+use Doctrine\ORM\QueryBuilder as ORMQueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -54,6 +57,42 @@ class ProjetRepository extends ServiceEntityRepository
         return $a->fetchAll();
 
     } 
+
+
+    /**
+     * @return Projet[]
+     */
+    public function findAllVisibleQuery(ProjetRecherche $recherche): Array
+    {   
+        if ($recherche->getNomProjet())
+        {//mitady par nom bailleur
+                return $this->findVisibleQuery()
+                ->where('b.nom = :nomprojet' )
+                ->setParameter('nomprojet',  $recherche->getNomProjet())
+                ->getQuery()
+                ->getResult();
+        }
+
+        else
+        {
+            return $this->findVisibleQuery()
+                        ->getQuery()
+                        ->getResult();
+        }
+    }
+
+    public function findAllQuery(): array
+    {
+        return $this->findVisibleQuery()
+                    ->getQuery()
+                    ->getResult();
+    }
+
+   
+    private function findVisibleQuery(): ORMQueryBuilder
+    {
+        return $this->createQueryBuilder('b');
+    }
 
     // /**
     //  * @return Bailleur[] Returns an array of Bailleur objects

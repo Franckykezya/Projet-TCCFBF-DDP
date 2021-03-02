@@ -31,7 +31,7 @@
         <!-- Scrollbar Custom CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
-
+      
         <style>
             
             .affix {
@@ -291,9 +291,9 @@
             display: block;
             color: #f2f2f2;
             text-align: center;
-            padding: 14px 16px;
+            padding: 5px 20px;
             text-decoration: none;
-            font-size: 17px;
+            font-size: 16px;
             }
 
             #navbarFIXE a:hover {
@@ -320,8 +320,19 @@
             padding-top: 60px;
             }
 
+            {# Ligne verticale separation menu #}
+            .vertical-line{
+                border-left: 2px solid #FFF;
+                display: inline-block;
+                height: 30px;
+                margin: 1 10px;
+            }
+
         </style>
-       
+
+      {% block stylesheets %} {% endblock %}
+
+
     </head>
 
     <body id="page-top" style="height:1500px">
@@ -348,36 +359,23 @@
                     <li>
                         <a class = "" href="{{ path('blog') }}"><i class="fa fa-home"></i> Accueil</a>
                     </li>
-                    <li id = "btn">
-                        <a class="active" href="{{path('liste_projet')}}"><i class="fa fa-list "></i> Listes des bailleurs de fond</a>
+
+                    <li>
+                        <a class="active" href="{{path('bailleur_index')}}"><i class="fa fa-university" aria-hidden="true"></i> Bailleurs</a>
+                    </li>
+
+                    <li>
+                        <a class="active" href="{{path('liste_projet')}}"><i class="fa fa-building" aria-hidden="true"></i> Projets</a>
+                    </li>
+            
                     </li>
                     <li>
-                        <a class="active" href="{{ path('tableau_comparatif') }}"><i class="fa fa-table "></i> Tableau comparatif</a>
-                    </li>
-                    <li>
-                        <a class="active" href="{{ path('bailleur_index') }}"><i class="fa fa-edit "></i> Ajout bailleur </a>
-                    </li>
-                    <li>
-                        <a class="active" href="{{ path('create_bailleur') }}"><i class="fa fa-edit "></i> Ajout projet </a>
-                    </li>
-                    <li>
-                        <a class="active" href="#submenu" data-toggle="collapse" aria-expanded="false">Secteur d'intervention/Type finacement/Taux d'interet</a>
-                        <ul class="collapse list-unstyled" id="submenu">
-                           <li>
-                                <a href="{{path('secteur_liste')}}">Secteur d'intervention</a>
-                            </li>
-                            <li>
-                                <a href="{{path('type_financement_index')}}">Type financement</a>
-                            </li>
-                            <li>
-                                <a href="#">Taux d'interet</a>       
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class ="active" href="{{path('grant_element')}}"><i class="fa fa-plus-circle"></i> Grant-Element</a>
+                        <a class="active" href="{{ path('tableau_comparatif') }}"><i class="fa fa-table" aria-hidden="true"></i> Tableau comparatif</a>
                     </li>
                 </ul>
+                <p>
+                    <div class="small text-center text-muted">Copyright © 2021 - Direction de la dette publique</div>
+                </p>
             </nav>
 
             <!-- Page Content  -->
@@ -389,48 +387,42 @@
                     </a>
                 </nav>
               
-                <div id="navbarFIXE">
+                <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark" id="navbarFIXE">
+                
+                    <a class="nav-link js-scroll-trigger" href="#" id="sidebarCollapse"><i class="fa fa-bars" aria-hidden="true"></i>
+                                   
+                    </a>
 
-                <ul class="">
-                    <li class="nav-item active">
-                        <a class="nav-link js-scroll-trigger" href="#" id="sidebarCollapse"><i class="fa fa-bars fa-1x" aria-hidden="true"></i>
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    {# <li class="nav-item active">
-                        <a class = "nav-link js-scroll-trigger" href="{{ path('blog') }}" id="sidebarCollapse"><i class="fa fa-home"></i> 
-                        Accueil
-                        </a>
-                    </li>
-                     <li class="nav-item">
-                        <a class="" href="{{path('liste_bailleur')}}"><i class="fa fa-list "></i> 
-                        Listes 
-                        </a>
-                    </li>
-                     <li class="nav-item">
-                        <a class="" href="{{ path('create_bailleur') }}"><i class="fa fa-edit "></i> 
-                        Ajout
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class ="" href="{{path('grant_element')}}"><i class="fa fa-plus-circle"></i>
-                         Grant-Element
-                        </a>
-                    </li>
-                     <li class="nav-item">
-                         <a class="" href="{{ path('tableau_comparatif') }}"><i class="fa fa-table "></i> 
-                         Tableau comparatif
-                        </a>
-                    </li> #}
+                    <div class="navbar-nav-scroll">
+                        <ul class="navbar-nav bd-navbar-nav flex-row">                
+                            <li class="nav-item">
+                                <a class = "" href="{{ path('blog') }}"><i class="fa fa-home"></i> Accueil</a>
+                            </li>
+                            <span class="vertical-line"></span>
+                                
+                            <li class="nav-item">
+                                <a class="" href="{{path('bailleur_index')}}"><i class="fa fa-university" aria-hidden="true"></i> Bailleurs</a>
+                            </li>
+                            <span class="vertical-line"></span>
+                                                                                
+                            <li class="nav-item">
+                                <a class="" href="{{path('liste_projet')}}"><i class="fa fa-building" aria-hidden="true"></i> Projets</a>
+                            </li>
+                            <span class="vertical-line"></span>
+                                     
+                             <li class="nav-item">
+                                <a class="" href="{{ path('tableau_comparatif') }}"><i class="fa fa-table" aria-hidden="true"></i> Tableau comparatif</a>
+                            </li>         
+                        </ul>     
+                    </div>
 
-                        <ul class="form-inline mt-2 mt-md-1 float-right">
-                            <i class="fa fa-user-circle fa-2x" aria-hidden="true" style="color: white;"></i>
-                            <h5 class="" style="color: white;">&nbsp; {{app.user.username}} &nbsp; &nbsp; &nbsp;</h5>
-                            <a href="{{path('logout')}}" class="btn btn-danger"  style="font: bold 11px Arial">Déconnexion</a>
-                        </ul>
-                </ul>
-                </div>
-
+                    <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+                        <i class="fa fa-user-circle fa-2x" aria-hidden="true" style="color: white;"></i>
+                        <h5 class="" style="color: white;">&nbsp; {{app.user.username}} &nbsp; &nbsp; &nbsp;</h5>
+                        <a href="{{path('logout')}}" class="btn btn-danger">Déconnexion</a>
+                    </ul>
+                        
+                </nav>
 
                 <!-- About-->
                 {% block body %} {% endblock %}

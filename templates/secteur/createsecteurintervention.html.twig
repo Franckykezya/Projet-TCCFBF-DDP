@@ -1,7 +1,39 @@
-{{ form_start(formSecteurIntervention) }}
+{# {{ form_start(formSecteurIntervention) }}
     {{ form_widget(formSecteurIntervention) }}
     <button class="btn btn-success" >
         {{ button_label|default('Enregistrer') }}
     </button>
-{{ form_end(formSecteurIntervention) }}
+{{ form_end(formSecteurIntervention) }} #}
+
+
+
+<!-- BOOTSTRAP STYLES-->
+<link href="../assets/css/bootstrap.css" rel="stylesheet" />
+<!-- BOOTSTRAP SCRIPTS -->
+<script src="../assets/js/bootstrap.min.js"></script>
+
+
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">creation secteur</h5>
+        <a class="close" href="{{ path('secteur_liste') }}">&times;</a>
+      </div>
+      <div class="modal-body">
+        <p>
+            {{ form_start(formSecteurIntervention) }}
+                {{ form_widget(formSecteurIntervention, {'label' : 'Nom du secteur' , 'attr' : {'placeholder':"Nom du type financement"}}) }}
+
+        </p>
+      </div>
+      <div class="modal-footer">
+       <button class="btn btn-success" >
+            {{ button_label|default('Enregistrer') }}
+        </button>
+        <a href="{{ path('secteur_liste') }}" type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</a>
+            {{ form_end(formSecteurIntervention) }}
+      </div>
+    </div>
+  </div>
+
 

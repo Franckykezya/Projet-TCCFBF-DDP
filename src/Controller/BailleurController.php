@@ -3,13 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Bailleur;
+use App\Entity\BailleurRecherche;
 use App\Form\BailleurType;
 use App\Repository\BailleurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use App\Form\BailleurRechercheType;
 /**
  * @Route("/bailleur")
  */
@@ -18,10 +19,19 @@ class BailleurController extends AbstractController
     /**
      * @Route("/", name="bailleur_index", methods={"GET"})
      */
-    public function index(BailleurRepository $bailleurRepository): Response
+    public function index(BailleurRepository $bailleurRepository, Request $request): Response
     {
+
+        $recherche = new BailleurRecherche();
+        $form = $this->createForm(BailleurRechercheType::class, $recherche);
+        $form->handleRequest($request);
+
+        $bailleur_recherche = $bailleurRepository->findAllVisibleQuery($recherche);
+
         return $this->render('bailleur/index.html.twig', [
-            'bailleurs' => $bailleurRepository->findAll(),
+            
+            'bailleurs' => $bailleur_recherche,
+            'form' => $form->createView()
         ]);
     }
 
@@ -91,4 +101,5 @@ class BailleurController extends AbstractController
 
         return $this->redirectToRoute('bailleur_index');
     }
+
 }

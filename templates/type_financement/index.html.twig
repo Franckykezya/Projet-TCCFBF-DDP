@@ -101,7 +101,8 @@
                         </tbody>
                     </table>
 
-                <a href="#popup1" class="btn btn-success"><span class="glyphicon glyphicon-plus">_</span>Ajout</a>
+                <a href="{{path('type_financement_new')}}" class="btn btn-success"><span class="glyphicon glyphicon-plus">_</span>Ajout</a>
+                {# <a href="#popup1" class="btn btn-success"><span class="glyphicon glyphicon-plus">_</span>Ajout</a>
                 <div id="popup1" class="overlay">
                     <div class="popup">
                         <h2>Ajout type financement</h2>
@@ -110,39 +111,39 @@
                         {{ include('type_financement/_form.html.twig') }}
                         <a href="{{ path('type_financement_index') }}">Liste</a>     
                     </div>
-                </div>   
-            </div>
-        </div>
-            <h1>TypeFinancement index</h1>
+                </div>    #}
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nom</th>
-                        <th>actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for type_financement in type_financements %}
-                    <tr>
-                        <td>{{ type_financement.id }}</td>
-                        <td>{{ type_financement.nom }}</td>
-                        <td>
-                            <a href="{{ path('type_financement_show', {'id': type_financement.id}) }}">show</a>
-                            <a href="{{ path('type_financement_edit', {'id': type_financement.id}) }}">edit</a>
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="3">no records found</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+                {# <h1>TypeFinancement index</h1>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nom</th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for type_financement in type_financements %}
+                        <tr>
+                            <td>{{ type_financement.id }}</td>
+                            <td>{{ type_financement.nom }}</td>
+                            <td>
+                                <a href="{{ path('type_financement_show', {'id': type_financement.id}) }}">show</a>
+                                <a href="{{ path('type_financement_edit', {'id': type_financement.id}) }}">edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="3">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
 
             <a href="{{ path('type_financement_new') }}">Create new</a>
-        </div>
+        </div> #}
+    </div>
     {# </div>
 </div> #}
 

@@ -4,7 +4,7 @@
 {% block body %}
 
 <script type="text/javascript">
-function calcul()
+function calculValeur()
 {
    if ( !Number(document.getElementById("taux_variable_valeur").value) || !Number(document.getElementById("taux_variable_marge").value)){
        document.getElementById("taux_variable_Total").value = 0;
@@ -15,6 +15,20 @@ function calcul()
     
         var total = Number(valeur + marge);
         document.getElementById("taux_variable_Total").value = total;
+    }
+}
+
+function calculValeurElemenDon()
+{
+   if ( !Number(document.getElementById("taux_variable_valeur_calcul_element_don").value) || !Number(document.getElementById("taux_variable_marge").value)){
+       document.getElementById("taux_variable_valeur_element_don").value = 0;
+   }else{
+        var valeur1 = Number(document.getElementById("taux_variable_valeur_calcul_element_don").value);
+    
+        var marge1 = Number(document.getElementById("taux_variable_marge").value);
+    
+        var total1 = Number(valeur1 + marge1);
+        document.getElementById("taux_variable_valeur_element_don").value = total1;
     }
 }
 
@@ -31,7 +45,7 @@ function onlyNumber()
 
 </script>    
 
-         {# <div id="page-wrapper" > #}
+         {# < id="page-wrapper" > #}
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
@@ -58,9 +72,9 @@ function onlyNumber()
                                 
                                         {{ form_row(formBailleur.bailleur, {'label' : 'Nom du bailleur'}) }}
                                         {{ form_row(formBailleur.nom, {'label' : 'Nom du projet' , 'attr' : {'placeholder':"Nom du projet"}}) }}
-                                        <a class="dropdown-item" href="{{ path('create_secteur_intervention') }}">Ajout...</a>
+                                        <a class="dropdown-item" href="{{ path('create_secteur_intervention') }}">Ajout secteurs d'intervention...</a>
                                         {{ form_row(formBailleur.secteur, {'label' : 'Secteurs d\'intervention', 'attr' : {'placeholder':"Secteurs d'intervention"}}) }}
-                                        <a class="dropdown-item" href="{{ path('type_financement_new') }}">Ajout...</a>
+                                        <a class="dropdown-item" href="{{ path('type_financement_new') }}">Ajout type de financement...</a>
                                         {{ form_row(formBailleur.typefinancement, {'label' : 'Type de financement', 'attr' : {'placeholder':"Type de financement"}}) }}
                                         {{ form_row(formBailleur.part_finance, {'label' : 'Part finance par le bailleur de fonds (en %)' ,'attr' : {'placeholder':"Part finance par le bailleur de fonds (en %)"}}) }}
                                         {{ form_row(formBailleur.maturite_facilite, {'label' : 'Maturite de la facilité (ans)', 'attr' : {'placeholder':"Maturite de la facilité (ans)"}}) }}
@@ -92,13 +106,15 @@ function onlyNumber()
                                                             <div class="col-md-4">
                                                             {{ form_start(formTauxVariable) }}
                                                                 {{ form_row(formTauxVariable.base, {'label' : "Taux d'interet base", 'attr' : {'placeholder':"Taux d'interet base"}}) }}                                                            
-                                                               
-                                                                {{ form_row(formTauxVariable.valeur, {'label' : 'Valeur (en %)', 'attr' : {'placeholder':"Valeur (en %)", 'onblur': "calcul()"}}) }}
-                                                                 {# {{ form_row(formTauxVariable.valeur, {'label' : 'Valeur (en %)', 'attr' : {'placeholder':"Valeur (en %)", 'onblur': "calcul()", 'onkeyup':"onlyNumber();"}}) }} #}
+                                                                
+                                                                {{ form_row(formTauxVariable.valeur_calcul_element_don, {'label' : 'Valeur pour element don (en %)', 'attr' : {'placeholder':"Valeur pour element don (en %)", 'onblur': "calculValeurElemenDon()"}}) }}
+
+                                                                {{ form_row(formTauxVariable.valeur, {'label' : 'Valeur (en %)', 'attr' : {'placeholder':"Valeur (en %)", 'onblur': "calculValeur()"}}) }}
+                                                                {# {{ form_row(formTauxVariable.valeur, {'label' : 'Valeur (en %)', 'attr' : {'placeholder':"Valeur (en %)", 'onblur': "calcul()", 'onkeyup':"onlyNumber();"}}) }} #}
                                                                 {{ form_row(formTauxVariable.marge, {'label' : 'Marge (en %)', 'attr' : {'placeholder':"Marge (en %)", 'onblur': "calcul()"}}) }}
-                                                                {{ form_row(formTauxVariable.Total, {'label' : "Valeur total (en %)", 'attr' : {'placeholder':"Valeur total (en %)", 'onblur': "calcul()", 'disabled':"disabled" }}) }}    
+                                                                {{ form_row(formTauxVariable.Total, {'label' : "Valeur total (en %)", 'attr' : {'placeholder':"Valeur total (en %)", 'onblur': "calculValeur()", 'disabled':"disabled" }}) }}    
                                                                
-                                                                {{ form_row(formTauxVariable.valeur_element_don, {'label' : "Valeur pour l'element don (en %)", 'attr' : {'placeholder':"Valeur pour l'element don (en %)" }}) }}         
+                                                                {{ form_row(formTauxVariable.valeur_element_don, {'label' : "Valeur total de l'element don (en %)", 'attr' : {'placeholder':"Valeur total de l'element don (en %)", 'onblur': "calculValeurElemenDon()", 'disabled':"disabled" }}) }}         
                                                             {# {{ form_end(formTauxVariable) }} #}
                                                             </div>
                                                         </p>
@@ -147,5 +163,20 @@ function onlyNumber()
         {# <!-- /. ROW  -->
         </div> #}
          
+
+{% endblock %}
+
+{% block stylesheets %}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js">  </script>
+    <script>
+        $('select').select2();
+    </script>
 
 {% endblock %}

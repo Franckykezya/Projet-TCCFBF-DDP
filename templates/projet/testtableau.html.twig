@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des bailleurs{% endblock %}
+{% block stylesheets %}
+       <style>
+           
+       </style>
+ {% endblock %}
+ 
+{% block body %}
+    <div id="" >
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <center>
+                            <h2>Tableau comparatif des bailleurs de fond</h2>   
+                            <h5>Ce tableau représente les comparaisons des bailleurs de fond.</h5>
+                         </center>
+                         
+                        <div class="row">
+                            <form class="form-inline my-2 my-lg-0">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Bailleur" aria-label="Search">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Secteur d'intervention" aria-label="Search">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Type financement" aria-label="Search">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Taux d'interet" aria-label="Search">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Element don" aria-label="Search">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Taux d'interet effectif" aria-label="Search">
+                                <button class="btn btn-success" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </form>
+                            <div class="ml-md-auto">
+                                <a href="{{path('tableaucomparatif_Excel')}}" class="btn btn-success pull-right"><span class="glyphicon glyphicon-download-alt"></br>Excel</span></a> 
+                                {# <a href="{{path('tableau_comparatif_pdf')}}" class="btn btn-success pull-right"><span class="glyphicon glyphicon-download-alt"></br>pdf</span></a> #}
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+                    <!-- /. ROW  -->
+                    <hr/>
+               
+                <div class="row">
+                
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <div class="table-responsive">
+
+                        <table class = "table table-striped" border = "2">
+                            <thead>
+                                <tr class="bg-primary">
+                                    <th scope="col" >BAILLEURS DE FONDS</th>
+                                  
+                                    <th scope="col">SECTEURS D'INTERVENTION</th>
+                                      
+                                    <th scope="col">Part Finance</th>
+                                      
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <td>
+                                    {% for bailleur in bailleurs %}
+                                        <tr scope="col">{{bailleur.nom}}</tr>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for bailleur in bailleurs %}
+                                        <tr scope="col">
+                                            {% for secteur in bailleur.secteur %}
+                                                {{secteur.nom}} <br>
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for bailleur in bailleurs %}
+                                        <tr scope="col">
+                                            {% for secteur in bailleur.secteur %}
+                                                {{bailleur.PartFinance}}
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                    
+                                </td>     
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                    <!--End Advanced Tables --> 
+            </div>
+                <!-- /. ROW  -->
+         </div>
+         
+{% endblock %}

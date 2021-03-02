@@ -1,28 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bailleur index{% endblock %}
+{% block title %}Bailleurs{% endblock %}
 
 {% block body %}
-    <h1>Bailleur index</h1>
+    <h1>Liste des bailleurs de fond</h1>
+
+    {{form_start(form)}}
+        <div class="form-row" >
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    {{ form_row(form.nombailleur, {'label' : 'Nom bailleur', 'attr' : {'placeholder':"Nom bailleur"}}) }}
+                </div>
+                <div class="col-md-2">
+                    <button type="Submit" class="btn btn-success pull-right" name="" id="" value="">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    {{form_end(form)}}
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>actions</th>
+            <tr>       
+                <th>Nom</th> 
+                <th>Siège</th> 
+                <th>Téléphone</th> 
+                <th>Adresse mail</th>  
+                <th>Fax</th> 
+                <th>Description</th>   
+                <th>Actions</th> 
             </tr>
         </thead>
         <tbody>
-        {% for bailleur in bailleurs %}
+        {% for blr in bailleurs %}
             <tr>
-                <td>{{ bailleur.id }}</td>
-                <td>{{ bailleur.nom }}</td>
-                <td>{{ bailleur.description }}</td>
+                <td>{{ blr.nom }}</td>
+                <td>{{ blr.siege }}</td>
+                <td>{{ blr.telephone }}</td>
+                <td>{{ blr.mail }}</td>
+                <td>{{ blr.fax }}</td>
+                <td>{{ blr.description }}</td>
                 <td>
-                    <a href="{{ path('bailleur_show', {'id': bailleur.id}) }}">show</a>
-                    <a href="{{ path('bailleur_edit', {'id': bailleur.id}) }}">edit</a>
+                    <a href="{{ path('bailleur_show', {'id': blr.id}) }}" class="btn btn-info"><span class="glyphicon glyphicon-align-justify"></span> Afficher</a>
+                    <a href="{{ path('bailleur_edit', {'id': blr.id}) }}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Modifier</a>
+                    
+                    {#                     
+                    <form method="post" action="{{ path('bailleur_delete', {'id': bailleur.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ bailleur.id) }}">
+                        <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Supprimer</button>
+                    </form>
+                     #}
+                     
                 </td>
             </tr>
         {% else %}
@@ -33,5 +63,8 @@
         </tbody>
     </table>
 
-    <a href="{{ path('bailleur_new') }}">Create new</a>
+    <center>
+        <a href="{{ path('bailleur_new') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus">_</span>Ajout bailleur</a>
+    </center>
+
 {% endblock %}

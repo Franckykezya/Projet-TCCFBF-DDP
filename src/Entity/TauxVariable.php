@@ -42,6 +42,11 @@ class TauxVariable
      */
     private $valeur_element_don;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $valeur_calcul_element_don;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class TauxVariable
     public function setValeurElementDon(?float $valeur_element_don): self
     {
         $this->valeur_element_don = $valeur_element_don;
+
+        return $this;
+    }
+
+    public function getValeurCalculElementDon(): ?float
+    {
+        return $this->valeur_calcul_element_don;
+    }
+
+    public function setValeurCalculElementDon(float $valeur_calcul_element_don): self
+    {
+        $this->valeur_calcul_element_don = $valeur_calcul_element_don;
 
         return $this;
     }

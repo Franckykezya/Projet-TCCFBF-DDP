@@ -7,6 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+// Validation formulaire
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Entity(repositoryClass=BailleurRepository::class)
  */
@@ -33,6 +36,27 @@ class Bailleur
      * @ORM\ManyToMany(targetEntity=Projet::class, mappedBy="projet")
      */
     private $projets;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $siege;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     * @Assert\Regex("/^[0-9]{13}/")
+     */
+    private $telephone;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $mail;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $fax;
 
     public function __construct()
     {
@@ -92,6 +116,54 @@ class Bailleur
             $projet->removeBailleur($this);
         }
         
+
+        return $this;
+    }
+
+    public function getSiege(): ?string
+    {
+        return $this->siege;
+    }
+
+    public function setSiege(string $siege): self
+    {
+        $this->siege = $siege;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?float
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(?float $telephone): self
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getMail(): ?string
+    {
+        return $this->mail;
+    }
+
+    public function setMail(?string $mail): self
+    {
+        $this->mail = $mail;
+
+        return $this;
+    }
+
+    public function getFax(): ?float
+    {
+        return $this->fax;
+    }
+
+    public function setFax(?float $fax): self
+    {
+        $this->fax = $fax;
 
         return $this;
     }

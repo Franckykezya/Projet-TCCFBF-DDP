@@ -7,9 +7,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Projet;
+use App\Entity\ProjetRecherche;
 use App\Entity\TauxFixe;
 use App\Entity\TauxVariable;
 use App\Entity\SecteurIntervention;
+use App\Form\ProjetRechercheType;
 use App\Form\ProjetType;
 use App\Form\TauxFixeType;
 use App\Form\TauxVariableType;
@@ -109,13 +111,22 @@ class ProjetController extends AbstractController
      */
     public function liste_projet(Request $request, PaginatorInterface $paginator, ProjetRepository $projetRepository) : Response
     {
+        $recherche = new ProjetRecherche();
+        $form = $this->createForm(ProjetRechercheType::class, $recherche);
+        $form->handleRequest($request);
+
+        $bailleur_recherche = $projetRepository->findAllVisibleQuery($recherche);
+        $projets = $paginator->paginate($bailleur_recherche, $request->query->getInt('page', 1), 13);
+
         //$donnees = $this->getDoctrine()->getRepository(Projet::class)->findyBy();
-        $projets = $paginator->paginate($this->projetRepository->findAll(), $request->query->getInt('page', 1), 12);
+        $pjt = $paginator->paginate($this->projetRepository->findAll(), $request->query->getInt('page', 1), 13  );
         
         //$bailleurs = $bailleurRepository->findAll();
         //dump($bailleurs);
         return $this->render("projet/listebailleur.html.twig",[
-            'bailleurs' => $projets
+            'bailleurs' => $projets,
+            'projet' => $pjt,
+            'form' => $form->createView()
         ]);
     }
 
@@ -209,6 +220,37 @@ class ProjetController extends AbstractController
 
 
         return $this->render("projet/tableau_comparatif.html.twig",[
+            'bailleurs' => $projets,
+            'secteur' => $secteur,
+            'typefinancement' => $typefinancement,
+            //'tauxinteret' => $tauxinteret,
+        ]);
+    }
+     //----------------------------------------excel-----------------------------------//
+
+    /**
+     * @Route("/projet/tableaucomparatif_Excel", name="tableaucomparatif_Excel", methods={"GET"})
+     */
+    public function tableaucomparatif_Excel() : Response
+    {   
+
+        return $this->render("projet/tableau_comparatif_excel.html.twig");
+    }
+
+    //--------------------------------------Test anle tableau comparatif fotsiny io---------------------------//
+
+    /**
+     * @Route("/testtableau", name="testtableau", methods={"GET"})
+     */
+    public function testtableau(ProjetRepository $projetrep, SecteurInterventionRepository $secteurInterventionrep, TypeFinancementRepository $typefinancementrep) : Response
+    {   
+        $projets = $projetrep->findAll();
+        $secteur = $secteurInterventionrep->findAll();
+        $typefinancement = $typefinancementrep->findAll();
+        //$tauxinteret = $tauxinteretrep->findAll();
+
+
+        return $this->render("projet/testtableau.html.twig",[
             'bailleurs' => $projets,
             'secteur' => $secteur,
             'typefinancement' => $typefinancement,

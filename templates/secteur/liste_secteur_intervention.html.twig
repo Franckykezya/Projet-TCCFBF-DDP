@@ -72,49 +72,58 @@
         <!-- /. NAV SIDE  -->
             <div id="page-wrapper" > #}
                 <div id="page-inner">
-            <h1>Secteur d'intervention</h1>
+                    <h1>Secteur d'intervention</h1>
+                    <table class="table">
+                        <div class="row">
+                            <div class="col-md-12">
+                                    <thead>
+                                        <tr>
+                                            <th>Nom</th>
+                                            <th>actions</th>
+                                        </tr>
+                                    </thead>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <tbody>
+                                    {% for secteur in secteurs %}
+                                        <tr>
+                                            <td>{{ secteur.nom }}</td>
+                                            <td>
+                                                <a href="{{ path('secteur_editer', {'id': secteur.id}) }}" class="btn btn-info"><span class="glyphicon glyphicon-edit"></span></a>    
+                                            </td>
+                                            <td>
+                                                <form method="post" action="{{ path('secteur_delete', {'id': secteur.id}) }}" onsubmit="return confirm('Vous voulez supprimer ce secteur');">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ secteur.id) }}">
+                                                    <button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="3">no records found</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </div>
+                        </div>
+                    </table>
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for secteur in secteurs %}
-                    <tr>
-                        <td>{{ secteur.nom }}</td>
-                        <td>
-                            <a href="{{ path('secteur_editer', {'id': secteur.id}) }}" class="btn btn-info"><span class="glyphicon glyphicon-edit"></span></a>    
-                        </td>
-                        <td>
-                            <form method="post" action="{{ path('secteur_delete', {'id': secteur.id}) }}" onsubmit="return confirm('Vous voulez supprimer ce secteur');">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ secteur.id) }}">
-                                <button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
-                            </form>
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="3">no records found</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+                            <a href="{{ path('create_secteur_intervention')}}" class="btn btn-success"> </a>
 
-            <a href="#popup1" class="btn btn-success"><span class="glyphicon glyphicon-plus">_</span>Ajout</a>
-                <div id="popup1" class="overlay">
-                    <div class="popup">
-                        <h2>Ajout secteur</h2>
-                        <a class="close" href="{{ path('secteur_liste') }}">&times;</a>
-                        <!-- input -->
-                        {{ include('secteur/createsecteurintervention.html.twig') }}
-                        <a href="{{ path('secteur_liste') }}">Liste</a>     
-                    </div>
-                </div>  
-        </div>
+                            {# <a href="#popup1" class="btn btn-success"><span class="glyphicon glyphicon-plus">_</span>Ajout</a>
+                                <div id="popup1" class="overlay">
+                                    <div class="popup">
+                                        <h2>Ajout secteur</h2>
+                                        <a class="close" href="{{ path('secteur_liste') }}">&times;</a>
+                                        <!-- input -->
+                                        {{ include('secteur/createsecteurintervention.html.twig') }}
+                                        <a href="{{ path('secteur_liste') }}">Liste</a>     
+                                    </div>
+                                </div>   #}
+            </div>
     {# </div>
 </div> #}
 {% endblock %}

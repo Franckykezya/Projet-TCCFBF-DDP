@@ -2,30 +2,31 @@
 
 namespace App\Form;
 
-use App\Entity\Bailleur;
+use App\Entity\ProjetRecherche;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class BailleurType extends AbstractType
+class ProjetRechercheType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom')
-            ->add('siege')
-            ->add('telephone')
-            ->add('mail')
-            ->add('fax')
-            ->add('description')
-            // ->add('projet')
+            ->add('nomprojet')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Bailleur::class,
+            'data_class' => ProjetRecherche::class,
+            'method' => 'get',
+            'csrf_protection' => false
         ]);
+    }
+
+    public function getBlockPrefix()
+    {
+        return '';   
     }
 }

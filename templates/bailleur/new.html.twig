@@ -1,11 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Bailleur{% endblock %}
+{% block title %}Ajout bailleur{% endblock %}
 
 {% block body %}
-    <h1>Create new Bailleur</h1>
+    <h1>Ajout bailleur</h1>
 
-    {{ include('bailleur/_form.html.twig') }}
+    {# {{ include('bailleur/_form.html.twig') }} #}
 
-    <a href="{{ path('bailleur_index') }}">back to list</a>
+    {{ form_start(form) }}
+        {{ form_row(form.nom, {'label' : 'Nom', 'attr' : {'placeholder':"Nom"}}) }}
+        {{ form_row(form.siege, {'label' : 'Siège', 'attr' : {'placeholder':"Siège"}}) }}
+        {{ form_row(form.telephone, {'label' : 'Téléphone', 'attr' : {'placeholder':"Téléphone"}}) }}
+        {{ form_row(form.mail, {'label' : 'Adresse mail', 'attr' : {'placeholder':"Adresse mail"}}) }}
+        {{ form_row(form.fax, {'label' : 'Fax', 'attr' : {'placeholder':"Fax"}}) }}
+        {{ form_row(form.description, {'label' : 'Déscription', 'attr' : {'placeholder':"Déscription"}}) }}
+        <button type="Submit" class="btn btn-info pull-right" name="" id="" value="">
+            <span class="glyphicon glyphicon-floppy-saved">&nbsp;</span>Enregistrer
+        </button>
+    {{ form_end(form) }}
+
+
+    <a href="{{ path('bailleur_index') }}">Retourner à la liste...</a>
 {% endblock %}
