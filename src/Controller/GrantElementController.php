@@ -19,11 +19,12 @@ class GrantElementController extends AbstractController
     {
         //dump($request);
         $val  = 0; $vallumpsum = 0;
-        $d = 0; $dlumpsum = 0;
+        $d = 0; $dlumpsum = 0;$valiny = 0;
         $test = 0;
         if($request->request->count() > 0){
             
-            $element = new GrantElement1(($_POST['interest']/100),$_POST['payments'],$_POST['graceperiod'],$_POST['maturity'],$_POST['management'], $_POST['val_management'],$_POST['commission']);
+           // $element = new GrantElement1(($_POST['interest']/100),$_POST['payments'],$_POST['graceperiod'],$_POST['maturity'],$_POST['management'], $_POST['val_management'],$_POST['commission']);
+           $element = new GrantElement1(0.77,2,4,14,0,0,16.43);
             //$val = $element->calculElementDonSansCommission();
             $val = $element->calculeElementDon($_POST['face'],0);
             $d = $element->Calendrier_de_paiement($_POST['face']);
@@ -32,17 +33,18 @@ class GrantElementController extends AbstractController
             $vallumpsum = $element->calculeElementDon_lump_sum($_POST['face'],0);
             $dlumpsum = $element->Calendrier_de_paiement_lump_sum($_POST['face']);
 
-
+            $valiny =$element->calculeInterestrate($_POST['face']);
             
-           // dump($d);
+            dump($valiny);
             // return $this->redirectToRoute('grant_element');
        // dump($element);
         }
         //maka bailleur
         $projets = $projetRepository->findAll();
-        dump($projets);
+       // dump($projets);
         return $this->render('grant_element/index.html.twig', [
             'controller_name' => $val,
+            'Eir' => $valiny,
             'test' => $test,
             'tabs' => $d,
             'vallumpsum' => $vallumpsum,
@@ -106,17 +108,12 @@ class GrantElementController extends AbstractController
      * @Route("/tri", name = "tri")
      */
     public function tri(){
-        $TRI= 0;
-        $MD = array(1000,2500,3000,3000,3000,3500);
-        $MI = 10000;
-        for($i=0 ; $i<count($MD) ; $i++){
-             $TRI = $TRI + pow(($MD[$i] / $MI),(1/$i)) - 1;
-        }
-        dump($TRI);
-        return $this->render('grant_element/testvan.html.twig',[
-                 'v' => $TRI
-             ]);
-        
+//         $element = new GrantElement1(0.77,2,4,14,0,0,16.43);
+       
+//         dump($valiny);
+//         return $this->render('grant_element/testvan.html.twig',[
+//             'v' => round($valiny,3)
+// ]);
     }
 
 }
