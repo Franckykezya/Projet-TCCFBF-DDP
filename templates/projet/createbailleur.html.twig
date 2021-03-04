@@ -93,7 +93,7 @@ function onlyNumber()
                                                     <div id="fixe" class="tab-pane fade in active">
                                                         <p>
                                                             <div class="col-md-4">
-                                                            {{ form_start(formTauxFixe) }}
+                                                            {# {{ form_start(formTauxFixe) }} 
                                                                 {{ form_row(formTauxFixe.base, {'label' : "Taux d'interet base", 'attr' : {'placeholder':"Taux d'interet base"}}) }}                                                           
                                                                 {{ form_row(formTauxFixe.valeur, {'label' : 'Valeur (en %)', 'attr' : {'placeholder':"Valeur (en %)"}}) }}
                                                                 {{ form_row(formTauxFixe.valeur_element_don, {'label' : "Valeur pour l'element don (en %)", 'attr' : {'placeholder':"Valeur pour l'element don (en %)"}}) }}
@@ -104,18 +104,7 @@ function onlyNumber()
                                                     <div id="variable" class="tab-pane fade">
                                                         <p>
                                                             <div class="col-md-4">
-                                                            {{ form_start(formTauxVariable) }}
-                                                                {{ form_row(formTauxVariable.base, {'label' : "Taux d'interet base", 'attr' : {'placeholder':"Taux d'interet base"}}) }}                                                            
-                                                                
-                                                                {{ form_row(formTauxVariable.valeur_calcul_element_don, {'label' : 'Valeur pour element don (en %)', 'attr' : {'placeholder':"Valeur pour element don (en %)", 'onblur': "calculValeurElemenDon()"}}) }}
-
-                                                                {{ form_row(formTauxVariable.valeur, {'label' : 'Valeur (en %)', 'attr' : {'placeholder':"Valeur (en %)", 'onblur': "calculValeur()"}}) }}
-                                                                {# {{ form_row(formTauxVariable.valeur, {'label' : 'Valeur (en %)', 'attr' : {'placeholder':"Valeur (en %)", 'onblur': "calcul()", 'onkeyup':"onlyNumber();"}}) }} #}
-                                                                {{ form_row(formTauxVariable.marge, {'label' : 'Marge (en %)', 'attr' : {'placeholder':"Marge (en %)", 'onblur': "calcul()"}}) }}
-                                                                {{ form_row(formTauxVariable.Total, {'label' : "Valeur total (en %)", 'attr' : {'placeholder':"Valeur total (en %)", 'onblur': "calculValeur()", 'disabled':"disabled" }}) }}    
-                                                               
-                                                                {{ form_row(formTauxVariable.valeur_element_don, {'label' : "Valeur total de l'element don (en %)", 'attr' : {'placeholder':"Valeur total de l'element don (en %)", 'onblur': "calculValeurElemenDon()", 'disabled':"disabled" }}) }}         
-                                                            {# {{ form_end(formTauxVariable) }} #}
+                                                           
                                                             </div>
                                                         </p>
                                                     </div>
@@ -180,3 +169,15 @@ function onlyNumber()
     </script>
 
 {% endblock %}
+ {# {{ form_start(formTauxVariable) }} 
+                                                                {{ form_row(formTauxVariable.base, {'label' : "Taux d'interet base", 'attr' : {'placeholder':"Taux d'interet base"}}) }}                                                            
+                                                                
+                                                                {{ form_row(formTauxVariable.valeur_calcul_element_don, {'label' : 'Valeur pour element don (en %)', 'attr' : {'placeholder':"Valeur pour element don (en %)", 'onblur': "calculValeurElemenDon()"}}) }}
+
+                                                                {{ form_row(formTauxVariable.valeur, {'label' : 'Valeur (en %)', 'attr' : {'placeholder':"Valeur (en %)", 'onblur': "calculValeur()"}}) }}
+                                                                {# {{ form_row(formTauxVariable.valeur, {'label' : 'Valeur (en %)', 'attr' : {'placeholder':"Valeur (en %)", 'onblur': "calcul()", 'onkeyup':"onlyNumber();"}}) }} 
+                                                                {{ form_row(formTauxVariable.marge, {'label' : 'Marge (en %)', 'attr' : {'placeholder':"Marge (en %)", 'onblur': "calcul()"}}) }}
+                                                                {{ form_row(formTauxVariable.Total, {'label' : "Valeur total (en %)", 'attr' : {'placeholder':"Valeur total (en %)", 'onblur': "calculValeur()", 'disabled':"disabled" }}) }}    
+                                                               
+                                                                {{ form_row(formTauxVariable.valeur_element_don, {'label' : "Valeur total de l'element don (en %)", 'attr' : {'placeholder':"Valeur total de l'element don (en %)", 'onblur': "calculValeurElemenDon()", 'disabled':"disabled" }}) }}         
+                                                            {# {{ form_end(formTauxVariable) }} #}

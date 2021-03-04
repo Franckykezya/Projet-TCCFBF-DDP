@@ -47,16 +47,25 @@ class ProjetRepository extends ServiceEntityRepository
     } 
 
     public function tauxinteretfixe($id){
-        $req = "SELECT taux_fixe.base FROM projet
-            INNER JOIN taux_interet_type ON projet.id = taux_interet_type.taux_fixe_id
-            INNER JOIN taux_fixe ON taux_interet_type.tauxfixe_id = taux_fixe.id
-            WHERE projet.id = $id
-        ";
+       $req = "SELECT taux_fixe.base,taux_fixe.valeur,taux_fixe.valeur_element_don FROM projet
+                INNER JOIN taux_fixe ON projet.id = taux_fixe.id
+                WHERE projet.id = $id";
         $a = $this->getEntityManager()->getConnection()->prepare($req);
         $a->execute([]);
         return $a->fetchAll();
-
+       
+       
     } 
+    public function tauxinteretvariable($id){
+        $req = "SELECT taux_variable.base,taux_variable.valeur,taux_variable.marge,taux_variable.total,taux_variable.valeur_element_don,taux_variable.valeur_calcul_element_don FROM projet
+                 INNER JOIN taux_variable ON projet.id = taux_variable.id
+                 WHERE projet.id = $id";
+         $a = $this->getEntityManager()->getConnection()->prepare($req);
+         $a->execute([]);
+         return $a->fetchAll();
+        
+        
+     } 
 
 
     /**

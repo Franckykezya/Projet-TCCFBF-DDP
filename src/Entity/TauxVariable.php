@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\TauxVariableRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=TauxVariableRepository::class)
@@ -46,7 +48,11 @@ class TauxVariable
      * @ORM\Column(type="float")
      */
     private $valeur_calcul_element_don;
-
+   
+    public function __construct()
+    {
+        $this->projets = new ArrayCollection();
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -123,4 +129,5 @@ class TauxVariable
 
         return $this;
     }
+    
 }

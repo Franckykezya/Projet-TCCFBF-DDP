@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\TauxFixeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=TauxFixeRepository::class)
@@ -32,6 +34,10 @@ class TauxFixe
      */
     private $valeur_element_don;
 
+    public function __construct()
+    {
+        $this->projets = new ArrayCollection();
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -72,4 +78,5 @@ class TauxFixe
 
         return $this;
     }
+   
 }

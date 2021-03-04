@@ -6,6 +6,7 @@ use App\Entity\Projet;
 use App\Entity\SecteurIntervention;
 use App\Entity\TypeFinancement;
 use App\Entity\Bailleur;
+use App\Entity\TauxFixe;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -48,7 +49,9 @@ class ProjetType extends AbstractType
                  'choice_label' => 'nom',
                  'multiple' => true
              ])
-        ;
+             ->add('tauxfixe',TauxFixeType::class)
+             ->add('tauxvariable',TauxVariableType::class)
+                     ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

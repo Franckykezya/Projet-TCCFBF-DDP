@@ -127,9 +127,13 @@ class Projet
     private $elementdon;
 
     /**
-     * @ORM\OneToOne(targetEntity=TauxInteretType::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=TauxFixe::class, cascade={"persist", "remove"})
      */
-    private $tauxinteret;
+    private $tauxfixe;
+        /**
+     * @ORM\OneToOne(targetEntity=TauxVariable::class, cascade={"persist", "remove"})
+     */
+    private $tauxvariable;
 
     public function __construct()
     {
@@ -406,18 +410,6 @@ class Projet
 
         return $this;
     }
-
-    public function getTauxinteret(): ?TauxInteretType
-    {
-        return $this->tauxinteret;
-    }
-
-    public function setTauxinteret(?TauxInteretType $tauxinteret): self
-    {
-        $this->tauxinteret = $tauxinteret;
-
-        return $this;
-    } 
     // /**
     //  * @return Collection|Bailleur[]
     //  */
@@ -464,4 +456,28 @@ class Projet
 
         return $this;
     }
+
+    public function getTauxfixe(): ?TauxFixe
+    {
+        return $this->tauxfixe;
+    }
+
+    public function setTauxfixe(?TauxFixe $tauxfixe): self
+    {
+        $this->tauxfixe = $tauxfixe;
+
+        return $this;
+    }
+    public function getTauxvariable(): ?TauxVariable
+    {
+        return $this->tauxvariable;
+    }
+
+    public function setTauxvariable(?TauxVariable $tauxvariable): self
+    {
+        $this->tauxvariable = $tauxvariable;
+
+        return $this;
+    }
+    
 }

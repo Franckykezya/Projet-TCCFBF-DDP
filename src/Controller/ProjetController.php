@@ -70,18 +70,18 @@ class ProjetController extends AbstractController
         $form = $this->createForm(ProjetType::class, $projet);
         $form->handleRequest($request);
 
-        $tauxfixe = new TauxFixe();
-        $formfixe = $this->createForm(TauxFixeType::class, $tauxfixe);
-        $formfixe->handleRequest($request);
+        // $tauxfixe = new TauxFixe();
+        // $formfixe = $this->createForm(TauxFixeType::class, $tauxfixe);
+        // $formfixe->handleRequest($request);
 
-        $tauxvariable = new TauxVariable();
-        $formVariable = $this->createForm(TauxVariableType::class, $tauxvariable);
-        $formVariable->handleRequest($request);
+        // $tauxvariable = new TauxVariable();
+        // $formVariable = $this->createForm(TauxVariableType::class, $tauxvariable);
+        // $formVariable->handleRequest($request);
 
-        dump("test enregistrer");
+        
         if($form->isSubmitted() && $form->isValid())
          {
-            
+            dump("test enregistrer");
             $repo = $this->getDoctrine()->getManager();
             //ajout element don
             $somme_commission = $projet->getDifferentielInteret()+$projet->getFraisGestion()+$projet->getCommissionEngagement()+$projet->getCommissionService()+$projet->getCommissionInitiale()+$projet->getCommissionArrangement()+$projet->getCommissionAgent()+$projet->getMaturiteLettreCredit()+$projet->getFraisLiesLettreCredit()+$projet->getFraisLiesRefinancement();
@@ -90,8 +90,8 @@ class ProjetController extends AbstractController
             
             $projet->setElementDon($val);
 
-            $repo->persist($tauxfixe);
-            $repo->persist($tauxvariable);
+            // $repo->persist($tauxfixe);
+            // $repo->persist($tauxvariable);
             
             $repo->persist($projet);
             
@@ -101,8 +101,8 @@ class ProjetController extends AbstractController
 
         return $this->render("projet/createbailleur.html.twig",[
             'formBailleur' => $form->createView(),
-            'formTauxFixe' => $formfixe->createView(),
-            'formTauxVariable' => $formVariable->createView(),
+            // 'formTauxFixe' => $formfixe->createView(),
+            // 'formTauxVariable' => $formVariable->createView(),
         ]);
     }
 
@@ -137,14 +137,16 @@ class ProjetController extends AbstractController
         $projet = $projetRepository->find($id);
         $secteurs = $projetRepository->secteur($id);
         $financements = $projetRepository->financement($id);
-        $tauxinteretfixe = $projetRepository->tauxinteretfixe($id);
-        dump($tauxinteretfixe);
+        $tauxinteretfixes = $projetRepository->tauxinteretfixe($id);
+        $tauxinteretvariables = $projetRepository->tauxinteretvariable($id);
+        //dump($tauxinteretvariable);
 
         return $this->render("projet/affichebailleur.html.twig",[
             'bailleur' => $projet,
             'secteurs' => $secteurs,
             'financements' => $financements,
-            'tauxinteretfixe' => $tauxinteretfixe
+            'tauxinteretfixes' => $tauxinteretfixes,
+            'tauxinteretvariables' =>$tauxinteretvariables
         ]);
 
 
@@ -168,7 +170,7 @@ class ProjetController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', 'Le groupe a bien été modifié');
 
-            return $this->redirectToRoute('liste_bailleur');
+            return $this->redirectToRoute('liste_projet');
         }
         return $this->render('projet/edit.html.twig',[
             'bailleur' => $projet,
