@@ -1,8 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Ajout bailleur{% endblock %}
-
+    
 {% block body %}
+    
+    <!-- BOOTSTRAP STYLES-->
+    <link href="../assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="../assets/js/bootstrap.min.js"></script>
+
     <h1>Ajout bailleur</h1>
 
     {# {{ include('bailleur/_form.html.twig') }} #}
@@ -14,11 +20,53 @@
         {{ form_row(form.mail, {'label' : 'Adresse mail', 'attr' : {'placeholder':"Adresse mail"}}) }}
         {{ form_row(form.fax, {'label' : 'Fax', 'attr' : {'placeholder':"Fax"}}) }}
         {{ form_row(form.description, {'label' : 'Déscription', 'attr' : {'placeholder':"Déscription"}}) }}
+
+     
+            {# <a href="#popup1" class="btn btn-success pull-right"><span class="glyphicon glyphicon-floppy-saved">&nbsp;</span>Enregistrer</a>
+        
+            <div id="popup1" class="overlay">
+                <div class="popup">
+                    <h2>Ajout bailleur</h2>
+                    <a class="close" href="{{ path('bailleur_index') }}">&times;</a>
+                    
+                    <!-- input -->
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Type financement</h5>
+                                <a class="close" href="{{ path('type_financement_index') }}">&times;</a>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    {{ form_start(form) }}
+                                        {{ form_row(form.nom, {'label' : 'Nom', 'attr' : {'placeholder':"Nom"}}) }}
+                                        {{ form_row(form.siege, {'label' : 'Siège', 'attr' : {'placeholder':"Siège"}}) }}
+                                        {{ form_row(form.telephone, {'label' : 'Téléphone', 'attr' : {'placeholder':"Téléphone"}}) }}
+                                        {{ form_row(form.mail, {'label' : 'Adresse mail', 'attr' : {'placeholder':"Adresse mail"}}) }}
+                                        {{ form_row(form.fax, {'label' : 'Fax', 'attr' : {'placeholder':"Fax"}}) }}
+                                        {{ form_row(form.description, {'label' : 'Déscription', 'attr' : {'placeholder':"Déscription"}}) }}
+                                    {{ form_end(form)}}
+
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="Submit" class="btn btn-info pull-right" name="" id="" value="" onclick="confirmer()">
+                                    <span class="glyphicon glyphicon-floppy-saved">&nbsp;</span>Enregistrer
+                                </button>
+                                <a href="{{ path('bailleur_index') }}" type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</a>
+                            </div>
+                        </div>
+                    </div>   
+
+                </div>
+        </div>  #}
+
         <button type="Submit" class="btn btn-info pull-right" name="" id="" value="">
             <span class="glyphicon glyphicon-floppy-saved">&nbsp;</span>Enregistrer
         </button>
+
     {{ form_end(form) }}
 
+    <a href="{{ path('bailleur_index') }}" class="pull-right">Retourner à la liste...</a>
 
-    <a href="{{ path('bailleur_index') }}">Retourner à la liste...</a>
 {% endblock %}

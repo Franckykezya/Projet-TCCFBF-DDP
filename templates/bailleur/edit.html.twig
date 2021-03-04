@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Bailleur{% endblock %}
+{% block title %}Modification bailleur{% endblock %}
 
 {% block body %}
-    <h1>Edit Bailleur</h1>
+    <h1>Modification bailleur</h1>
 
-    {{ include('bailleur/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('bailleur/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('bailleur_index') }}">back to list</a>
+        <a href="{{ path('bailleur_index') }}">Retourner à la liste...</a>
 
     {{ include('bailleur/_delete_form.html.twig') }}
 {% endblock %}

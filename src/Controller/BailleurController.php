@@ -44,7 +44,15 @@ class BailleurController extends AbstractController
         $form = $this->createForm(BailleurType::class, $bailleur);
         $form->handleRequest($request);
 
+        // $formNew = $this->createForm(BailleurType::class, $bailleur);
+        // $formNew->handleRequest($request);
+
+        // if ($formNew->isSubmitted() && $formNew->isValid()) {
+        //     return $this->redirectToRoute('bailleur_new');
+        // }
+
         if ($form->isSubmitted() && $form->isValid()) {
+        
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($bailleur);
             $entityManager->flush();
@@ -55,6 +63,7 @@ class BailleurController extends AbstractController
         return $this->render('bailleur/new.html.twig', [
             'bailleur' => $bailleur,
             'form' => $form->createView(),
+            // 'formNew' => $formNew->createView()
         ]);
     }
 

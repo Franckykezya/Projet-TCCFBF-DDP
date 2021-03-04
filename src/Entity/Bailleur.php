@@ -33,7 +33,7 @@ class Bailleur
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Projet::class, mappedBy="projet")
+     * @ORM\ManyToMany(targetEntity=Projet::class, mappedBy="bailleur")
      */
     private $projets;
 
@@ -43,8 +43,7 @@ class Bailleur
     private $siege;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
-     * @Assert\Regex("/^[0-9]{13}/")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $telephone;
 
@@ -54,7 +53,7 @@ class Bailleur
     private $mail;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $fax;
 
@@ -132,12 +131,12 @@ class Bailleur
         return $this;
     }
 
-    public function getTelephone(): ?float
+    public function getTelephone(): ?string
     {
         return $this->telephone;
     }
 
-    public function setTelephone(?float $telephone): self
+    public function setTelephone(?string $telephone): self
     {
         $this->telephone = $telephone;
 
@@ -156,12 +155,12 @@ class Bailleur
         return $this;
     }
 
-    public function getFax(): ?float
+    public function getFax(): ?string
     {
         return $this->fax;
     }
 
-    public function setFax(?float $fax): self
+    public function setFax(?string $fax): self
     {
         $this->fax = $fax;
 

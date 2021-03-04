@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout bailleur{% endblock %}
+
+{% block body %}
+    <h1>Ajout bailleur</h1>
+
+    {# {{ include('bailleur/_form.html.twig') }} #}
+
+    {{ form_start(formNew) }}
+        {{ form_row(formNew.nom, {'label' : 'Nom', 'attr' : {'placeholder':"Nom"}}) }}
+        {{ form_row(formNew.siege, {'label' : 'Siège', 'attr' : {'placeholder':"Siège"}}) }}
+        {{ form_row(formNew.telephone, {'label' : 'Téléphone', 'attr' : {'placeholder':"Téléphone"}}) }}
+        {{ form_row(formNew.mail, {'label' : 'Adresse mail', 'attr' : {'placeholder':"Adresse mail"}}) }}
+        {{ form_row(formNew.fax, {'label' : 'Fax', 'attr' : {'placeholder':"Fax"}}) }}
+        {{ form_row(formNew.description, {'label' : 'Déscription', 'attr' : {'placeholder':"Déscription"}}) }}
+
+       
+        <a href="#popup1" class="btn btn-success"><span class="glyphicon glyphicon-floppy-saved">&nbsp;</span>Enregistrer
+            <div id="popup1" class="overlay">
+                <div class="popup">
+                    <h2>Ajout bailleur</h2>
+                    <a class="close" href="{{ path('bailleur_index') }}">&times;</a>
+                    <!-- input -->
+                    {{ include('bailleur/new.html.twig') }}
+                <a href="{{ path('bailleur_index') }}">Liste</a>     
+            </div>
+        </div> 
+
+
+    {{ form_end(formNew) }}
+
+
+    <a href="{{ path('bailleur_index') }}">Retourner à la liste...</a>
+{% endblock %}

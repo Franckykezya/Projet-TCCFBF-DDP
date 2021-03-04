@@ -34,7 +34,7 @@ class BailleurRepository extends ServiceEntityRepository
         return $a->fetchAll();
 
     } 
-    
+
     /**
      * @return Bailleur[]
      */
@@ -43,10 +43,10 @@ class BailleurRepository extends ServiceEntityRepository
         if ($recherche->getNomBailleur())
         {//mitady par nom bailleur
                 return $this->findVisibleQuery()
-                ->where('b.nom = :nombailleur' )
-                ->setParameter('nombailleur',  $recherche->getNomBailleur())
+                ->where('b.nom LIKE :nombailleur' )
+                ->setParameter('nombailleur',  '%' .$recherche->getNomBailleur(). '%')
                 ->getQuery()
-                ->getResult();
+                ->getResult(); 
         }
 
         else
