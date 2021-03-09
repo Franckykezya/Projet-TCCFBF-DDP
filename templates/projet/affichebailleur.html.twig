@@ -34,8 +34,16 @@
                                     {# <p class="text-muted"> <b> Taux d'interet :</b>  {{tauxinteretfixe.base}} ans </br> </p> tauxinteretfixe' => $tauxinteretfixe,
             'tauxinteretvariable #}
                                     <p class="text-muted"><b> Taux d'interet :</br>
-                                        <p> tauxinteretfixe :</p>{% for tauxinteretfixe in tauxinteretfixes %} {{tauxinteretfixe.base}},{{tauxinteretfixe.valeur}}%,{{tauxinteretfixe.valeur_element_don}}% {% endfor %}</p>
-                                        <p> tauxinteretvariable :</p>{% for tauxinteretvariable in tauxinteretvariables %} {{tauxinteretvariable.base}},{{tauxinteretvariable.valeur}}%,{{tauxinteretvariable.marge}},{{tauxinteretvariable.total}},{{tauxinteretvariable.valeur_element_don}}%,{{tauxinteretvariable.valeur_element_don}}%,{{tauxinteretvariable.valeur_calcul_element_don}}% {% endfor %}</p>
+                                        <p> tauxinteretfixe :</p>{% for tauxinteretfixe in tauxinteretfixes %}
+                                                                    
+                                                                    {{tauxinteretfixe.base}},
+                                                                    {{tauxinteretfixe.valeur}}%,
+                                                                    {{tauxinteretfixe.valeur_element_don}}% 
+                                                                {% endfor %}</p>
+                                        <p> tauxinteretvariable :</p>{% for tauxinteretvariable in tauxinteretvariables %} {{tauxinteretvariable.base}},
+                                        {{tauxinteretvariable.valeur}}%,{{tauxinteretvariable.marge}},{{tauxinteretvariable.total}},
+                                        {{tauxinteretvariable.valeur_element_don}}%,{{tauxinteretvariable.valeur_element_don}}%,
+                                        {{tauxinteretvariable.valeur_calcul_element_don}}% {% endfor %}</p>
 
                                     <p class="text-muted"> <b> Differentiel d'interet :  </b> {{bailleur.DifferentielInteret}}  </br> </p>
                                     <p class="text-muted"> <b> Frais de gestion :</b>  {{bailleur.FraisGestion}} </br>  </p>
