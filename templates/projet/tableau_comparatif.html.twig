@@ -96,12 +96,13 @@
                                         <th scope="col">{{bailleur.PeriodeGrace}}</th>
                                     {% endfor %}
                                 </tr>
-                                 {# <tr>
+                                  <tr>
                                     <th scope="row">TAUX D'INTERET</th>
-                                      {% for ti in tauxinteret %}
-                                        <th scope="col">{{ti.taux}}</th>
-                                    {% endfor %}
-                                </tr> #}
+                                    {{ dump(bailleurs) }}
+                                      {# {% for  in  %}
+                                        <th scope="col">{{}}</th>
+                                    {% endfor %} #}
+                                </tr> 
                                  <tr>
                                     <th scope="row">DIFFERENTIEL D'INTERET</th>
                                      {% for bailleur in bailleurs %}
@@ -162,11 +163,13 @@
                                         <th scope="col">{{bailleur.FraisLiesRefinancement}}</th>
                                     {% endfor %}
                                 </tr>
-                                 <tr>
+                                 <tr class="table-danger">
                                     <th scope="row">ELEMENT-DON 
                                     (niveau de concessionnalité de la facilité)</th>
                                     {% for bailleur in bailleurs %}
-                                        <th scope="col">{{bailleur.PartFinance}}</th>
+                                        <th scope="col">
+                                            {{bailleur.elementdon | number_format(2,'.', ',')}} %</br>
+                                        </th>
                                     {% endfor %}
                                 </tr>
                                  <tr>
@@ -187,18 +190,30 @@
                                         <th scope="col">{{bailleur.PrimeAttenuationRisqueCredit}}</th>
                                     {% endfor %}
                                 </tr>
-                                 <tr>
+                                 <tr class="table-danger">
                                     <th scope="row">ELEMENT-DON 
                                     (tenant compte frais et débours  et si assurance payée par l'emprunteur)</th>
                                     {% for bailleur in bailleurs %}
-                                        <th scope="col">{{bailleur.PartFinance}}</th>
+                                        <th scope="col">
+                                            {% if bailleur.elementdon >= 35 %}
+                                                {{bailleur.elementdon | number_format(2,'.', ',')}} %</br>
+                                                <span>Concessionnel</span>
+                                            {% elseif bailleur.elementdon > 20 and  bailleur.elementdon < 35 %}
+                                                {{bailleur.elementdon | number_format(2,'.', ',')}} %</br>
+                                                <span>Semi-concessionnel</span>
+                                            {% elseif bailleur.elementdon < 20 %}
+                                                {{bailleur.elementdon | number_format(2, '.', ',')}} %</br>
+                                                <span>Non concessionnel</span>
+                                            {% endif %}
+
+                                        </th>
                                     {% endfor %}
-                                    -->
+                                    
                                 </tr>
                                  <tr>
                                     <th scope="row">TAUX D'INTERET EFFECTIF</th>
                                     {% for bailleur in bailleurs %}
-                                        <th scope="col"></th>
+                                        <th scope="col">test</th>
                                     {% endfor %}
                                      
                                 </tr>

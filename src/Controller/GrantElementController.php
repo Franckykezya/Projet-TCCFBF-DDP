@@ -23,8 +23,8 @@ class GrantElementController extends AbstractController
         $test = 0;
         if($request->request->count() > 0){
             
-           // $element = new GrantElement1(($_POST['interest']/100),$_POST['payments'],$_POST['graceperiod'],$_POST['maturity'],$_POST['management'], $_POST['val_management'],$_POST['commission']);
-           $element = new GrantElement1(0.77,2,4,14,0,0,16.43);
+           $element = new GrantElement1(($_POST['interest']/100),$_POST['payments'],$_POST['periodeval'],$_POST['maturityval'],$_POST['management'], $_POST['val_management'],$_POST['commission']);
+           //$element = new GrantElement1(0.77,2,4,14,0,0,16.43);
             //$val = $element->calculElementDonSansCommission();
             $val = $element->calculeElementDon($_POST['face'],0);
             $d = $element->Calendrier_de_paiement($_POST['face']);
@@ -35,7 +35,7 @@ class GrantElementController extends AbstractController
 
             $valiny = $element->calculeInterestrate($_POST['face']);
             
-            dump($valiny);
+            //dump($valiny);
             // return $this->redirectToRoute('grant_element');
        // dump($element);
         }
@@ -59,12 +59,15 @@ class GrantElementController extends AbstractController
     public function selectoption($id, ProjetRepository $projetRepository,BailleurRepository $bailleurRepository){
         $projet = $projetRepository->find($id);
         $bailleur = $bailleurRepository->projetbailleur($id);
+        $taux = $projetRepository->tauxinteretfixe($id);
             
         //$data = array();
         $data = array($projet->getMaturiteFacilite());
         array_push($data, $projet->getPeriodeGrace());
+        array_push($data, $taux);
+
         $ba = array();
-        dump($bailleur);
+        dump($taux);
         // foreach ($bailleur as  $value) {
             
         //     $ba = array_push($ba, $value);

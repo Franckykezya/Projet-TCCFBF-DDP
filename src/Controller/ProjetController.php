@@ -219,7 +219,8 @@ class ProjetController extends AbstractController
         $secteur = $secteurInterventionrep->findAll();
         $typefinancement = $typefinancementrep->findAll();
         //$tauxinteret = $tauxinteretrep->findAll();
-
+        $makarehetra = $projetrep->makarehetra();
+        dump($makarehetra);
 
         return $this->render("projet/tableau_comparatif.html.twig",[
             'bailleurs' => $projets,

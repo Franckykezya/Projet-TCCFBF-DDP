@@ -111,19 +111,20 @@
                         </div>  
                        
                 </div>
-                <div class = "form-group">
-                        <div class ="col-md-4">
-                            <label for ="face">Face Value of Loan</label>
-                        </div>
-                         <div  class ="col-md-6">
-                             <input type="number" min="0" required id = "face" name = "face" class="form-control" >
-                        </div>  
-                       
-                </div>
+
+                {# <div class = "form-group"> #}
+                        {# <div class ="col-md-4"> #}
+                            {# <label for ="face">Face Value of Loan</label> #}
+                        {# </div> #}
+                         {# <div  class ="col-md-6"> #}
+                             {# <input type="number" min="0" required id = "face" name = "face" class="form-control" > #}
+                        {# </div>   #}
+                       {#  #}
+                {# </div> #}
                    
 
 
-{#                    
+                   
                     <div class = "form-group">
                         <div class ="col-md-4">
                             <label for ="face">Face Value of Loan</label>
@@ -174,15 +175,15 @@
                             <input type="text" min="0" id = "interest" required name = "interest" class="form-control">
                         </div>
                     </div>
-
-                    <div class = "form-group">
-                        <div class ="col-md-4">
-                            <label for ="maturity">Maturity</label>
-                        </div>
-                        <div class ="col-md-6">
-                            <input type="number" min="0" id = "maturity" required name = "maturity" class="form-control">
-                        </div>
-                    </div>
+                    
+                    {# <div class = "form-group"> #}
+                        {# <div class ="col-md-4"> #}
+                            {# <label for ="maturity">Maturity</label> #}
+                        {# </div> #}
+                        {# <div class ="col-md-6"> #}
+                            {# <input type="number" min="0" id = "maturity" required name = "maturity" class="form-control"> #}
+                        {# </div> #}
+                    {# </div> #}
 
                     <div class = "form-group">
                         <div class ="col-md-4">
@@ -193,14 +194,14 @@
                         </div>
                     </div>
 
-                    <div class = "form-group">
-                        <div class ="col-md-4">
-                            <label for ="graceperiod">Grace period (in years)</label>
-                        </div>
-                        <div class ="col-md-6">
-                            <input type="number" min="0" id = "graceperiod" required name = "graceperiod" class="form-control">
-                        </div>
-                    </div> #}
+                    {# <div class = "form-group"> #}
+                        {# <div class ="col-md-4"> #}
+                            {# <label for ="graceperiod">Grace period (in years)</label> #}
+                        {# </div> #}
+                        {# <div class ="col-md-6"> #}
+                            {# <input type="number" min="0" id = "graceperiod" required name = "graceperiod" class="form-control"> #}
+                        {# </div> #}
+                    {# </div> #} 
 
                     <div class = "form-group">
                         <div class = "col-md-12">
@@ -386,8 +387,10 @@
                    console.log(response);
                    spanmat.textContent = response.data.projet[0];
                    spanper.textContent = response.data.projet[1];
+                   
                    $('input[name=maturityval]').val(response.data.projet[0]);
                    $('input[name=periodeval]').val(response.data.projet[1]);
+                   $('input[name=interest]').val(response.data.projet[2][0].valeur_element_don);
 
 
                })

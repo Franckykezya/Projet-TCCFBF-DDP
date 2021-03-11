@@ -67,7 +67,12 @@ class ProjetRepository extends ServiceEntityRepository
         
      } 
 
-
+    public function makarehetra (){
+        $req = "SELECT * FROM projet";
+        $a=$this->getEntityManager()->getConnection()->prepare($req);
+        $a->execute([]);
+        return $a->fetchAll();
+    }
     /**
      * @return Projet[]
      */
