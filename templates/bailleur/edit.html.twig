@@ -3,11 +3,40 @@
 {% block title %}Modification bailleur{% endblock %}
 
 {% block body %}
-    <h1>Modification bailleur</h1>
 
-    {{ include('bailleur/_form.html.twig', {'button_label': 'Modifier'}) }}
+       <!-- BOOTSTRAP STYLES-->
+    <link href="../assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="../assets/js/bootstrap.min.js"></script>
 
-        <a href="{{ path('bailleur_index') }}">Retourner à la liste...</a>
+    <center><h1>Modification bailleur</h1></center>
 
-    {{ include('bailleur/_delete_form.html.twig') }}
+     <div class="col-md-12">
+
+        <div class="col-md-3">
+        
+        </div>
+
+        <div class="col-md-6">
+                {{ form_start(form) }}
+                    {{ form_row(form.nom, {'label' : 'Nom', 'attr' : {'placeholder':"Nom"}}) }}
+                    {{ form_row(form.siege, {'label' : 'Siège', 'attr' : {'placeholder':"Siège"}}) }}
+                    {{ form_row(form.telephone, {'label' : 'Téléphone', 'attr' : {'placeholder':"Téléphone"}}) }}
+                    {{ form_row(form.mail, {'label' : 'Adresse mail', 'attr' : {'placeholder':"Adresse mail"}}) }}
+                    {{ form_row(form.fax, {'label' : 'Fax', 'attr' : {'placeholder':"Fax"}}) }}
+                    {{ form_row(form.description, {'label' : 'Déscription', 'attr' : {'placeholder':"Déscription"}}) }}
+                   
+                    <div class="form-row align-items-end pull-right"> 
+                        <button type="Submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit">_</span>Modifier</button>
+                    {{ form_end(form) }}
+
+                        &nbsp; &nbsp; &nbsp;
+                        <a href="{{ path('bailleur_index') }}" class="btn btn-warning"><span class="glyphicon glyphicon-share-alt">_</span>Retour à la liste...</a></br>
+                    </div>
+        </div>
+
+        <div class="col-md-3">
+        
+        </div>   
+    </div>        
 {% endblock %}

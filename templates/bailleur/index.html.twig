@@ -3,64 +3,46 @@
 {% block title %}Bailleurs{% endblock %}
 
 {% block body %}
-    <h1> &nbsp; Liste des bailleurs de fond</h1>
-        {{form_start(form)}}
-            <div class="form-row align-items-end">
-                <div class="col-md-4">
-                    {{ form_row(form.nombailleur, {'label' : "Nom bailleur", 'attr' : {'placeholder':"Nom bailleur"}}) }} 
-                </div> 
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <button type="Submit" class="btn btn-success pull-right" name="" id="" value="">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </button> 
-                    </div> 
-                </div> 
-            </div>  
-        {{form_end(form)}}
+    <center> <h1> Liste des bailleurs de fond </h1></center>
+        <div class="form-row align-items-end">
+            {{form_start(form)}}
+                <div class="form-row align-items-end">
+                &nbsp; &nbsp; &nbsp; &nbsp; 
+                        {{ form_row(form.nombailleur, {'label' : "Nom du bailleur", 'attr' : {'placeholder':"Nom bailleur"}}) }} 
+                        <div class="form-group">
+                            <button type="Submit" class="btn btn-success pull-right" name="" id="" value="">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </button> 
+                        </div> 
+                </div>  
+            {{form_end(form)}}
+        </div>
 
     <table class="table table-striped">
         <thead>
             <tr class="table-info">       
                 <th scope="col">Nom</th> 
-                <th scope="col">Siège</th> 
-                <th scope="col">Téléphone</th> 
-                <th scope="col">Adresse mail</th>  
-                <th scope="col">Fax</th> 
-                <th scope="col">Description</th>   
-                <th scope="col">Actions</th> 
+                <th scope="col">Déscription</th>   
+                <th scope="col">Action</th> 
             </tr>
         </thead>
         <tbody>
         {% for blr in bailleurs %}
             <tr>
                 <td>{{ blr.nom }}</td>
-                <td>{{ blr.siege }}</td>
-                <td>{{ blr.telephone }}</td>
-                <td>{{ blr.mail }}</td>
-                <td>{{ blr.fax }}</td>
                 <td>{{ blr.description }}</td>
                 <td>
                     <div class="form-row align-items-end">
                         <div class="col">
-                            <a href="{{ path('bailleur_show', {'id': blr.id}) }}" class="btn btn-info"><span class="glyphicon glyphicon-align-justify"></span></a>
+                            <a href="{{ path('bailleur_show', {'id': blr.id}) }}" class="btn btn-info"><span class="glyphicon glyphicon-align-justify">_</span>Détails</a>
                         </div>
-                        <div class="col">
-                            <a href="{{ path('bailleur_edit', {'id': blr.id}) }}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
-                        </div> 
-                        <div class="col">              
-                            <form method="post" action="{{ path('bailleur_delete', {'id': blr.id}) }}" onsubmit="return confirm('Vous voulez supprimer cet bailleur?');">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ blr.id) }}">
-                                <button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
-                            </form>
-                        </div> 
+                        
                     </div> 
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">Aucun(e)...</td>
+                <td colspan="4">Aucun bailleur...</td>
             </tr>
         {% endfor %}
         </tbody>
