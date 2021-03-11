@@ -98,13 +98,15 @@ function onlyNumber()
                                                                 {{ form_row(formTauxFixe.valeur, {'label' : 'Valeur (en %)', 'attr' : {'placeholder':"Valeur (en %)"}}) }}
                                                                 {{ form_row(formTauxFixe.valeur_element_don, {'label' : "Valeur pour l'element don (en %)", 'attr' : {'placeholder':"Valeur pour l'element don (en %)"}}) }}
                                                             {# {{ form_end(formTauxFixe) }} #}
+                                                            {{ form_row(formBailleur.tauxfixe) }}
+
                                                             </div>
                                                         </p>
                                                     </div>
                                                     <div id="variable" class="tab-pane fade">
                                                         <p>
                                                             <div class="col-md-4">
-                                                           
+                                                            {{ form_row(formBailleur.tauxvariable) }}
                                                             </div>
                                                         </p>
                                                     </div>
