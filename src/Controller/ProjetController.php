@@ -86,6 +86,7 @@ class ProjetController extends AbstractController
             //ajout element don
             $somme_commission = $projet->getDifferentielInteret()+$projet->getFraisGestion()+$projet->getCommissionEngagement()+$projet->getCommissionService()+$projet->getCommissionInitiale()+$projet->getCommissionArrangement()+$projet->getCommissionAgent()+$projet->getMaturiteLettreCredit()+$projet->getFraisLiesLettreCredit()+$projet->getFraisLiesRefinancement();
             $element = new GrantElement1(0.015,2,$projet->getPeriodeGrace(),$projet->getMaturiteFacilite(),"In percent of outstanding loan",0,$somme_commission);
+            $element = new GrantElement1($projet->getTauxFixe()->getValeurElementDon(), 2,$projet->getPeriodeGrace(),$projet->getMaturiteFacilite(),"In percent of outstanding loan",0,$somme_commission);
             $val = $element->calculeElementDonBailleur(100,0);
             
             $projet->setElementDon($val);
@@ -124,17 +125,18 @@ class ProjetController extends AbstractController
         //$bailleurs = $bailleurRepository->findAll();
         //dump($bailleurs);
         return $this->render("projet/listebailleur.html.twig",[
-            'bailleurs' => $projets,
+            'projets' => $projets,
             'projet' => $pjt,
             'form' => $form->createView()
         ]);
     }
 
     /**
-     * @Route("/afficheBAILLEUR/{id}",name = "affiche_bailleur")
+     * @Route("/afficheprojet/{id}",name = "affiche_bailleur")
      */
     public function affiche_bailleur($id,ProjetRepository $projetRepository){
         $projet = $projetRepository->find($id);
+        $bailleur = $projetRepository->bailleur($id);
         $secteurs = $projetRepository->secteur($id);
         $financements = $projetRepository->financement($id);
         $tauxinteretfixes = $projetRepository->tauxinteretfixe($id);
@@ -142,7 +144,8 @@ class ProjetController extends AbstractController
         //dump($tauxinteretvariable);
 
         return $this->render("projet/affichebailleur.html.twig",[
-            'bailleur' => $projet,
+            'projet' => $projet,
+            'bailleurs' => $bailleur,
             'secteurs' => $secteurs,
             'financements' => $financements,
             'tauxinteretfixes' => $tauxinteretfixes,

@@ -22,6 +22,16 @@ class ProjetRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Projet::class);
     }
+
+    public function bailleur($id){
+        $req = "SELECT bailleur.nom,bailleur.description,bailleur.siege,bailleur.telephone,bailleur.mail,bailleur.fax FROM projet
+                 INNER JOIN bailleur ON projet.id = bailleur.id
+                 WHERE projet.id = $id";
+         $a = $this->getEntityManager()->getConnection()->prepare($req);
+         $a->execute([]);
+         return $a->fetchAll();
+    }
+
     public function secteur($id){
         $req = "SELECT secteur_intervention.nom FROM projet
             INNER JOIN projet_secteur_intervention ON projet.id = projet_secteur_intervention.projet_id
@@ -81,8 +91,8 @@ class ProjetRepository extends ServiceEntityRepository
         if ($recherche->getNomProjet())
         {//mitady par nom bailleur
                 return $this->findVisibleQuery()
-                ->where('b.nom = :nomprojet' )
-                ->setParameter('nomprojet',  $recherche->getNomProjet())
+                ->where('b.nom LIKE :nomprojet' )
+                ->setParameter('nomprojet', '%' .$recherche->getNomProjet(). '%')
                 ->getQuery()
                 ->getResult();
         }

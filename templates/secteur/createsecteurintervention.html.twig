@@ -1,39 +1,47 @@
-{# {{ form_start(formSecteurIntervention) }}
-    {{ form_widget(formSecteurIntervention) }}
-    <button class="btn btn-success" >
-        {{ button_label|default('Enregistrer') }}
-    </button>
-{{ form_end(formSecteurIntervention) }} #}
+{% extends 'base.html.twig' %}
 
+{% block title %}Ajout secteur{% endblock %}
+    
+{% block body %}
+    
+    <!-- BOOTSTRAP STYLES-->
+    <link href="../assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="../assets/js/bootstrap.min.js"></script>
 
+    <center><h1>Ajout bailleur</h1></center>
 
-<!-- BOOTSTRAP STYLES-->
-<link href="../assets/css/bootstrap.css" rel="stylesheet" />
-<!-- BOOTSTRAP SCRIPTS -->
-<script src="../assets/js/bootstrap.min.js"></script>
+    {# {{ include('bailleur/_form.html.twig') }} #}
 
+    <div class="col-md-12">
 
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">creation secteur</h5>
-        <a class="close" href="{{ path('secteur_liste') }}">&times;</a>
-      </div>
-      <div class="modal-body">
-        <p>
+        <div class="col-md-3">
+        
+        </div>
+
+        <div class="col-md-6">
             {{ form_start(formSecteurIntervention) }}
-                {{ form_widget(formSecteurIntervention, {'label' : 'Nom du secteur' , 'attr' : {'placeholder':"Nom du type financement"}}) }}
+                {{ form_row(formSecteurIntervention.nom, {'label' : 'Nom du secteur', 'attr' : {'placeholder':"Nom du secteur"}}) }}
+ 
+            <div class="form-row align-items-end pull-right">    
 
-        </p>
-      </div>
-      <div class="modal-footer">
-       <button class="btn btn-success" >
-            {{ button_label|default('Enregistrer') }}
-        </button>
-        <a href="{{ path('secteur_liste') }}" type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</a>
-            {{ form_end(formSecteurIntervention) }}
-      </div>
-    </div>
-  </div>
+                    <button type="Submit" class="btn btn-info pull-right" name="" id="" value="">
+                        <span class="glyphicon glyphicon-floppy-saved">_</span>Enregistrer
+                    </button>
+
+                {{ form_end(formSecteurIntervention) }}
+
+                &nbsp; &nbsp; &nbsp;
+                <a href="{{ path('secteur_liste') }}" class="btn btn-warning"><span class="glyphicon glyphicon-share-alt">_</span>Retour à la liste...</a></br>
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+        
+        </div>
+    </div> 
+
+{% endblock %}
 
 

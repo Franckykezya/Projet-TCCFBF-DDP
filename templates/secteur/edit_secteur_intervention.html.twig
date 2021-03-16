@@ -1,27 +1,38 @@
-<!-- BOOTSTRAP STYLES-->
-<link href="../assets/css/bootstrap.css" rel="stylesheet" />
-<!-- BOOTSTRAP SCRIPTS -->
-<script src="../assets/js/bootstrap.min.js"></script>
+{% extends 'base.html.twig' %}
 
+{% block title %}Modification secteur{% endblock %}
 
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modification secteur</h5>
-        <a class="close" href="{{ path('secteur_liste') }}">&times;</a>
-      </div>
-      <div class="modal-body">
-        <p>
-            {{ form_start(form) }}
-                <b> Nom du secteur :</b> {{ form_widget(form.nom, {'label' : 'Nom du secteur' , 'attr' : {'placeholder':"Nom du type financement"}}) }}
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-primary">
-            {{ button_label|default('Enregistrer') }}
-        </button>
-        <a href="{{ path('secteur_liste') }}" type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</a>
-        {{ form_end(form) }}  
-      </div>
-    </div>
-  </div>
+{% block body %}
+
+       <!-- BOOTSTRAP STYLES-->
+    <link href="../assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="../assets/js/bootstrap.min.js"></script>
+
+    <center><h1>Modification secteur</h1></center>
+
+     <div class="col-md-12">
+
+        <div class="col-md-3">
+        
+        </div>
+
+        <div class="col-md-6">
+                {{ form_start(form) }}
+                    {{ form_row(form.nom, {'label' : 'Nom du secteur', 'attr' : {'placeholder':"Nom du secteur"}}) }}
+                   
+                    <div class="form-row align-items-end pull-right"> 
+                        <button type="Submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit">_</span>Modifier</button>
+                    {{ form_end(form) }}
+
+                        &nbsp; &nbsp; &nbsp;
+                        <a href="{{ path('secteur_liste') }}" class="btn btn-warning"><span class="glyphicon glyphicon-share-alt">_</span>Retour à la liste...</a></br>
+                  
+                    </div>
+        </div>
+
+        <div class="col-md-3">
+        
+        </div>   
+    </div>        
+{% endblock %}

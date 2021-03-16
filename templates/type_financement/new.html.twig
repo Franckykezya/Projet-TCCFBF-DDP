@@ -1,48 +1,47 @@
-{# {% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Ajout type financement{% endblock %}
-
+    
 {% block body %}
-   <div id="wrapper">
-        <!-- /. NAV SIDE  -->
-            <div id="page-wrapper" >
-                <div id="page-inner">
-                    <h1>Ajout type financement</h1>
+    
+    <!-- BOOTSTRAP STYLES-->
+    <link href="../assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="../assets/js/bootstrap.min.js"></script>
 
-                    {{ include('type_financement/_form.html.twig') }}
-                    
-                    <a href="{{ path('type_financement_index') }}">Liste</a>
-                </div>
-            </div>
-    </div>
+    <center><h1>Ajout type financement</h1></center>
 
-{% endblock %} #}
+    {# {{ include('bailleur/_form.html.twig') }} #}
 
+    <div class="col-md-12">
 
-<!-- BOOTSTRAP STYLES-->
-<link href="../assets/css/bootstrap.css" rel="stylesheet" />
-<!-- BOOTSTRAP SCRIPTS -->
-<script src="../assets/js/bootstrap.min.js"></script>
+        <div class="col-md-3">
+        
+        </div>
 
-
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Type financement</h5>
-        <a class="close" href="{{ path('type_financement_index') }}">&times;</a>
-      </div>
-      <div class="modal-body">
-        <p>
+        <div class="col-md-6">
             {{ form_start(form) }}
-                {{ form_widget(form, {'label' : 'Type financement' , 'attr' : {'placeholder':"Nom du type financement"}}) }}
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-success">
-            {{ button_label|default('Enregistrer') }}
-        </button>
-        <a href="{{ path('type_financement_index') }}" type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</a>
-            {{ form_end(form) }}
-      </div>
-    </div>
-  </div>
+                {{ form_row(form.nom, {'label' : 'Nom du type financement', 'attr' : {'placeholder':"Nom du type financement"}}) }}
+ 
+            <div class="form-row align-items-end pull-right">    
+
+                    <button type="Submit" class="btn btn-info pull-right" name="" id="" value="">
+                        <span class="glyphicon glyphicon-floppy-saved">_</span>Enregistrer
+                    </button>
+
+                {{ form_end(form) }}
+
+                &nbsp; &nbsp; &nbsp;
+                <a href="{{ path('type_financement_index') }}" class="btn btn-warning"><span class="glyphicon glyphicon-share-alt">_</span>Retour à la liste...</a></br>
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+        
+        </div>
+    </div> 
+
+{% endblock %}
+
+

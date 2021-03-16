@@ -368,7 +368,18 @@
                         <a class="active" href="{{path('liste_projet')}}"><i class="fa fa-building" aria-hidden="true"></i> Projets</a>
                     </li>
             
+                    <li>
+                        <a class="active" href="{{path('liste_projet')}}"><i class="glyphicon glyphicon-th-list" aria-hidden="true"></i> Option</a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{path('secteur_liste')}}">Secteur d'intervention</a>
+                            </li>
+                            <li>
+                                <a href="{{path('type_financement_index')}}">Type financement</a>
+                            </li>
+                        </ul>
                     </li>
+
                     <li>
                         <a class="active" href="{{ path('tableau_comparatif') }}"><i class="fa fa-table" aria-hidden="true"></i> Tableau comparatif</a>
                     </li>
@@ -390,7 +401,7 @@
                 <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark" id="navbarFIXE">
                 
                     <a class="nav-link js-scroll-trigger" href="#" id="sidebarCollapse"><i class="fa fa-bars" aria-hidden="true"></i>
-                                   
+                            
                     </a>
 
                     <div class="navbar-nav-scroll">
@@ -409,7 +420,26 @@
                                 <a class="" href="{{path('liste_projet')}}"><i class="fa fa-building" aria-hidden="true"></i> Projets</a>
                             </li>
                             <span class="vertical-line"></span>
-                                     
+                            
+                            <li class="nav-item">
+                                <a class="" href="{{ path('secteur_liste') }}"><i class="glyphicon glyphicon-road" aria-hidden="true"></i> Secteur</a>
+                            </li>
+                            <span class="vertical-line"></span>
+
+                            <li class="nav-item">
+                                <a class="" href="{{ path('type_financement_index') }}"><i class="glyphicon glyphicon-book" aria-hidden="true"></i> Type financement</a>
+                            </li>
+
+                            {# <li class="dropdown nav-item active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Option</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{{ path('secteur_liste') }}">Secteur</a>
+                                    <a class="dropdown-item" href="{{ path('type_financement_index') }}">Type</a>
+                                 </div>
+                            </li> #}
+
+                            <span class="vertical-line"></span>
+                             
                              <li class="nav-item">
                                 <a class="" href="{{ path('tableau_comparatif') }}"><i class="fa fa-table" aria-hidden="true"></i> Tableau comparatif</a>
                             </li>         

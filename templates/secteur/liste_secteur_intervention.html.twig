@@ -3,127 +3,56 @@
 {% block title %}Secteur d'itervention{% endblock %}
 
 {% block body %}
+    <center> <h1> Liste des secteur d'intervention</h1></center>
 
-<style>
+<div class="col-md-12">
 
-    {# Css creation secteur #}
-        .overlay {
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.7);
-        transition: opacity 500ms;
-        visibility: hidden;
-        opacity: 0;
-        }
-        .overlay:target {
-        visibility: visible;
-        opacity: 1;
-        }
+        <div class="col-md-3">
+        
+        </div>
 
-        .popup {
-        margin: 70px auto;
-        padding: 20px;
-        background: #fff;
-        border-radius: 5px;
-        width: 30%;
-        position: relative;
-        transition: all 5s ease-in-out;
-        }
+        <div class="col-md-6">
 
-        .popup h2 {
-        margin-top: 0;
-        color: #333;
-        font-family: Tahoma, Arial, sans-serif;
-        }
-        .popup .close {
-        position: absolute;
-        top: 20px;
-        right: 30px;
-        transition: all 200ms;
-        font-size: 30px;
-        font-weight: bold;
-        text-decoration: none;
-        color: red;
-        }
-        .popup .close:hover {
-        color: red;
-        }
-        .popup .content {
-        max-height: 30%;
-        overflow: auto;
-        }
-
-        @media screen and (max-width: 700px){
-        .box{
-            width: 70%;
-        }
-        .popup{
-            width: 70%;
-        }
-    }
-
-</style>
-
-
-    {# <div id="wrapper">
-        <!-- /. NAV SIDE  -->
-            <div id="page-wrapper" > #}
-                <div id="page-inner">
-                    <h1>Secteur d'intervention</h1>
-                    <table class="table">
-                        <div class="row">
-                            <div class="col-md-12">
-                                    <thead>
-                                        <tr>
-                                            <th>Nom</th>
-                                            <th>actions</th>
-                                        </tr>
-                                    </thead>
-                            </div>
+        <table class="table table-striped">
+            <thead>
+                <tr class="table-info">       
+                    <th scope="col">Nom</th>  
+                    <th scope="col">Actions</th> 
+                </tr>
+            </thead>
+            <tbody>
+            {% for secteur in secteurs %}
+                <tr>
+                    <td>{{ secteur.nom }}</td>
+                        <td>
+                        <div class="form-row align-items-end">
+                            <a href="{{ path('secteur_editer', {'id': secteur.id}) }}" class="btn btn-info"><span class="glyphicon glyphicon-edit">_</span>Modifier</a>                
+                            &nbsp; &nbsp; &nbsp;
+                            <form method="post" action="{{ path('secteur_delete', {'id': secteur.id}) }}" onsubmit="return confirm('Vous voulez supprimer ce secteur');">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ secteur.id) }}">
+                                <button class="btn btn-danger"><span class="glyphicon glyphicon-trash">_</span>Supprimer</button>
+                            </form>     
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <tbody>
-                                    {% for secteur in secteurs %}
-                                        <tr>
-                                            <td>{{ secteur.nom }}</td>
-                                            <td>
-                                                <a href="{{ path('secteur_editer', {'id': secteur.id}) }}" class="btn btn-info"><span class="glyphicon glyphicon-edit"></span></a>    
-                                            </td>
-                                            <td>
-                                                <form method="post" action="{{ path('secteur_delete', {'id': secteur.id}) }}" onsubmit="return confirm('Vous voulez supprimer ce secteur');">
-                                                    <input type="hidden" name="_method" value="DELETE">
-                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ secteur.id) }}">
-                                                    <button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    {% else %}
-                                        <tr>
-                                            <td colspan="3">Aucun(e)...</td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </div>
-                        </div>
-                    </table>
+                        </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Aucun secteur...</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+     </div>
 
-                            <a href="{{ path('create_secteur_intervention')}}" class="btn btn-success"> </a>
+    <div class="col-md-3">
+        
+    </div>
+</div>
 
-                            {# <a href="#popup1" class="btn btn-success"><span class="glyphicon glyphicon-plus">_</span>Ajout</a>
-                                <div id="popup1" class="overlay">
-                                    <div class="popup">
-                                        <h2>Ajout secteur</h2>
-                                        <a class="close" href="{{ path('secteur_liste') }}">&times;</a>
-                                        <!-- input -->
-                                        {{ include('secteur/createsecteurintervention.html.twig') }}
-                                        <a href="{{ path('secteur_liste') }}">Liste</a>     
-                                    </div>
-                                </div>   #}
-            </div>
-    {# </div>
-</div> #}
+    <center>
+        <a href="{{ path('create_secteur_intervention') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus">_</span>Ajout secteur</a>
+    </center>
+
 {% endblock %}
+

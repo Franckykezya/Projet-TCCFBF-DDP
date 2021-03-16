@@ -8,82 +8,74 @@
  {% endblock %}
 
 {% block body %}
-    {# <div id="wrapper">
-        <!-- /. NAV SIDE  -->
-            <div id="page-wrapper" > #}
-                <div id="page-inner">
-                    <div class="row">
-                        <div class="col-md-12">
-                        <center>
-                            <h2>Listes des projets</h2>   
-                            <h5>Cette carte represente la liste des projets</h5>
-                        </center>
-                        </div>
-                    </div>
-                    <div class="row">
-                        {{form_start(form)}}
-                            <div class="form-row" >
-                                <div class="col-md-12">
-                                    <div class="col-md-10">
-                                        {{ form_row(form.nomprojet, {'label' : 'Nom projet', 'attr' : {'placeholder':"Nom projet"}}) }}
-                                    </div>
-                                    <div class="col-md-2">
-                                        <button type="Submit" class="btn btn-success pull-right" name="" id="" value="">
-                                            <i class="fa fa-search" aria-hidden="true"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        {{form_end(form)}}
 
-                    </div>
-                    <!-- /. ROW  -->
-                    <hr />
-                <div class="row">
+        <center>
+            <h2>Liste des projets</h2>   
+            <h5>Cette carte represente la liste des projets</h5>
+        </center>
 
-                    {% for bailleur in bailleurs %}
-    
-                        <div class="col-md-4 col-sm-4">
-                            <div class="panel panel-success ">
-                                <div class="panel-heading">
-                                {{bailleur.nom}}
-                                </div>
-                                <div class="panel-body">
-                                    <p>Element-don : {{bailleur.Elementdon}} %</p>
-                                </div>
-                                <div class="panel-footer">
-                                <div class = "btn-group">
-                                    <div class = "col-md-4"> <a href="{{path('affiche_bailleur', {'id': bailleur.id})}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-th-list"></span></a></div>
-                                    <div class = "col-md-4"><a href="{{path('modifier_bailleur', {'id': bailleur.id})}}" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-edit"></span></a></div>
-                                    <div class = "col-md-4">
-                                        <form method="post" action="{{ path('supprimer_bailleur', {'id': bailleur.id}) }}" onsubmit="return confirm('Vous voulez supprimer cet bailleur');">
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ bailleur.id) }}">
-                                            <button class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></button>
-                                        </form>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                   
-                    {% endfor %}
-                 </div>
-                <!-- /. ROW  -->
-                <div class = "text-center">
-                    <div class = "page">
-                        <div class="pagination">
-                            <center>
-                                {{knp_pagination_render(bailleurs)}}
-                                <a href="{{path('create_bailleur')}}" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-plus">_</span>Ajout projet</a>
-                                <a href="{{path('grant_element')}}" class ="btn btn-primary btn-lg" role="button"><i class="fa fa-plus-circle"></i>_Element don</a>
-                            </center>
-                        </div>
+        <div class="form-row align-items-end">
+            {{form_start(form)}}
+                <div class="form-row align-items-end">
+                    &nbsp; &nbsp; &nbsp; &nbsp; 
+                    {{ form_row(form.nomprojet, {'label' : 'Nom projet', 'attr' : {'placeholder':"Nom projet"}}) }}
+                    <div class="form-group">
+                        <button type="Submit" class="btn btn-success pull-right" name="" id="" value="">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button> 
+                    </div> 
+                </div>  
+            {{form_end(form)}}
+
+        </div>
+        <!-- /. ROW  -->
+            
+        <table class="table table-striped">
+            <thead>
+                <tr class="table-info">
+                    <th scope="col">Nom du pojet</th> 
+                    <th scope="col">Bailleur(s)</th>   
+                    <th scope="col">Actions</th> 
                   
-                    </div>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pjt in projets %}
+                    <tr>
+                        <td>{{pjt.nom}}</td>
+                        <td>Bailleur Tsy vita</td>
+                        {# {% for blr in bailleur %} {{blr.nom}},  {% endfor %} #}
+                        <td>
+                            <div class="form-row align-items-end">
+                                <div class="col">
+                                    <a href="{{ path('affiche_bailleur', {'id': pjt.id}) }}" class="btn btn-info"><span class="glyphicon glyphicon-align-justify">_</span>Détails</a>
+                                     <a href="{{path('grant_element')}}" class ="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span>_Element don</a>
+                                </div>
+                                
+                            </div> 
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4">Aucun projet...</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class = "text-center">
+            <div class = "page">
+                <div class="pagination">
+                    <center>
+                        {{knp_pagination_render(projets)}}
+                            <a href="{{path('create_bailleur')}}" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-plus">_</span>Ajout projet</a>
+                    </center>
                 </div>
-            <!-- /. ROW  -->
+                  
             </div>
+        </div>
+            <!-- /. ROW  -->
+    </div>
             <!-- /. PAGE INNER  -->
         {# </div>
             <!-- /. PAGE WRAPPER  -->

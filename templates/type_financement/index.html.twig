@@ -1,151 +1,58 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Type financement{% endblock %}
-    
+
 {% block body %}
+    <center> <h1> Liste des types finacements</h1></center>
 
-<style>
-        .overlay {
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.7);
-        transition: opacity 500ms;
-        visibility: hidden;
-        opacity: 0;
-        }
-        .overlay:target {
-        visibility: visible;
-        opacity: 1;
-        }
+<div class="col-md-12">
 
-        .popup {
-        margin: 70px auto;
-        padding: 20px;
-        background: #fff;
-        border-radius: 5px;
-        width: 30%;
-        position: relative;
-        transition: all 5s ease-in-out;
-        }
+        <div class="col-md-3">
+        
+        </div>
 
-        .popup h2 {
-        margin-top: 0;
-        color: #333;
-        font-family: Tahoma, Arial, sans-serif;
-        }
-        .popup .close {
-        position: absolute;
-        top: 20px;
-        right: 30px;
-        transition: all 200ms;
-        font-size: 30px;
-        font-weight: bold;
-        text-decoration: none;
-        color: red;
-        }
-        .popup .close:hover {
-        color: red;
-        }
-        .popup .content {
-        max-height: 30%;
-        overflow: auto;
-        }
+        <div class="col-md-6">
 
-        @media screen and (max-width: 700px){
-        .box{
-            width: 70%;
-        }
-        .popup{
-            width: 70%;
-        }
-    }
-</style>
+        <table class="table table-striped">
+            <thead>
+                <tr class="table-info">       
+                    <th scope="col">Nom</th>  
+                    <th scope="col">Actions</th> 
+                </tr>
+            </thead>
+            <tbody>
+                {% for type_financement in type_financements %}
+                <tr>
+                    <td>{{ type_financement.nom }}</td>
+                        <td>
+                        <div class="form-row align-items-end">
+                            <a href="{{ path('type_financement_edit', {'id': type_financement.id}) }}" class="btn btn-info"><span class="glyphicon glyphicon-edit">_</span>Modifier</a>                
+                            &nbsp; &nbsp; &nbsp;
+                            <form method="post" action="{{ path('secteur_delete', {'id': type_financement.id}) }}" onsubmit="return confirm('Vous voulez supprimer ce type financement?');">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ type_financement.id) }}">
+                                <button class="btn btn-danger"><span class="glyphicon glyphicon-trash">_</span>Supprimer</button>
+                            </form>     
+                        </div>
+                        </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Aucun type financement...</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+     </div>
 
-    {# <div id="wrapper">
-        <!-- /. NAV SIDE  -->
-            <div id="page-wrapper" > #}
-                <div id="page-inner">
-                
-                    <h1>Type financement</h1>
-
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Nom</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {% for type_financement in type_financements %}
-                            <tr>
-                                <td>{{ type_financement.nom }}</td>
-                                <td>
-                                    <a href="{{ path('type_financement_edit', {'id': type_financement.id}) }}" class="btn btn-info"><span class="glyphicon glyphicon-edit"></span></a>
-                                    <td>
-                                    <form method="post" action="{{ path('type_financement_delete', {'id': type_financement.id}) }}" onsubmit="return confirm('Vous voulez supprimer ce type de financement');">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ type_financement.id) }}">
-                                        <button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
-                                    </form>
-                                    </td>
-                                </tr>
-                            </tr>
-                        {% else %}
-                            <tr>
-                                <td colspan="3">Aucun(e)...</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-
-                <a href="{{path('type_financement_new')}}" class="btn btn-success"><span class="glyphicon glyphicon-plus">_</span>Ajout</a>
-                {# <a href="#popup1" class="btn btn-success"><span class="glyphicon glyphicon-plus">_</span>Ajout</a>
-                <div id="popup1" class="overlay">
-                    <div class="popup">
-                        <h2>Ajout type financement</h2>
-                        <a class="close" href="{{ path('type_financement_index') }}">&times;</a>
-                        <!-- input -->
-                        {{ include('type_financement/_form.html.twig') }}
-                        <a href="{{ path('type_financement_index') }}">Liste</a>     
-                    </div>
-                </div>    #}
-
-                {# <h1>TypeFinancement index</h1>
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nom</th>
-                            <th>actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for type_financement in type_financements %}
-                        <tr>
-                            <td>{{ type_financement.id }}</td>
-                            <td>{{ type_financement.nom }}</td>
-                            <td>
-                                <a href="{{ path('type_financement_show', {'id': type_financement.id}) }}">show</a>
-                                <a href="{{ path('type_financement_edit', {'id': type_financement.id}) }}">edit</a>
-                            </td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="3">no records found</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-
-            <a href="{{ path('type_financement_new') }}">Create new</a>
-        </div> #}
+    <div class="col-md-3">
+        
     </div>
-    {# </div>
-</div> #}
+</div>
+
+    <center>
+        <a href="{{ path('type_financement_new') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus">_</span>Ajout type financement</a>
+    </center>
 
 {% endblock %}
-            
+
