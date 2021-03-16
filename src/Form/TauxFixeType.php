@@ -16,7 +16,10 @@ class TauxFixeType extends AbstractType
         $builder
             ->add('base',TextType::class)
             ->add('valeur',NumberType::class)
-            ->add('valeur_element_don',NumberType::class)
+            ->add('valeur_element_don',NumberType::class,
+            [
+                'data' => 0
+            ])
         ;
     }
 

@@ -33,8 +33,8 @@ class GrantElementController extends AbstractController
             $vallumpsum = $element->calculeElementDon_lump_sum($_POST['face'],0);
             $dlumpsum = $element->Calendrier_de_paiement_lump_sum($_POST['face']);
 
-            $valiny = $element->calculeInterestrate($_POST['face']);
-            
+            //$valiny = $element->calculeInterestrate($_POST['face']);
+                $valiny=0;
             //dump($valiny);
             // return $this->redirectToRoute('grant_element');
        // dump($element);

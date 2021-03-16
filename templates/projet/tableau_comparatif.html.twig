@@ -57,8 +57,8 @@
                                      <th scope="col">SECTEURS D'INTERVENTION</th>
                                     {% for bailleur in bailleurs %}
                                      <td>
-                                       {% for secteur in bailleur.secteur %}
-                                       {{secteur.nom}} <br>
+                                        {% for secteur in bailleur.secteur %}
+                                            -{{secteur.nom}} <br>
                                         {% endfor %}
                                      </td>
                                     {% endfor %}
@@ -70,9 +70,9 @@
                                     <th scope="row">TYPE DE FINANCEMENT</th>
                                     {% for bailleur in bailleurs %}
                                      <td>
-                                      {% for tf in bailleur.typefinancement %}
-                                        {{tf.nom}}
-                                     {% endfor %}
+                                        {% for tf in bailleur.typefinancement %}
+                                            -{{tf.nom}} <br>
+                                        {% endfor %}
                                      </td>
                                     {% endfor %}
                                 </tr>
@@ -81,86 +81,134 @@
                                  <tr>
                                     <th scope="row">PART FINANCE PAR LE BAILLEUR DE FONDS</th>
                                     {% for bailleur in bailleurs %}
-                                        <th scope="col">{{bailleur.PartFinance}}</th>
+                                    
+                                        <td scope="col">{{bailleur.PartFinance}} %</td>
                                     {% endfor %}
                                 </tr>
                                  <tr>
                                     <th scope="row">MATURITE DE LA FACILITE</th>
                                    {% for bailleur in bailleurs %}
-                                        <th scope="col">{{bailleur.MaturiteFacilite}}</th>
+                                        <td scope="col">{{bailleur.MaturiteFacilite}} ans</td>
                                     {% endfor %}
                                 </tr>
                                  <tr>
                                     <th scope="row">PERIODE DE GRACE DE LA FACILITE</th>
                                      {% for bailleur in bailleurs %}
-                                        <th scope="col">{{bailleur.PeriodeGrace}}</th>
+                                        <td scope="col">{{bailleur.PeriodeGrace}} ans</td>
                                     {% endfor %}
                                 </tr>
-                                  <tr>
+                                <tr>
                                     <th scope="row">TAUX D'INTERET</th>
-                                    {{ dump(bailleurs) }}
-                                      {# {% for  in  %}
-                                        <th scope="col">{{}}</th>
-                                    {% endfor %} #}
+                                {# {{ dump(bailleurs) }} #}
+                                    {% for taux in tauxinteret %}
+                                        <td scope="col">
+                                            {{taux.base}}
+                                        </td>
+                                    {% endfor %} 
                                 </tr> 
                                  <tr>
                                     <th scope="row">DIFFERENTIEL D'INTERET</th>
                                      {% for bailleur in bailleurs %}
-                                        <th scope="col">{{bailleur.DifferentielInteret}}</th>
+                                        {% if bailleur.DifferentielInteret == null %}
+                                            <td>n/a</td>
+                                        {% else %}
+                                             <th scope="col">{{bailleur.DifferentielInteret}}</th>
+                                        {% endif %}
                                     {% endfor %}
                                 </tr>
                                  <tr>
                                     <th scope="row">FRAIS DE GESTION</th>   
                                     {% for bailleur in bailleurs %}
-                                        <th scope="col">{{bailleur.FraisGestion}}</th>
+                                        {% if bailleur.FraisGestion == null %}
+                                            <td>n/a</td>
+                                        {% else %}
+                                             <th scope="col">{{bailleur.FraisGestion}}</th>
+                                        {% endif %}
                                     {% endfor %}
                                 </tr>
                                  <tr>
                                     <th scope="row">COMMISSION D'ENGAGEMENT</th>
                                      {% for bailleur in bailleurs %}
-                                        <th scope="col">{{bailleur.CommissionEngagement}}</th>
+                                        {% if bailleur.CommissionEngagement == null %}
+                                            <td>n/a</td>
+                                        {% else %}
+                                             <td scope="col">{{bailleur.CommissionEngagement}}</td>
+                                        {% endif %}
                                     {% endfor %}
                                 </tr>
                                  <tr>
                                     <th scope="row">COMMISSION DE SERVICE</th>
-                                    {% for bailleur in bailleurs %}
-                                        <th scope="col">{{bailleur.CommissionService}}</th>
+                                     {% for bailleur in bailleurs %}
+                                        {% if bailleur.CommissionService == null %}
+                                            <td>n/a</td>
+                                        {% else %}
+                                             <td scope="col">{{bailleur.CommissionService}}</td>
+                                        {% endif %}
                                     {% endfor %}
                                 </tr>
                                  <tr>
                                     <th scope="row">COMMISSION INITIALE</th>
-                                  {% for bailleur in bailleurs %}
-                                        <th scope="col">{{bailleur.CommissionInitiale}}</th>
-                                    {% endfor %}
+                                        {% for bailleur in bailleurs %}
+                                        {% if bailleur.CommissionInitiale == null %}
+                                            <td>n/a</td>
+                                        {% else %}
+                                             <td scope="col">{{bailleur.CommissionInitiale}}</td>
+                                        {% endif %}
+                                        {% endfor %}
                                 </tr>
                                  <tr>
                                     <th scope="row">COMMISSION D'ARRANGEMENT</th>
+                                   
                                      {% for bailleur in bailleurs %}
-                                        <th scope="col">{{bailleur.CommissionArrangement}}</th>
+                                        {% if bailleur.CommissionArrangement == null %}
+                                            <td>n/a</td>
+                                        {% else %}
+                                             <td scope="col">{{bailleur.CommissionArrangement}}</td>
+                                        {% endif %}
                                     {% endfor %}
                                 </tr>
                                  <tr>
                                     <th scope="row">COMMISSION D'AGENT</th>
-                                    {% for bailleur in bailleurs %}
-                                        <th scope="col">{{bailleur.CommissionAgent}}</th>
+                                   
+                                     {% for bailleur in bailleurs %}
+                                        {% if bailleur.CommissionAgent == null %}
+                                            <td>n/a</td>
+                                        {% else %}
+                                             <td scope="col">{{bailleur.CommissionAgent}}</td>
+                                        {% endif %}
                                     {% endfor %}
                                 </tr>
                                  <tr>
                                     <th scope="row">MATURITE DE LA LETTRE DE CREDIT</th>
-                                    {% for bailleur in bailleurs %}
-                                        <th scope="col">{{bailleur.MaturiteLettreCredit}}</th>
+                                   
+                                     {% for bailleur in bailleurs %}
+                                        {% if bailleur.MaturiteLettreCredit == null %}
+                                            <td>n/a</td>
+                                        {% else %}
+                                             <td scope="col">{{bailleur.MaturiteLettreCredit}}</td>
+                                        {% endif %}
                                     {% endfor %}
                                 </tr>
                                  <tr>
                                     <th scope="row">FRAIS LIES A LA MISE EN PLACE DE LA LETTRE DE CREDIT</th>
-                                    {% for bailleur in bailleurs %}
-                                        <th scope="col">{{bailleur.FraisLiesLettreCredit}}</th>
+                                    
+                                     {% for bailleur in bailleurs %}
+                                        {% if bailleur.FraisLiesLettreCredit == null %}
+                                            <td>n/a</td>
+                                        {% else %}
+                                             <td scope="col">{{bailleur.FraisLiesLettreCredit}}</td>
+                                        {% endif %}
                                     {% endfor %}
                                 </tr>
                                  <tr>
                                     <th scope="row">FRAIS LIES AU REFINANCEMENT DE LA LETTRE DE CREDIT</th>
+                                     
                                      {% for bailleur in bailleurs %}
-                                        <th scope="col">{{bailleur.FraisLiesRefinancement}}</th>
+                                        {% if bailleur.FraisLiesRefinancement == null %}
+                                            <td>n/a</td>
+                                        {% else %}
+                                             <td scope="col">{{bailleur.FraisLiesRefinancement}}</td>
+                                        {% endif %}
                                     {% endfor %}
                                 </tr>
                                  <tr class="table-danger">
@@ -174,20 +222,35 @@
                                 </tr>
                                  <tr>
                                     <th scope="row">FRAIS ET DEBOURS</th>
+                                     
                                      {% for bailleur in bailleurs %}
-                                        <th scope="col">{{bailleur.FraisEtDebours}}</th>
+                                        {% if bailleur.FraisEtDebours == null %}
+                                            <td>n/a</td>
+                                        {% else %}
+                                             <td scope="col">{{bailleur.FraisEtDebours}}</td>
+                                        {% endif %}
                                     {% endfor %}
                                 </tr>
                                  <tr>
                                     <th scope="row">PRIME D'ASSURANCE / FRAIS DE GARANTIE</th>
+                                    
                                      {% for bailleur in bailleurs %}
-                                        <th scope="col">{{bailleur.PrimeAssuranceEtFraisGarantie}}</th>
+                                        {% if bailleur.PrimeAssuranceEtFraisGarantie == null %}
+                                            <td>n/a</td>
+                                        {% else %}
+                                             <td scope="col">{{bailleur.PrimeAssuranceEtFraisGarantie}}</td>
+                                        {% endif %}
                                     {% endfor %}
                                 </tr>
                                  <tr>
                                     <th scope="row">PRIME D'ATTENUATION DU RISQUE DE CREDIT</th>
-                                    {% for bailleur in bailleurs %}
-                                        <th scope="col">{{bailleur.PrimeAttenuationRisqueCredit}}</th>
+                                  
+                                     {% for bailleur in bailleurs %}
+                                        {% if bailleur.PrimeAttenuationRisqueCredit == null %}
+                                            <td>n/a</td>
+                                        {% else %}
+                                             <td scope="col">{{bailleur.PrimeAttenuationRisqueCredit}}</td>
+                                        {% endif %}
                                     {% endfor %}
                                 </tr>
                                  <tr class="table-danger">
@@ -213,7 +276,9 @@
                                  <tr>
                                     <th scope="row">TAUX D'INTERET EFFECTIF</th>
                                     {% for bailleur in bailleurs %}
-                                        <th scope="col">test</th>
+                                        <th scope="col">
+                                        
+                                        </th>
                                     {% endfor %}
                                      
                                 </tr>

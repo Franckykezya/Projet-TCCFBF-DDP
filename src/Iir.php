@@ -24,8 +24,10 @@ class IRRCalculator
         while ($i < $maxIterationCount) {
             $fValue = 0;
             $fDerivative = 0;
-
+            dump($i);
             for ($k = 0; $k < $totalCashFlowItems; $k++) {
+                //dump($x0);
+
                 $fValue = bcadd($fValue, bcdiv($cashFlow[$k], bcadd(1.0, $x0) ** $k));
                 $fDerivative = bcadd($fDerivative, bcdiv(bcmul(-$k, $cashFlow[$k]), bcadd(1.0, $x0) ** bcadd($k, 1)));
             }

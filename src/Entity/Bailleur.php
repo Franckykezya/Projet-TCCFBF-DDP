@@ -44,16 +44,23 @@ class Bailleur
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(min = 8, max = 20, minMessage = "trop court", maxMessage = "trop long")
+     * @Assert\Regex(pattern="/^\+?[0-9]*$/", message="nombre seulement")
      */
     private $telephone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Email(
+     *     message = "{{ value }}' n'est pas un e-mail valide."
+     * )
      */
     private $mail;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(min = 8, max = 20, minMessage = "trop court", maxMessage = "trop long")
+     * @Assert\Regex(pattern="/^\+?[0-9]*$/", message="nombre seulement")
      */
     private $fax;
 
