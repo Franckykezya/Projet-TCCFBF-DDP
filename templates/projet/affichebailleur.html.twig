@@ -7,107 +7,116 @@
         <!-- /. NAV SIDE  -->
             <div id="page-wrapper" > #}
                 <div id="page-inner">
-                  <div class="row">
-                    <div class="col-md-12">
-                        <h2>Information du projet " {{projet.nom}} " avec le bailleur de fond : " {% for blr in bailleurs %} {{blr.nom}} ".  {% endfor %}  </h2>
-                    </div>
+
+                 <div class="col-md-1">
+        
                 </div>
-                <!-- /. ROW  -->
-                <hr />
 
+                    <div class="col-md-10">
                     <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="panel panel-back noti-box">
-                                <span class="icon-box bg-color-red">
-                                     <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
-                                </span>
-                                <div class="text-box">
-                                    <p class="main-text">{{projet.nom}}</p>
-                                    <p class="text-muted">Voici l'information de cet projet.</p>
-                                    <p class="text-muted"> <b> Nom du projet :</b> {{projet.nom}} </br> </p>
-                                    <p class="text-muted"> <b> Bailleur(s) :</b>{% for blr in bailleurs %} {{blr.nom}},  {% endfor %}  </br> </p>
-                                    <p class="text-muted"> <b> Secteur d'intervention :</b> {% for secteur in secteurs %} {{secteur.nom}},  {% endfor %} </br> </p>
-                                    <p class="text-muted"> <b> Type de financement : </b> {% for financement in financements %} {{financement.nom}},  {% endfor %} </br> </p>
-                                    <p class="text-muted"> <b> Part finance par le bailleurs de fond :</b>  {{projet.PartFinance}} % du coût du projet </br> </p>
-                                    <p class="text-muted"> <b> Maturite de la facilite :</b> {{projet.MaturiteFacilite}} ans </br></p>
-                                    <p class="text-muted"> <b> Periode de grace de la facilite :</b>  {{projet.PeriodeGrace}} ans </br> </p>
+                        <div class="col-md-12">
+                            <h2>Information du projet " {{projet.nom}} " avec le bailleur de fond : " {% for blr in bailleurs %} {{blr.nom}} ".  {% endfor %}  </h2>
+                        </div>
+                    </div>
+                    <!-- /. ROW  -->
+                    <hr />
 
-                                    {# <p class="text-muted"> <b> Taux d'interet :</b>  {{tauxinteretfixe.base}} ans </br> </p> tauxinteretfixe' => $tauxinteretfixe,
-            'tauxinteretvariable #}
-                                    <p class="text-muted"><br><b> Taux d'interet : </b></br>
-                                            &nbsp; &nbsp;&nbsp; &nbsp; <b> >>> Taux d'interet fixe : </b>{% for tauxinteretfixe in tauxinteretfixes %}
-                                                                    {{tauxinteretfixe.valeur}}% </br>
-                                            &nbsp; &nbsp;&nbsp; &nbsp;  Valeur pour l'élément don : {{tauxinteretfixe.valeur_element_don}}% 
-                                                                {% endfor %}</br>
-                                            &nbsp; &nbsp;&nbsp; &nbsp; <b> >>> Taux d'interet variable : </b>{% for tauxinteretvariable in tauxinteretvariables %} 
-                                                                        {# {{tauxinteretvariable.base}},{{tauxinteretvariable.valeur}}%,
-                                                                        {{tauxinteretvariable.marge}},{{tauxinteretvariable.total}},
-                                                                        {{tauxinteretvariable.valeur_element_don}}%,{{tauxinteretvariable.valeur_element_don}}%,
-                                                                        {{tauxinteretvariable.valeur_calcul_element_don}}%  #}
-                                                                        {{tauxinteretvariable.base}} +{{tauxinteretvariable.valeur}}%,
-                                                                        soit ({{tauxinteretvariable.total}}%) </br>
-                                                                        &nbsp; &nbsp;&nbsp; &nbsp;  Valeur pour l'élément don : {{tauxinteretvariable.valeur_calcul_element_don}}% 
-                                                                    {% endfor %}
-                                    </p>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="panel panel-back noti-box">
+                                    <span class="icon-box bg-color-red">
+                                        <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+                                    </span>
+                                    <div class="text-box">
+                                        <p class="main-text">{{projet.nom}}</p>
+                                        <p class="text-muted">Voici l'information de cet projet.</p>
+                                        <p class="text-muted"> <b> Nom du projet :</b> {{projet.nom}} </br> </p>
+                                        <p class="text-muted"> <b> Bailleur(s) :</b>{% for blr in bailleurs %} {{blr.nom}},  {% endfor %}  </br> </p>
+                                        <p class="text-muted"> <b> Secteur d'intervention :</b> {% for secteur in secteurs %} {{secteur.nom}},  {% endfor %} </br> </p>
+                                        <p class="text-muted"> <b> Type de financement : </b> {% for financement in financements %} {{financement.nom}},  {% endfor %} </br> </p>
+                                        <p class="text-muted"> <b> Part finance par le bailleurs de fond :</b>  {{projet.PartFinance}} % du coût du projet </br> </p>
+                                        <p class="text-muted"> <b> Maturite de la facilite :</b> {{projet.MaturiteFacilite}} ans </br></p>
+                                        <p class="text-muted"> <b> Periode de grace de la facilite :</b>  {{projet.PeriodeGrace}} ans </br> </p>
 
-                                    <p class="text-muted"> <b> Differentiel d'interet :  </b> {{projet.DifferentielInteret}}  </br> </p>
-                                    <p class="text-muted"> <b> Frais de gestion :</b>  {{projet.FraisGestion}} </br>  </p>
-                                    <p class="text-muted"> <b> Commission d'engagement : </b>  {{projet.commissionEngagement}} % </br> </p>
-                                    <p class="text-muted"> <b> Commission de service : </b>   {{projet.CommissionService}} % </br> </p>
-                                    <p class="text-muted"> <b> Commission initiale :</b> {{projet.CommissionInitiale}} </br> </p>
-                                    <p class="text-muted"> <b> Commission d'arrangement : </b> {{projet.CommissionArrangement}}</br> </p>
-                                    <p class="text-muted"> <b> Commission d'agent :  </b>  {{projet.commissionAgent}} </br> </p>
-                                    <p class="text-muted"> <b> Maturite de la lettre de credit :</b>  {{projet.MaturiteLettreCredit}}</br>  </p>
-                                    <p class="text-muted"> <b> Frais lies a la mise en place de la lettre de credit : </b>  {{projet.FraisLiesLettreCredit}}</br> </p>
-                                    <p class="text-muted"> <b> Frais lies au refinancement de la lettre de credit :</b>  {{projet.FraisLiesRefinancement}}</br> </p>
-                    
-                                    <hr />
-                                    <p class="text-muted">
-                                        <font color="red">  
-                                            <i class="glyphicon glyphicon-hand-right" aria-hidden="true"></i> Element-don :
-                                            {{projet.Elementdon}} %</br>
-                                        </font>                                     
-                                    </p>
+                                        {# <p class="text-muted"> <b> Taux d'interet :</b>  {{tauxinteretfixe.base}} ans </br> </p> tauxinteretfixe' => $tauxinteretfixe,
+                'tauxinteretvariable #}
+                                        <p class="text-muted"><br><b> Taux d'interet : </b></br>
+                                                &nbsp; &nbsp;&nbsp; &nbsp; <b> >>> Taux d'interet fixe : </b>{% for tauxinteretfixe in tauxinteretfixes %}
+                                                                        {{tauxinteretfixe.valeur}}% </br>
+                                                &nbsp; &nbsp;&nbsp; &nbsp;  Valeur pour l'élément don : {{tauxinteretfixe.valeur_element_don}}% 
+                                                                    {% endfor %}</br>
+                                                &nbsp; &nbsp;&nbsp; &nbsp; <b> >>> Taux d'interet variable : </b>{% for tauxinteretvariable in tauxinteretvariables %} 
+                                                                            {# {{tauxinteretvariable.base}},{{tauxinteretvariable.valeur}}%,
+                                                                            {{tauxinteretvariable.marge}},{{tauxinteretvariable.total}},
+                                                                            {{tauxinteretvariable.valeur_element_don}}%,{{tauxinteretvariable.valeur_element_don}}%,
+                                                                            {{tauxinteretvariable.valeur_calcul_element_don}}%  #}
+                                                                            {{tauxinteretvariable.base}} +{{tauxinteretvariable.valeur}}%,
+                                                                            soit ({{tauxinteretvariable.total}}%) </br>
+                                                                            &nbsp; &nbsp;&nbsp; &nbsp;  Valeur pour l'élément don : {{tauxinteretvariable.valeur_calcul_element_don}}% 
+                                                                        {% endfor %}
+                                        </p>
 
-                                    <hr/> 
-                                    <p class="text-muted"> <b> Frais et debours :</b>  {{projet.FraisEtDebours}} </br> </p>
-                                    <p class="text-muted"> <b> Prime d'assurance / frais de garantie :</b> {{projet.PrimeAssuranceEtFraisGarantie}}</br></p>
-                                    <p class="text-muted"> <b> Prime d'attenuation du risque de credit : </b>  {{projet.PrimeAttenuationRisqueCredit}} </br> </p>
+                                        <p class="text-muted"> <b> Differentiel d'interet :  </b> {{projet.DifferentielInteret}}  </br> </p>
+                                        <p class="text-muted"> <b> Frais de gestion :</b>  {{projet.FraisGestion}} </br>  </p>
+                                        <p class="text-muted"> <b> Commission d'engagement : </b>  {{projet.commissionEngagement}} % </br> </p>
+                                        <p class="text-muted"> <b> Commission de service : </b>   {{projet.CommissionService}} % </br> </p>
+                                        <p class="text-muted"> <b> Commission initiale :</b> {{projet.CommissionInitiale}} </br> </p>
+                                        <p class="text-muted"> <b> Commission d'arrangement : </b> {{projet.CommissionArrangement}}</br> </p>
+                                        <p class="text-muted"> <b> Commission d'agent :  </b>  {{projet.commissionAgent}} </br> </p>
+                                        <p class="text-muted"> <b> Maturite de la lettre de credit :</b>  {{projet.MaturiteLettreCredit}}</br>  </p>
+                                        <p class="text-muted"> <b> Frais lies a la mise en place de la lettre de credit : </b>  {{projet.FraisLiesLettreCredit}}</br> </p>
+                                        <p class="text-muted"> <b> Frais lies au refinancement de la lettre de credit :</b>  {{projet.FraisLiesRefinancement}}</br> </p>
+                        
+                                        <hr />
+                                        <p class="text-muted">
+                                            <font color="red">  
+                                                <i class="glyphicon glyphicon-hand-right" aria-hidden="true"></i> Element-don :
+                                                {{projet.Elementdon}} %</br>
+                                            </font>                                     
+                                        </p>
 
-                                    <hr />
-                                    <p class="text-muted">
-                                        <font color="red">  
-                                            <i class="glyphicon glyphicon-hand-right" aria-hidden="true"></i>  Element-don (Teneant compte frais et debours et si assurance payée par l'emprunteur) :
-                                            mbl tsi vita ihany koa </br>
-                                        </font>     
-                                    </p>
+                                        <hr/> 
+                                        <p class="text-muted"> <b> Frais et debours :</b>  {{projet.FraisEtDebours}} </br> </p>
+                                        <p class="text-muted"> <b> Prime d'assurance / frais de garantie :</b> {{projet.PrimeAssuranceEtFraisGarantie}}</br></p>
+                                        <p class="text-muted"> <b> Prime d'attenuation du risque de credit : </b>  {{projet.PrimeAttenuationRisqueCredit}} </br> </p>
 
-                                    <hr />
-                                    <p class="text-muted">
-                                        <font color="red">  
-                                          <i class="glyphicon glyphicon-hand-right" aria-hidden="true"></i> Taux d'interet effectif :
-                                                mbl tsi vita :p  </br>
-                                        </font>     
-                                    </p>
-                                    </p>
+                                        <hr />
+                                        <p class="text-muted">
+                                            <font color="red">  
+                                                <i class="glyphicon glyphicon-hand-right" aria-hidden="true"></i>  Element-don (Teneant compte frais et debours et si assurance payée par l'emprunteur) :
+                                                  {{projet.Elementdon}} %</br>
+                                            </font>     
+                                        </p>
 
+                                        <hr />
+                                        <p class="text-muted">
+                                            <font color="red">  
+                                            <i class="glyphicon glyphicon-hand-right" aria-hidden="true"></i> Taux d'interet effectif :
+                                                    {{projet.Elementdon}} % </br>
+                                            </font>     
+                                        </p>
+                                        </p>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="form-row align-items-end pull-right">
+                            <a href="{{path('modifier_bailleur', {'id': projet.id})}}" class="btn btn-info"><span class="glyphicon glyphicon-edit">_</span>Modifier</a>
+                                &nbsp; &nbsp; &nbsp;
+                            <form method="post" action="{{ path('supprimer_bailleur', {'id': projet.id}) }}" onsubmit="return confirm('Vous voulez supprimer cet bailleur');">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ projet.id) }}">
+                                <button class="btn btn-danger"><span class="glyphicon glyphicon-trash">_</span>Supprimer</button>
+                            </form>
+                        </div>
+                                
                     </div>
-
-
-                    <div class="form-row align-items-end pull-right">
-                        <a href="{{path('modifier_bailleur', {'id': projet.id})}}" class="btn btn-info"><span class="glyphicon glyphicon-edit">_</span>Modifier</a>
-                            &nbsp; &nbsp; &nbsp;
-                        <form method="post" action="{{ path('supprimer_bailleur', {'id': projet.id}) }}" onsubmit="return confirm('Vous voulez supprimer cet bailleur');">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ projet.id) }}">
-                            <button class="btn btn-danger"><span class="glyphicon glyphicon-trash">_</span>Supprimer</button>
-                        </form>
+                    <div class="col-md-2">
+                        
                     </div>
-                               
-
+                </div>
 
 
              </div>

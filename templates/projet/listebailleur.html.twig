@@ -17,8 +17,8 @@
         <div class="form-row align-items-end">
             {{form_start(form)}}
                 <div class="form-row align-items-end">
-                    &nbsp; &nbsp; &nbsp; &nbsp; 
-                    {{ form_row(form.nomprojet, {'label' : 'Nom projet', 'attr' : {'placeholder':"Nom projet"}}) }}
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    {{ form_row(form.nomprojet, {'label' : 'Nom du projet', 'attr' : {'placeholder':"Nom du projet"}}) }}
                     <div class="form-group">
                         <button type="Submit" class="btn btn-success pull-right" name="" id="" value="">
                             <i class="fa fa-search" aria-hidden="true"></i>
@@ -30,38 +30,52 @@
         </div>
         <!-- /. ROW  -->
             
-        <table class="table table-striped">
-            <thead>
-                <tr class="table-info">
-                    <th scope="col">Nom du pojet</th> 
-                    <th scope="col">Bailleur(s)</th>   
-                    <th scope="col">Actions</th> 
-                  
-                </tr>
-            </thead>
-            <tbody>
-                {% for pjt in projets %}
-                    <tr>
-                        <td>{{pjt.nom}}</td>
-                        <td>Bailleur Tsy vita</td>
-                        {# {% for blr in bailleur %} {{blr.nom}},  {% endfor %} #}
-                        <td>
-                            <div class="form-row align-items-end">
-                                <div class="col">
-                                    <a href="{{ path('affiche_bailleur', {'id': pjt.id}) }}" class="btn btn-info"><span class="glyphicon glyphicon-align-justify">_</span>Détails</a>
-                                     <a href="{{path('grant_element')}}" class ="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span>_Element don</a>
-                                </div>
-                                
-                            </div> 
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="4">Aucun projet...</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="col-md-12">
+
+            <div class="col-md-1">
+            
+            </div>
+
+            <div class="col-md-10">
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr class="table-info">
+                            <th scope="col">Nom du pojet</th> 
+                            {# <th scope="col">Bailleur(s)</th>    #}
+                            <th scope="col">Actions</th> 
+                        
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pjt in projets %}
+                            <tr>
+                                <td>{{pjt.nom}}</td>
+                                {# <td>Bailleur Tsy vita</td> #}
+                                {# {% for blr in bailleur %} {{blr.nom}},  {% endfor %} #}
+                                <td>
+                                    <div class="form-row align-items-end">
+                                        <div class="col">
+                                            <a href="{{ path('affiche_bailleur', {'id': pjt.id}) }}" class="btn btn-info"><span class="glyphicon glyphicon-align-justify">_</span>Détails</a>
+                                            <a href="{{path('grant_element')}}" class ="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span>_Element don</a>
+                                        </div>
+                                        
+                                    </div> 
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="4">Aucun projet...</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        <div class="col-md-1">
+            
+        </div>
+    </div>
 
         <div class = "text-center">
             <div class = "page">

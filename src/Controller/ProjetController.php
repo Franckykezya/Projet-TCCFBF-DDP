@@ -85,7 +85,7 @@ class ProjetController extends AbstractController
             $repo = $this->getDoctrine()->getManager();
             //ajout element don
             $somme_commission = $projet->getDifferentielInteret()+$projet->getFraisGestion()+$projet->getCommissionEngagement()+$projet->getCommissionService()+$projet->getCommissionInitiale()+$projet->getCommissionArrangement()+$projet->getCommissionAgent()+$projet->getMaturiteLettreCredit()+$projet->getFraisLiesLettreCredit()+$projet->getFraisLiesRefinancement();
-            $element = new GrantElement1(0.015,2,$projet->getPeriodeGrace(),$projet->getMaturiteFacilite(),"In percent of outstanding loan",0,$somme_commission);
+           // $element = new GrantElement1(0.015,2,$projet->getPeriodeGrace(),$projet->getMaturiteFacilite(),"In percent of outstanding loan",0,$somme_commission);
             
             
 
