@@ -70,9 +70,9 @@ class ProjetController extends AbstractController
         $form = $this->createForm(ProjetType::class, $projet);
         $form->handleRequest($request);
 
-        // $tauxfixe = new TauxFixe();
-        // $formfixe = $this->createForm(TauxFixeType::class, $tauxfixe);
-        // $formfixe->handleRequest($request);
+        $tauxfixe = new TauxFixe();
+        $formfixe = $this->createForm(TauxFixeType::class, $tauxfixe);
+        $formfixe->handleRequest($request);
 
         // $tauxvariable = new TauxVariable();
         // $formVariable = $this->createForm(TauxVariableType::class, $tauxvariable);
@@ -86,12 +86,15 @@ class ProjetController extends AbstractController
             //ajout element don
             $somme_commission = $projet->getDifferentielInteret()+$projet->getFraisGestion()+$projet->getCommissionEngagement()+$projet->getCommissionService()+$projet->getCommissionInitiale()+$projet->getCommissionArrangement()+$projet->getCommissionAgent()+$projet->getMaturiteLettreCredit()+$projet->getFraisLiesLettreCredit()+$projet->getFraisLiesRefinancement();
             $element = new GrantElement1(0.015,2,$projet->getPeriodeGrace(),$projet->getMaturiteFacilite(),"In percent of outstanding loan",0,$somme_commission);
+            
+            
+
             $element = new GrantElement1($projet->getTauxFixe()->getValeurElementDon(), 2,$projet->getPeriodeGrace(),$projet->getMaturiteFacilite(),"In percent of outstanding loan",0,$somme_commission);
             $val = $element->calculeElementDonBailleur(100,0);
             
             $projet->setElementDon($val);
 
-            // $repo->persist($tauxfixe);
+            $repo->persist($tauxfixe);
             // $repo->persist($tauxvariable);
             
             $repo->persist($projet);
@@ -102,7 +105,7 @@ class ProjetController extends AbstractController
 
         return $this->render("projet/createbailleur.html.twig",[
             'formBailleur' => $form->createView(),
-            // 'formTauxFixe' => $formfixe->createView(),
+            'formTauxFixe' => $formfixe->createView(),
             // 'formTauxVariable' => $formVariable->createView(),
         ]);
     }
@@ -195,7 +198,7 @@ class ProjetController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('liste_bailleur');
+        return $this->redirectToRoute('liste_projet');
     }
 
     /**

@@ -49,10 +49,7 @@ class ProjetType extends AbstractType
                  'choice_label' => 'nom',
                  'multiple' => true
              ])
-             ->add('tauxfixe',TauxFixeType::class,
-             [
-                'required'   => false
-            ])
+             ->add('tauxfixe',TauxFixeType::class)
              ->add('tauxvariable',TauxVariableType::class,
              [
                  'required' => false

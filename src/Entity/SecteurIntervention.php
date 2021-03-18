@@ -7,8 +7,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+// Validation formulaire
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * @ORM\Entity(repositoryClass=SecteurInterventionRepository::class)
+ * @UniqueEntity(
+ *     fields={"nom"},
+ *     message="Cet projet exist dejà!!"
+ * )
  */
 class SecteurIntervention
 {
@@ -20,7 +28,7 @@ class SecteurIntervention
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, unique=true)
      */
     private $nom;
 

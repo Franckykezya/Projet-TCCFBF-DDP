@@ -14,11 +14,17 @@ class TauxFixeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('base',TextType::class)
-            ->add('valeur',NumberType::class)
+            ->add('base',TextType::class,
+            [
+                'required'   => false
+            ])
+            ->add('valeur',NumberType::class,
+            [
+                'required'   => false
+            ])
             ->add('valeur_element_don',NumberType::class,
             [
-                'data' => 0
+                'required' => true
             ])
         ;
     }

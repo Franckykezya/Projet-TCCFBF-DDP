@@ -28,7 +28,7 @@
                         <div class="form-row align-items-end">
                             <a href="{{ path('type_financement_edit', {'id': type_financement.id}) }}" class="btn btn-info"><span class="glyphicon glyphicon-edit">_</span>Modifier</a>                
                             &nbsp; &nbsp; &nbsp;
-                            <form method="post" action="{{ path('secteur_delete', {'id': type_financement.id}) }}" onsubmit="return confirm('Vous voulez supprimer ce type financement?');">
+                            <form method="post" action="{{ path('type_financement_delete', {'id': type_financement.id}) }}" onsubmit="return confirm('Vous voulez supprimer ce type financement?');">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ type_financement.id) }}">
                                 <button class="btn btn-danger"><span class="glyphicon glyphicon-trash">_</span>Supprimer</button>

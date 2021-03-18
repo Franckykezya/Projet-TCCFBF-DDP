@@ -9,9 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
 
 // Validation formulaire
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=BailleurRepository::class)
+ * @UniqueEntity(
+ *     fields={"nom"},
+ *     message="Cet bailleur exist dejà!!"
+ * )
  */
 class Bailleur
 {
@@ -28,7 +33,7 @@ class Bailleur
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $description;
 

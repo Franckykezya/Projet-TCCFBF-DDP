@@ -7,6 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
+// Validation formulaire
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Entity(repositoryClass=TauxFixeRepository::class)
  */
@@ -31,6 +34,7 @@ class TauxFixe
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * 
      */
     private $valeur_element_don;
 

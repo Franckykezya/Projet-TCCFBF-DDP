@@ -7,9 +7,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+// Validation formulaire
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=ProjetRepository::class)
+ * @UniqueEntity(
+ *     fields={"nom"},
+ *     message="Cet projet exist dejà!!"
+ * )
  */
 class Projet
 {
@@ -21,88 +28,174 @@ class Projet
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, unique=true)
      */
     private $nom;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Positive(message = "Cette valeur doit être positive")
+     * @Assert\Range(
+     *          min=0,
+     *          max=100, 
+     *          notInRangeMessage = "Cette valeur doit être entre 0 et 100"
+     * )
      */
     private $part_finance;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Positive(message = "Cette valeur doit être positive")
+     * @Assert\Type(
+     *          type="integer",
+     *          message="Valeur invalide"
+     * )
      */
     private $maturite_facilite;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Positive(message = "Cette valeur doit être positive")
+     * @Assert\Type(
+     *          type="integer",
+     *          message="Valeur invalide"
+     * )
+     * @Assert\LessThan(
+     *          propertyPath="maturite_facilite"
+     * )
      */
     private $periode_grace;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\Positive(message = "Cette valeur doit être positive")
+     * @Assert\Range(
+     *          min=0,
+     *          max=100, 
+     *          notInRangeMessage = "Cette valeur doit être entre 0 et 100"
+     * )
      */
     private $differentiel_interet;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\Positive(message = "Cette valeur doit être positive")
+     * @Assert\Range(
+     *          min=0,
+     *          max=100, 
+     *          notInRangeMessage = "Cette valeur doit être entre 0 et 100"
+     * )
      */
     private $frais_gestion;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\Positive(message = "Cette valeur doit être positive")
+     * @Assert\Range(
+     *          min=0,
+     *          max=100, 
+     *          notInRangeMessage = "Cette valeur doit être entre 0 et 100"
+     * )
      */
     private $commission_engagement;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\Positive(message = "Cette valeur doit être positive")
+     * @Assert\Range(
+     *          min=0,
+     *          max=100, 
+     *          notInRangeMessage = "Cette valeur doit être entre 0 et 100"
+     * )
      */
     private $commission_service;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\Positive(message = "Cette valeur doit être positive")
+     * @Assert\Range(
+     *          min=0,
+     *          max=100, 
+     *          notInRangeMessage = "Cette valeur doit être entre 0 et 100"
+     * )
      */
     private $commission_initiale;
    
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\Positive(message = "Cette valeur doit être positive")
+     * @Assert\Range(
+     *          min=0,
+     *          max=100, 
+     *          notInRangeMessage = "Cette valeur doit être entre 0 et 100"
+     * )
      */
     private $commission_arrangement;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\Positive(message = "Cette valeur doit être positive")
      */
     private $commission_agent;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Positive(message = "Cette valeur doit être positive")
+     * @Assert\Type(
+     *          type="integer",
+     *          message="Valeur invalide"
+     * )
      */
     private $maturite_lettre_credit;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\Positive(message = "Cette valeur doit être positive")
+     * @Assert\Range(
+     *          min=0,
+     *          max=100, 
+     *          notInRangeMessage = "Cette valeur doit être entre 0 et 100"
+     * )
      */
     private $frais_lies_lettre_credit;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\Positive(message = "Cette valeur doit être positive")
+     * @Assert\Range(
+     *          min=0,
+     *          max=100, 
+     *          notInRangeMessage = "Cette valeur doit être entre 0 et 100"
+     * )
      */
     private $frais_lies_refinancement;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\Positive(message = "Cette valeur doit être positive")
      */
     private $frais_et_debours;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\Positive(message = "Cette valeur doit être positive")
+     * @Assert\Range(
+     *          min=0,
+     *          max=100, 
+     *          notInRangeMessage = "Cette valeur doit être entre 0 et 100"
+     * )
      */
     private $prime_assurance_et_frais_garantie;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\Positive(message = "Cette valeur doit être positive")
+     * @Assert\Range(
+     *          min=0,
+     *          max=100, 
+     *          notInRangeMessage = "Cette valeur doit être entre 0 et 100"
+     * )
      */
     private $prime_attenuation_risque_credit;
 

@@ -78,7 +78,7 @@ class BailleurController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="bailleur_edit", methods={"GET","POST"})
+     * @Route("_edit/{id}", name="bailleur_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Bailleur $bailleur): Response
     {
