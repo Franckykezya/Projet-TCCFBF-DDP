@@ -23,15 +23,6 @@ class ProjetRepository extends ServiceEntityRepository
         parent::__construct($registry, Projet::class);
     }
 
-    public function bailleur($id){
-        $req = "SELECT bailleur.nom,bailleur.description,bailleur.siege,bailleur.telephone,bailleur.mail,bailleur.fax FROM projet
-                 INNER JOIN bailleur ON projet.id = bailleur.id
-                 WHERE projet.id = $id";
-         $a = $this->getEntityManager()->getConnection()->prepare($req);
-         $a->execute([]);
-         return $a->fetchAll();
-    }
-
     public function secteur($id){
         $req = "SELECT secteur_intervention.nom FROM projet
             INNER JOIN projet_secteur_intervention ON projet.id = projet_secteur_intervention.projet_id
@@ -48,6 +39,18 @@ class ProjetRepository extends ServiceEntityRepository
         $req = "SELECT type_financement.nom FROM projet
             INNER JOIN projet_type_financement ON projet.id = projet_type_financement.projet_id
             INNER JOIN type_financement ON projet_type_financement.type_financement_id = type_financement.id
+            WHERE projet.id = $id
+        ";
+        $a = $this->getEntityManager()->getConnection()->prepare($req);
+        $a->execute([]);
+        return $a->fetchAll();
+
+    } 
+
+    public function bailleur($id){
+        $req = "SELECT bailleur.nom FROM projet
+            INNER JOIN projet_bailleur ON projet.id = projet_bailleur.projet_id
+            INNER JOIN bailleur ON projet_bailleur.bailleur_id = bailleur.id
             WHERE projet.id = $id
         ";
         $a = $this->getEntityManager()->getConnection()->prepare($req);
