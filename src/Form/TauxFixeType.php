@@ -24,7 +24,8 @@ class TauxFixeType extends AbstractType
             ])
             ->add('valeur_element_don',NumberType::class,
             [
-                'required' => true
+                'required' => true,
+                'data' => '0'
             ])
         ;
     }

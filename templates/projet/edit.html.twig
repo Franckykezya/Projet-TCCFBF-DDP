@@ -46,96 +46,174 @@ function onlyNumber()
                   <!-- /. ROW  -->
                   <hr />
                   <div class="row">
-                      <div class="col-md-12">
-                          <!-- Form Elements -->
-                          <div class="panel panel-default">
-                              <div class="panel-heading">
-                                  Modification du bailleur de fond
-                              </div>
-                              <div class="panel-body">
-                                  <div class="row">
-                                        <div class="col-md-6">
-                
-                                            {{ form_start(formBailleur) }}
+                <div class="col-md-12">
+                    <!-- Form Elements -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Modification du projet
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
 
-                                            {{ form_row(formBailleur.nom, {'label' : 'Nom du bailleur' , 'attr' : {'placeholder':"Nom du bailleur"}}) }}
-                                            <a class="dropdown-item" href="{{ path('create_secteur_intervention') }}">Ajout...</a>
-                                            {{ form_row(formBailleur.secteur, {'label' : 'Secteurs d\'intervention', 'attr' : {'placeholder':"Secteurs d'intervention"}}) }}
-                                            <a class="dropdown-item" href="{{ path('type_financement_new') }}">Ajout...</a>
-                                            {{ form_row(formBailleur.typefinancement, {'label' : 'Type de financement', 'attr' : {'placeholder':"Type de financement"}}) }}
-                                            {{ form_row(formBailleur.part_finance, {'label' : 'Part finance par le bailleur de fonds' ,'attr' : {'placeholder':"Part finance par le bailleur de fonds"}}) }}
-                                            {{ form_row(formBailleur.maturite_facilite, {'label' : 'Maturite de la facilité', 'attr' : {'placeholder':"Maturite de la facilité"}}) }}
-                                            {{ form_row(formBailleur.periode_grace, {'label' : 'Periode de grace de la facilité', 'attr' : {'placeholder':"Periode de grace de la facilité"}}) }}
-                                            
+                                    {{ form_start(formBailleur) }}
+                                
+                                        {{ form_row(formBailleur.bailleur, {'label' : 'Nom du bailleur'}) }}
+                                        {{ form_row(formBailleur.nom, {'label' : 'Nom du projet' , 'attr' : {'placeholder':"Nom du projet"}}) }}
+
+                                        <div class="form-row align-items-end">
                                             <div class="col-md-12">
-                                                <h4>Taux d'interet</h4>
-                                                <div class="container">
-                                                    <a class="dropdown-item" href="https://www.global-rates.com/" target="_blank">Voir dans la page "global-rates"...</a>                                            
-                                                    
-                                                    <ul class="nav nav-tabs">
-                                                        <li class="active"><a data-toggle="tab" href="#fixe">Taux d'interet fixe</a></li>
-                                                        <li><a data-toggle="tab" href="#variable">Taux d'interet variable</a></li>
-                                                    </ul>
-                                                     {# <div class="tab-content">
-                                                        <div id="fixe" class="tab-pane fade in active">
-                                                            <p>
-                                                                <div class="col-md-4">
-                                                                {{ form_start(formTauxFixe) }}
-                                                                    {{ form_row(formTauxFixe.base, {'label' : "Taux d'interet base", 'attr' : {'placeholder':"Taux d'interet base"}}) }}                                                           
-                                                                    {{ form_row(formTauxFixe.valeur, {'label' : 'Valeur (en %)', 'attr' : {'placeholder':"Valeur (en %)"}}) }}
-                                                                    {{ form_row(formTauxFixe.valeur_element_don, {'label' : "Valeur pour l'element don (en %)", 'attr' : {'placeholder':"Valeur pour l'element don (en %)"}}) }}
-                                                                {{ form_end(formTauxFixe) }}
-                                                                </div>
-                                                            </p>
-                                                        </div>
-                                                       <div id="variable" class="tab-pane fade">
-                                                            <p>
-                                                                <div class="col-md-4">
-                                                                {{ form_start(formTauxVariable) }}
-                                                                    {{ form_row(formTauxVariable.base, {'label' : "Taux d'interet base", 'attr' : {'placeholder':"Taux d'interet base"}}) }}                                                            
+                                                <div class="col-md-6">
+                                                    {# <a class="dropdown-item" href="{{ path('create_secteur_intervention') }}">Ajout secteurs d'intervention...</a> #}
+                                                    {{ form_row(formBailleur.secteur, {'label' : 'Secteurs d\'intervention', 'attr' : {'placeholder':"Secteurs d'intervention"}}) }}
+                                                </div>
+                                                <div class="col-md-6">
+                                                    {# <a class="dropdown-item" href="{{ path('type_financement_new') }}">Ajout type de financement...</a> #}
+                                                    {{ form_row(formBailleur.typefinancement, {'label' : 'Type de financement', 'attr' : {'placeholder':"Type de financement"}}) }}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                         <div class="form-row align-items-end">
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.part_finance, {'label' : 'Part finance par le bailleur de fonds (en %)' ,'attr' : {'placeholder':"Part finance par le bailleur de fonds (en %)"}}) }}
+                                                </div>
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.maturite_facilite, {'label' : 'Maturite de la facilité (ans)', 'attr' : {'placeholder':"Maturite de la facilité (ans)"}}) }}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {{ form_row(formBailleur.periode_grace, {'label' : 'Periode de grace de la facilité (ans)', 'attr' : {'placeholder':"Periode de grace de la facilité (ans)"}}) }}                             
+
+                                        <div class="col-md-12">
+                                            <h4>Taux d'interet</h4>
+                                            <div class="container">
+                                                <a class="dropdown-item" href="https://www.global-rates.com/" target="_blank">Voir dans la page "global-rates"...</a>                                            
+                                                
+                                                <ul class="nav nav-tabs">
+                                                    <li class="active"><a data-toggle="tab" href="#fixe">Taux d'interet fixe</a></li>
+                                                    <li><a data-toggle="tab" href="#variable">Taux d'interet variable</a></li>
+                                                </ul>
+                                                <div class="tab-content">
+                                                    <div id="fixe" class="tab-pane fade in active">
+                                                        <p>
+                                                            <div class="col-md-4">
+                                                            {# {{ form_start(formTauxFixe) }} 
+                                                                {{ form_row(formTauxFixe.base, {'label' : "Taux d'interet base", 'attr' : {'placeholder':"Taux d'interet base"}}) }}                                                           
+                                                                {{ form_row(formTauxFixe.valeur, {'label' : 'Valeur (en %)', 'attr' : {'placeholder':"Valeur (en %)"}}) }}
+                                                                {{ form_row(formTauxFixe.valeur_element_don, {'label' : "Valeur pour l'element don (en %)", 'attr' : {'placeholder':"Valeur pour l'element don (en %)"}}) }}
+                                                            {{ form_end(formTauxFixe) }} #}
+                                                            {{ form_row(formBailleur.tauxfixe) }}
+
+                                                            </div>
+                                                        </p>
+                                                    </div>
+                                                    <div id="variable" class="tab-pane fade">
+                                                        <p>
+                                                            <div class="col-md-4">
+                                                             {# {{ form_start(formBailleur.tauxvariable) }}  #}
+                                                                {{ form_row(formBailleur.tauxvariable.base, {'label' : "Taux d'interet base", 'attr' : {'placeholder':"Taux d'interet base"}}) }}                                                            
                                                                 
-                                                                    {{ form_row(formTauxVariable.valeur, {'label' : 'Valeur (en %)', 'attr' : {'placeholder':"Valeur (en %)", 'onblur': "calcul()"}}) }}
-                                                                    {{ form_row(formTauxVariable.valeur, {'label' : 'Valeur (en %)', 'attr' : {'placeholder':"Valeur (en %)", 'onblur': "calcul()", 'onkeyup':"onlyNumber();"}}) }}
-                                                                    {{ form_row(formTauxVariable.marge, {'label' : 'Marge (en %)', 'attr' : {'placeholder':"Marge (en %)", 'onblur': "calcul()"}}) }}
-                                                                    {{ form_row(formTauxVariable.Total, {'label' : "Valeur total (en %)", 'attr' : {'placeholder':"Valeur total (en %)", 'onblur': "calcul()", 'disabled':"disabled" }}) }}   
-                                                                
-                                                                    {{ form_row(formTauxVariable.valeur_element_don, {'label' : "Valeur pour l'element don (en %)", 'attr' : {'placeholder':"Valeur pour l'element don (en %)" }}) }}         
-                                                                {{ form_end(formTauxVariable) }}
-                                                                </div>
-                                                            </p>
-                                                        </div> #}
+                                                                {{ form_row(formBailleur.tauxvariable.valeur_calcul_element_don, {'label' : 'Valeur pour element don (en %)', 'attr' : {'placeholder':"Valeur pour element don (en %)", 'onblur': "calculValeurElemenDon()"}}) }}
+
+                                                                {{ form_row(formBailleur.tauxvariable.valeur, {'label' : 'Valeur (en %)', 'attr' : {'placeholder':"Valeur (en %)", 'onblur': "calculValeur()"}}) }}
+                                                                {# {{ form_row(formTauxVariable.valeur, {'label' : 'Valeur (en %)', 'attr' : {'placeholder':"Valeur (en %)", 'onblur': "calcul()", 'onkeyup':"onlyNumber();"}}) }} #}
+                                                                {{ form_row(formBailleur.tauxvariable.marge, {'label' : 'Marge (en %)', 'attr' : {'placeholder':"Marge (en %)", 'onblur': "calculValeur(), calculValeurElemenDon()"}}) }}
+                                                                {{ form_row(formBailleur.tauxvariable.Total, {'label' : "TOTAL en % (Valeur + Marge)", 'attr' : {'placeholder':"TOTAL en % (Valeur + Marge)", 'onblur': "calculValeur()", 'disabled':"disabled" }}) }}    
+                                                               
+                                                                {{ form_row(formBailleur.tauxvariable.valeur_element_don, {'label' : "TOTAL en % (Valeur pour l'element don + Marge)", 'attr' : {'placeholder':"TOTAL en % (Valeur pour l'element don + Marge)", 'onblur': "calculValeurElemenDon()", 'disabled':"disabled" }}) }}         
+                                                            {# {{ form_end(formTauxVariable) }} #}
+                                                            {# {{ form_row(formBailleur.tauxvariable) }} #}
+                                                            </div>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
-                                        
                                         </div>
+                                    
+                                    </div>  
+ 
                                     <div class="col-md-6">
-                                
-                                    {{ form_row(formBailleur.differentiel_interet, {'label' : 'Differentiel d\'interet', 'attr' : {'placeholder':"Differentiel d'interet"}}) }}
-                                    {{ form_row(formBailleur.frais_gestion, {'label' : 'Frais de gestion', 'attr' : {'placeholder':"Frais de gestion"}}) }}
-                                    {{ form_row(formBailleur.commission_engagement, {'label' : 'Commision d\'engagement', 'attr' : {'placeholder':"Commision d'engagement"}}) }}
-                                    {{ form_row(formBailleur.commission_service, {'label' : 'Commission de service', 'attr' : {'placeholder':"Commission de service"}}) }}
-                                    {{ form_row(formBailleur.commission_initiale, {'label' : 'Commision initial', 'attr' : {'placeholder':"Commision initial"}}) }}
-                                    {{ form_row(formBailleur.commission_arrangement, {'label' : 'Commision d\'arrangement', 'attr' : {'placeholder':"Commision d'arrangement"}}) }}
-                                    {{ form_row(formBailleur.commission_agent, {'label' : 'Commision d\'agent', 'attr' : {'placeholder':"Commision d'agent"}}) }}
-                                    {{ form_row(formBailleur.maturite_lettre_credit, {'label' : 'Maturité de la lettre de credit', 'attr' : {'placeholder':"Maturité de la lettre de credit"}}) }}
-                                    {{ form_row(formBailleur.frais_lies_lettre_credit, {'label' : 'Frais liés à la mise en place de la lettre de credit', 'attr' : {'placeholder':"Frais liés à la mise en place de la lettre de credit"}}) }}
-                                    {{ form_row(formBailleur.frais_lies_refinancement, {'label' : 'Frais liés au refinancement de la lettre de credit', 'attr' : {'placeholder':"Frais liés au refinancement de la lettre de credit"}}) }}
-                                    {{ form_row(formBailleur.frais_et_debours, {'label' : 'Frais et debours', 'attr' : {'placeholder':"Frais et debours"}}) }}
-                                    {{ form_row(formBailleur.prime_assurance_et_frais_garantie, {'label' : 'Prime d\'assurance / Frais de garantie', 'attr' : {'placeholder':"Prime d'assurance / Frais de garantie"}}) }}
-                                    {{ form_row(formBailleur.prime_attenuation_risque_credit, {'label' : 'Prime d\'attenuation du risque de credit', 'attr' : {'placeholder':"Prime d'attenuation du risque de credit"}}) }}
+                                        
+                                         <div class="form-row align-items-end">
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.differentiel_interet, {'label' : 'Differentiel d\'interet (en %)', 'attr' : {'placeholder':"Differentiel d'interet (en %)"}}) }}
+                                                </div>
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.frais_gestion, {'label' : 'Frais gestion (%)', 'attr' : {'placeholder':"Frais gestion (%)"}}) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <div class="form-row align-items-end">
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.commission_engagement, {'label' : 'Commision d\'engagement (en %)', 'attr' : {'placeholder':"Commision d'engagement (en %)"}}) }}
+                                                </div>
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.commission_service, {'label' : 'Commission de service (en %)', 'attr' : {'placeholder':"Commission de service (en %)"}}) }}
+                                                  </div>
+                                            </div>
+                                        </div>
+                                         <div class="form-row align-items-end">
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.commission_initiale, {'label' : 'Commision initial (en %)', 'attr' : {'placeholder':"Commision initial (en %)"}}) }}
+                                                </div>
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.commission_arrangement, {'label' : 'Commision d\'arrangement (en %)', 'attr' : {'placeholder':"Commision d'arrangement (en %)"}}) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <div class="form-row align-items-end">
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.commission_agent, {'label' : 'Commision d\'agent (en Euro)', 'attr' : {'placeholder':"Commision d'agent (en Euro)"}}) }}
+                                                </div>
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.maturite_lettre_credit, {'label' : 'Maturité de la lettre de credit (mois)', 'attr' : {'placeholder':"Maturité de la lettre de credit (mois)"}}) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <div class="form-row align-items-end">
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.frais_lies_lettre_credit, {'label' : 'Frais liés à la mise en place de la lettre de credit (en %)', 'attr' : {'placeholder':"Frais liés à la mise en place de la lettre de credit (en %)"}}) }}
+                                                </div>
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.frais_lies_refinancement, {'label' : 'Frais liés au refinancement de la lettre de credit (en %)', 'attr' : {'placeholder':"Frais liés au refinancement de la lettre de credit (en %)"}}) }}
+                                                 </div>
+                                            </div>
+                                        </div>
+                                         <div class="form-row align-items-end">
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.frais_et_debours, {'label' : 'Frais et debours (Euro / USD)', 'attr' : {'placeholder':"Frais et debours (Euro / USD)"}}) }}
+                                                  </div>
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.prime_assurance_et_frais_garantie, {'label' : 'Prime d\'assurance / Frais garantie (en %)', 'attr' : {'placeholder':"Prime d'assurance / Frais de garantie (en %)"}}) }}
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                <button type="Submit" class="btn btn-info pull-right" name="" id="" value="">
-                                    <span class="glyphicon glyphicon-floppy-saved">_</span>Enregister
-                                </button>
+                                        {{ form_row(formBailleur.prime_attenuation_risque_credit, {'label' : 'Prime d\'attenuation du risque de credit (en %)', 'attr' : {'placeholder':"Prime d'attenuation du risque de credit (en %)"}}) }}
 
-                             {{ form_end(formBailleur) }}
-   
+                                        <button type="Submit" class="btn btn-info pull-right" name="" id="" value="">
+                                        <span class="glyphicon glyphicon-floppy-saved">&nbsp;</span>Enregistrer
+                                        </button>
+                                        
+                                        {{ form_end(formBailleur) }}
+                                    </div>
+
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                      </div>
-                      <!-- End Form Elements -->
+                    </div>
+                     <!-- End Form Elements -->
                 </div>
+            </div>
             {# </div> #}
                 <!-- /. ROW  -->
                 <div class="row">

@@ -86,6 +86,7 @@ class ProjetRepository extends ServiceEntityRepository
         $a->execute([]);
         return $a->fetchAll();
     }
+
     /**
      * @return Projet[]
      */

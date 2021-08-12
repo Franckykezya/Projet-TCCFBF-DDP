@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Projet;
+use App\Entity\BailleurRecherche;
 use App\Entity\ProjetRecherche;
 use App\Entity\TauxFixe;
 use App\Entity\TauxVariable;
@@ -18,6 +19,7 @@ use App\Form\TauxVariableType;
 use App\Form\SecteurInterventionType;
 use App\Form\TypeFinancementType;
 use App\Repository\ProjetRepository;
+use App\Repository\BailleurRepository;
 use App\Repository\SecteurInterventionRepository;
 use App\Repository\TypeFinancementRepository;
 use App\Repository\TauxInteretRepository;
@@ -26,6 +28,8 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 use Knp\Component\Pager\Event\PaginationEvent;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Validator\Constraints\Length;
+use App\Form\BailleurRechercheType;
+
 
 class ProjetController extends AbstractController
 {
@@ -85,11 +89,11 @@ class ProjetController extends AbstractController
             $repo = $this->getDoctrine()->getManager();
             //ajout element don
             $somme_commission = $projet->getDifferentielInteret()+$projet->getFraisGestion()+$projet->getCommissionEngagement()+$projet->getCommissionService()+$projet->getCommissionInitiale()+$projet->getCommissionArrangement()+$projet->getCommissionAgent()+$projet->getMaturiteLettreCredit()+$projet->getFraisLiesLettreCredit()+$projet->getFraisLiesRefinancement();
-           // $element = new GrantElement1(0.015,2,$projet->getPeriodeGrace(),$projet->getMaturiteFacilite(),"In percent of outstanding loan",0,$somme_commission);
+           $element = new GrantElement1(0.01,2,$projet->getPeriodeGrace(),$projet->getMaturiteFacilite(),"In percent of outstanding loan",0,$somme_commission);
             
             
 
-            $element = new GrantElement1($projet->getTauxFixe()->getValeurElementDon(), 2,$projet->getPeriodeGrace(),$projet->getMaturiteFacilite(),"In percent of outstanding loan",0,$somme_commission);
+            // $element = new GrantElement1($projet->getTauxFixe()->getValeurElementDon(), 2,$projet->getPeriodeGrace(),$projet->getMaturiteFacilite(),"In percent of outstanding loan",0,$somme_commission);
             $val = $element->calculeElementDonBailleur(100,0);
             
             $projet->setElementDon($val);
@@ -215,11 +219,11 @@ class ProjetController extends AbstractController
         ]);
     }
 
-      /**
+    /**
      * @Route("/projet/tableaucomparatif", name="tableau_comparatif")
      */
     //public function tableaucomparatif(BailleurRepository $bailleurrep, SecteurInterventionRepository $secteurInterventionrep, TypeFinancementRepository $typefinancementrep, TauxInteretRepository $tauxinteretrep) : Response
-    public function tableaucomparatif(ProjetRepository $projetrep, SecteurInterventionRepository $secteurInterventionrep, TypeFinancementRepository $typefinancementrep) : Response
+    public function tableaucomparatif(ProjetRepository $projetrep, BailleurRepository $bailleurRepository,  Request $request, SecteurInterventionRepository $secteurInterventionrep, TypeFinancementRepository $typefinancementrep) : Response
     {   
         $projets = $projetrep->findAll();
         $secteur = $secteurInterventionrep->findAll();
@@ -228,10 +232,22 @@ class ProjetController extends AbstractController
         $makarehetra = $projetrep->makarehetra();
         dump($makarehetra);
 
+        
+        $recherche = new BailleurRecherche();
+        $form = $this->createForm(BailleurRechercheType::class, $recherche);
+        $form->handleRequest($request);
+
+
+        // $bailleur_recherche = $bailleurRepository->findAllVisibleQuery($recherche);
+
         return $this->render("projet/tableau_comparatif.html.twig",[
             'bailleurs' => $projets,
             'secteur' => $secteur,
             'typefinancement' => $typefinancement,
+            
+            // 'bailleurs_recherche' => $bailleur_recherche,
+            // 'form' => $form->createView()
+            
             //'tauxinteret' => $tauxinteret,
         ]);
     }
@@ -263,6 +279,42 @@ class ProjetController extends AbstractController
             'bailleurs' => $projets,
             'secteur' => $secteur,
             'typefinancement' => $typefinancement,
+            //'tauxinteret' => $tauxinteret,
+        ]);
+    }
+
+    
+      //----------------------------------------excel-----------------------------------//
+
+    /**
+     * @Route("/projet/tableaucomparatif_Exel", name="")
+     */
+    //public function tableaucomparatif(BailleurRepository $bailleurrep, SecteurInterventionRepository $secteurInterventionrep, TypeFinancementRepository $typefinancementrep, TauxInteretRepository $tauxinteretrep) : Response
+    public function tbl_comp_excel(ProjetRepository $projetrep, BailleurRepository $bailleurRepository,  Request $request, SecteurInterventionRepository $secteurInterventionrep, TypeFinancementRepository $typefinancementrep) : Response
+    {   
+        $projets = $projetrep->findAll();
+        $secteur = $secteurInterventionrep->findAll();
+        $typefinancement = $typefinancementrep->findAll();
+        //$tauxinteret = $tauxinteretrep->findAll();
+        $makarehetra = $projetrep->makarehetra();
+        dump($makarehetra);
+
+        
+        $recherche = new BailleurRecherche();
+        $form = $this->createForm(BailleurRechercheType::class, $recherche);
+        $form->handleRequest($request);
+
+
+        // $bailleur_recherche = $bailleurRepository->findAllVisibleQuery($recherche);
+
+        return $this->render("projet/tbl_comp_excel.html.twig",[
+            'bailleurs' => $projets,
+            'secteur' => $secteur,
+            'typefinancement' => $typefinancement,
+            
+            // 'bailleurs_recherche' => $bailleur_recherche,
+            // 'form' => $form->createView()
+            
             //'tauxinteret' => $tauxinteret,
         ]);
     }

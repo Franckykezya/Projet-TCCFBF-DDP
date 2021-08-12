@@ -14,20 +14,6 @@
             <h5>Cette carte represente la liste des projets</h5>
         </center>
 
-        <div class="form-row align-items-end">
-            {{form_start(form)}}
-                <div class="form-row align-items-end">
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                    {{ form_row(form.nomprojet, {'label' : 'Nom du projet', 'attr' : {'placeholder':"Nom du projet"}}) }}
-                    <div class="form-group">
-                        <button type="Submit" class="btn btn-success pull-right" name="" id="" value="">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </button> 
-                    </div> 
-                </div>  
-            {{form_end(form)}}
-
-        </div>
         <!-- /. ROW  -->
             
         <div class="col-md-12">
@@ -37,6 +23,21 @@
             </div>
 
             <div class="col-md-10">
+
+                <div class="form-row align-items-end pull-right">
+                    {{form_start(form)}}
+                        <div class="form-row align-items-end">
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            {{ form_row(form.nomprojet, {'label' : 'Nom du projet', 'attr' : {'placeholder':"Nom du projet"}}) }}
+                            <div class="form-group">
+                                <button type="Submit" class="btn btn-success pull-right" name="" id="" value="">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button> 
+                            </div> 
+                        </div>  
+                    {{form_end(form)}}
+
+                </div>
 
                 <table class="table table-striped">
                     <thead>
