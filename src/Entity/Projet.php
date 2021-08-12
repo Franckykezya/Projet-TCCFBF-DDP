@@ -228,6 +228,126 @@ class Projet
      */
     private $tauxvariable;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $signature;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $date_mise_vigueur;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $date_limite_decaissement;
+
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $type;
+
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $situation;
+
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $mo_monnaie;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $mo_montant;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $mo_equivalent_usd;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $de_montant_accord;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $de_equivalent_usd;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $de_taux;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $de_reste_decaisser;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $de_rest_decaisser_usd;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $de_montant_mga;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $di_montant_usd;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $di_date_notification;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $di_nature_depenses;
+
+    /**
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $di_situation;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $pricipaux_problemes;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $mesures_prises;
+
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    private $concessionalite;
+
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $statut;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $observations;
+
     public function __construct()
     {
         $this->secteur = new ArrayCollection();
@@ -569,6 +689,294 @@ class Projet
     public function setTauxvariable(?TauxVariable $tauxvariable): self
     {
         $this->tauxvariable = $tauxvariable;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getSignature(): ?\DateTimeInterface
+    {
+        return $this->signature;
+    }
+
+    public function setSignature(\DateTimeInterface $signature): self
+    {
+        $this->signature = $signature;
+
+        return $this;
+    }
+
+    public function getDateMiseVigueur(): ?\DateTimeInterface
+    {
+        return $this->date_mise_vigueur;
+    }
+
+    public function setDateMiseVigueur(?\DateTimeInterface $date_mise_vigueur): self
+    {
+        $this->date_mise_vigueur = $date_mise_vigueur;
+
+        return $this;
+    }
+
+    public function getDateLimiteDecaissement(): ?\DateTimeInterface
+    {
+        return $this->date_limite_decaissement;
+    }
+
+    public function setDateLimiteDecaissement(?\DateTimeInterface $date_limite_decaissement): self
+    {
+        $this->date_limite_decaissement = $date_limite_decaissement;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getSituation(): ?string
+    {
+        return $this->situation;
+    }
+
+    public function setSituation(string $situation): self
+    {
+        $this->situation = $situation;
+
+        return $this;
+    }
+
+    public function getMoMonnaie(): ?string
+    {
+        return $this->mo_monnaie;
+    }
+
+    public function setMoMonnaie(string $mo_monnaie): self
+    {
+        $this->mo_monnaie = $mo_monnaie;
+
+        return $this;
+    }
+
+    public function getMoMontant(): ?float
+    {
+        return $this->mo_montant;
+    }
+
+    public function setMoMontant(?float $mo_montant): self
+    {
+        $this->mo_montant = $mo_montant;
+
+        return $this;
+    }
+
+    public function getMoEquivalentUsd(): ?float
+    {
+        return $this->mo_equivalent_usd;
+    }
+
+    public function setMoEquivalentUsd(?float $mo_equivalent_usd): self
+    {
+        $this->mo_equivalent_usd = $mo_equivalent_usd;
+
+        return $this;
+    }
+
+    public function getDeMontantAccord(): ?float
+    {
+        return $this->de_montant_accord;
+    }
+
+    public function setDeMontantAccord(?float $de_montant_accord): self
+    {
+        $this->de_montant_accord = $de_montant_accord;
+
+        return $this;
+    }
+
+    public function getDeEquivalentUsd(): ?float
+    {
+        return $this->de_equivalent_usd;
+    }
+
+    public function setDeEquivalentUsd(?float $de_equivalent_usd): self
+    {
+        $this->de_equivalent_usd = $de_equivalent_usd;
+
+        return $this;
+    }
+
+    public function getDeTaux(): ?float
+    {
+        return $this->de_taux;
+    }
+
+    public function setDeTaux(?float $de_taux): self
+    {
+        $this->de_taux = $de_taux;
+
+        return $this;
+    }
+
+    public function getDeResteDecaisser(): ?float
+    {
+        return $this->de_reste_decaisser;
+    }
+
+    public function setDeResteDecaisser(?float $de_reste_decaisser): self
+    {
+        $this->de_reste_decaisser = $de_reste_decaisser;
+
+        return $this;
+    }
+
+    public function getDeRestDecaisserUsd(): ?float
+    {
+        return $this->de_rest_decaisser_usd;
+    }
+
+    public function setDeRestDecaisserUsd(?float $de_rest_decaisser_usd): self
+    {
+        $this->de_rest_decaisser_usd = $de_rest_decaisser_usd;
+
+        return $this;
+    }
+
+    public function getDeMontantMga(): ?float
+    {
+        return $this->de_montant_mga;
+    }
+
+    public function setDeMontantMga(?float $de_montant_mga): self
+    {
+        $this->de_montant_mga = $de_montant_mga;
+
+        return $this;
+    }
+
+    public function getDiMontantUsd(): ?float
+    {
+        return $this->di_montant_usd;
+    }
+
+    public function setDiMontantUsd(?float $di_montant_usd): self
+    {
+        $this->di_montant_usd = $di_montant_usd;
+
+        return $this;
+    }
+
+    public function getDiDateNotification(): ?\DateTimeInterface
+    {
+        return $this->di_date_notification;
+    }
+
+    public function setDiDateNotification(?\DateTimeInterface $di_date_notification): self
+    {
+        $this->di_date_notification = $di_date_notification;
+
+        return $this;
+    }
+
+    public function getDiNatureDepenses(): ?string
+    {
+        return $this->di_nature_depenses;
+    }
+
+    public function setDiNatureDepenses(?string $di_nature_depenses): self
+    {
+        $this->di_nature_depenses = $di_nature_depenses;
+
+        return $this;
+    }
+
+    public function getDiSituation(): ?string
+    {
+        return $this->di_situation;
+    }
+
+    public function setDiSituation(?string $di_situation): self
+    {
+        $this->di_situation = $di_situation;
+
+        return $this;
+    }
+
+    public function getPricipauxProblemes(): ?string
+    {
+        return $this->pricipaux_problemes;
+    }
+
+    public function setPricipauxProblemes(?string $pricipaux_problemes): self
+    {
+        $this->pricipaux_problemes = $pricipaux_problemes;
+
+        return $this;
+    }
+
+    public function getMesuresPrises(): ?string
+    {
+        return $this->mesures_prises;
+    }
+
+    public function setMesuresPrises(?string $mesures_prises): self
+    {
+        $this->mesures_prises = $mesures_prises;
+
+        return $this;
+    }
+
+    public function getConcessionalite(): ?string
+    {
+        return $this->concessionalite;
+    }
+
+    public function setConcessionalite(string $concessionalite): self
+    {
+        $this->concessionalite = $concessionalite;
+
+        return $this;
+    }
+
+    public function getStatut(): ?string
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(string $statut): self
+    {
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function getObservations(): ?string
+    {
+        return $this->observations;
+    }
+
+    public function setObservations(?string $observations): self
+    {
+        $this->observations = $observations;
 
         return $this;
     }
