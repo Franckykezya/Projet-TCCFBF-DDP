@@ -13,9 +13,9 @@ use App\Repository\ProjetRepository;
 class GrantElementController extends AbstractController
 {
     /**
-     * @Route("/grantelementcalcul", name="grant_element")
+     * @Route("/grantelementcalcul/{id}", name="grant_element")
      */
-    public function index(Request $request,ProjetRepository $projetRepository): Response
+    public function index(Request $request,ProjetRepository $projetRepository,$id): Response
     {
         //dump($request);
         $val  = 0; $vallumpsum = 0;
@@ -40,7 +40,7 @@ class GrantElementController extends AbstractController
        // dump($element);
         }
         //maka bailleur
-        $projets = $projetRepository->findAll();
+        $projets = $projetRepository->find($id);
        // dump($projets);
         return $this->render('grant_element/index.html.twig', [
             'controller_name' => $val,

@@ -54,7 +54,7 @@
             <div class ="col-md-6 offset-md-3">
                 
                 {# <form action="" method="post" > #}
-                <form action="{{path('grant_element')}}" method="post" >    
+                <form action="{{path('grant_element',{'id':projets.id} )}}" method="post" >
                     {# <div class = "form-group">
                         <div class="col-md-4">
                             <label for="pet-select">Select Repayment Profile</label>
@@ -75,12 +75,16 @@
                             <label for ="projet">Projet</label>
                         </div>
                         <div class ="col-md-6">
+                           {#
                             <select name="projet" id="projet" class="form-control">
                                     <option value="">----projet----</option>
                                 {% for projet in projets %}
                                     <option value="{{ projet.id}}"><a href="">{{ projet.nom}}</option>
                                 {% endfor %}
                             </select>
+                            #}
+                                <input type="text" id = "projet" name = "projet" class="form-control" value="{{ projets.nom }}" disabled>
+                            
                         </div>
                         </br>
                     </div>
@@ -98,7 +102,7 @@
                             <label for ="face">Maturité</label>
                         </div>
                          <div  class ="col-md-6">
-                             <input type="text" id = "maturityval" name = "maturityval" class="form-control" >
+                             <input type="text" id = "maturityval" name = "maturityval" class="form-control" value="{{ projets.MaturiteFacilite }}" disabled>
                         </div>  
                        
                 </div>
@@ -107,7 +111,7 @@
                             <label for ="face">Période de grace</label>
                         </div>
                          <div  class ="col-md-6">
-                             <input type="text" id = "periodeval" name = "periodeval" class="form-control" >
+                             <input type="text" id = "periodeval" name = "periodeval" value="{{ projets.PeriodeGrace }}" class="form-control" disabled >
                         </div>  
                        
                 </div>

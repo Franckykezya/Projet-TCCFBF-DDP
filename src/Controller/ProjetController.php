@@ -90,7 +90,17 @@ class ProjetController extends AbstractController
             //ajout element don
             $somme_commission = $projet->getDifferentielInteret()+$projet->getFraisGestion()+$projet->getCommissionEngagement()+$projet->getCommissionService()+$projet->getCommissionInitiale()+$projet->getCommissionArrangement()+$projet->getCommissionAgent()+$projet->getMaturiteLettreCredit()+$projet->getFraisLiesLettreCredit()+$projet->getFraisLiesRefinancement();
            $element = new GrantElement1(0.01,2,$projet->getPeriodeGrace(),$projet->getMaturiteFacilite(),"In percent of outstanding loan",0,$somme_commission);
-            
+            //calcule decaissement
+             $de_taux = $projet->getMoMontant() - $projet->getDeMontantAccord();
+             $de_equivalent_usd = $projet->getMoEquivalentUsd() * $de_taux;
+             $de_reste_decaisser = $projet->getMoMontant() - $projet->getDeMontantAccord();
+             $de_reste_decaisser_usd = $projet->getMoEquivalentUsd() - $projet->getDeEquivalentUsd();
+
+             $projet->setDeTaux($de_taux);
+             $projet->setDeEquivalentUsd($de_equivalent_usd);
+             $projet->setDeResteDecaisser($de_reste_decaisser);
+             $projet->setDeRestDecaisserUsd($de_reste_decaisser_usd);
+
             
 
             // $element = new GrantElement1($projet->getTauxFixe()->getValeurElementDon(), 2,$projet->getPeriodeGrace(),$projet->getMaturiteFacilite(),"In percent of outstanding loan",0,$somme_commission);
