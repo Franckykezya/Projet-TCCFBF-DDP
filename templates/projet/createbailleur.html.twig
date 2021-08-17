@@ -231,6 +231,7 @@ function onlyNumber()
                                             </div>
                                         </div>
 
+                                        
                                         <div class="form-row align-items-end">
                                             <div class="col-md-12">
                                                 <div class="col-md-6">
@@ -240,50 +241,42 @@ function onlyNumber()
                                                     {{ form_row(formBailleur.situation, {'label' : 'Situation', 'attr' : {'placeholder':"Situation"}}) }}
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>                                         
+                                    
+                                        <fieldset>
+                                            <legend>Montant accord</legend>
+                                            {{ form_row(formBailleur.mo_monnaie, {'label' : 'Monnaie', 'attr' : {'placeholder':"Monnaie"}}) }}
 
-                                        <div class="form-row align-items-end">
-                                            <div>
-                                                <h5>Montant accord</h5>
-                                            </div>
-                                        </div></br>
-                                        
-                                        {{ form_row(formBailleur.mo_monnaie, {'label' : 'Monnaie', 'attr' : {'placeholder':"Monnaie"}}) }}
-
-                                        <div class="form-row align-items-end">
-                                            <div class="col-md-12">
-                                                <div class="col-md-6">
-                                                    {{ form_row(formBailleur.mo_montant, {'label' : 'Montant', 'attr' : {'placeholder':"Montant"}}) }}                       
+                                            <div class="form-row align-items-end">                                               
+                                                <div class="col-md-12">                                             
+                                                    <div class="col-md-6">
+                                                        {{ form_row(formBailleur.mo_montant, {'label' : 'Montant', 'attr' : {'placeholder':"Montant"}}) }}                       
                                                     </div>
-                                                <div class="col-md-6">
-                                                    {{ form_row(formBailleur.mo_equivalent_usd, {'label' : 'Equivalent USD', 'attr' : {'placeholder':"Equivalent USD"}}) }}
-                                                </div>                             
+                                                    <div class="col-md-6">
+                                                        {{ form_row(formBailleur.mo_equivalent_usd, {'label' : 'Equivalent USD', 'attr' : {'placeholder':"Equivalent USD"}}) }}
+                                                    </div>                                                                          
+                                                </div>                                              
                                             </div>
-                                        </div>
+                                        </fieldset>   
+                                    
+                                        <fieldset>
+                                            <legend>Décaissement cumulé</legend>                                   
+                                            {{ form_row(formBailleur.de_montant_accord, {'label' : 'Montant Accord', 'attr' : {'placeholder':"Montant Accord"}}) }}
+                                        </fieldset> 
 
-                                        <div class="form-row align-items-end">
-                                            <div>
-                                                <h5>Décaissement cumulé à fin Juin 2021</h5>
+                                        <fieldset>
+                                            <legend>Dépenses Inéligibles</legend>   
+                                            <div class="form-row align-items-end">
+                                                <div class="col-md-12">
+                                                    <div class="col-md-6">
+                                                        {{ form_row(formBailleur.de_montant_mga, {'label' : 'Montant MGA', 'attr' : {'placeholder':"Montant MGA"}}) }}
+                                                        </div>
+                                                    <div class="col-md-6">
+                                                        {{ form_row(formBailleur.di_montant_usd, {'label' : 'Montant en USD', 'attr' : {'placeholder':"Montant en USD"}}) }}
+                                                    </div>                             
+                                                </div>
                                             </div>
-                                        </div></br>
-                                         {{ form_row(formBailleur.de_montant_accord, {'label' : 'Montant Accord', 'attr' : {'placeholder':"Montant Accord"}}) }}
-                                     
-                                        <div class="form-row align-items-end">
-                                            <div>
-                                                <h5>Dépenses Inéligibles</h5>
-                                            </div>
-                                        </div></br>
-
-                                         <div class="form-row align-items-end">
-                                            <div class="col-md-12">
-                                                <div class="col-md-6">
-                                                    {{ form_row(formBailleur.de_montant_mga, {'label' : 'Montant MGA', 'attr' : {'placeholder':"Montant MGA"}}) }}
-                                                    </div>
-                                                <div class="col-md-6">
-                                                    {{ form_row(formBailleur.di_montant_usd, {'label' : 'Montant en USD', 'attr' : {'placeholder':"Montant en USD"}}) }}
-                                                </div>                             
-                                            </div>
-                                        </div>
+                                        </fieldset> 
 
                                         <div class="form-row align-items-end">
                                             <div class="col-md-12">

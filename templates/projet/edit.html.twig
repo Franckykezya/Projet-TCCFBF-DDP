@@ -131,13 +131,8 @@ function onlyNumber()
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    
-                                    </div>  
- 
-                                    <div class="col-md-6">
-                                        
-                                         <div class="form-row align-items-end">
+
+                                            <div class="form-row align-items-end">
                                             <div class="col-md-12">
                                                 <div class="col-md-6">
                                                     {{ form_row(formBailleur.differentiel_interet, {'label' : 'Differentiel d\'interet (en %)', 'attr' : {'placeholder':"Differentiel d'interet (en %)"}}) }}
@@ -198,10 +193,111 @@ function onlyNumber()
                                             </div>
                                         </div>
 
-                                        {{ form_row(formBailleur.prime_attenuation_risque_credit, {'label' : 'Prime d\'attenuation du risque de credit (en %)', 'attr' : {'placeholder':"Prime d'attenuation du risque de credit (en %)"}}) }}
+                                        </div>
+                                    
+                                    </div>  
+ 
+                                    <div class="col-md-6">                                      
+
+                                         {{ form_row(formBailleur.prime_attenuation_risque_credit, {'label' : 'Prime d\'attenuation du risque de credit (en %)', 'attr' : {'placeholder':"Prime d'attenuation du risque de credit (en %)"}}) }}
+
+                                        {# New #}
+
+                                        {{ form_row(formBailleur.description, {'label' : 'Déscritpion', 'attr' : {'placeholder':"Déscritpion"}}) }}
+                                        {{ form_row(formBailleur.signature, {'label' : 'Signature', 'attr' : {'placeholder':"Signature"}}) }}
+
+                                        <div class="form-row align-items-end">
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.date_mise_vigueur, {'label' : 'Date mise en vigueur', 'attr' : {'placeholder':"Date mise en vigueur"}}) }}
+                                                    </div>
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.date_limite_decaissement, {'label' : 'Date limite décaissement', 'attr' : {'placeholder':"Date limite décaissement"}}) }}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        
+                                        <div class="form-row align-items-end">
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.type, {'label' : 'Type', 'attr' : {'placeholder':"Type"}}) }}
+                                                    </div>
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.situation, {'label' : 'Situation', 'attr' : {'placeholder':"Situation"}}) }}
+                                                </div>
+                                            </div>
+                                        </div>                                         
+                                    
+                                        <fieldset>
+                                            <legend>Montant accord</legend>
+                                            {{ form_row(formBailleur.mo_monnaie, {'label' : 'Monnaie', 'attr' : {'placeholder':"Monnaie"}}) }}
+
+                                            <div class="form-row align-items-end">                                               
+                                                <div class="col-md-12">                                             
+                                                    <div class="col-md-6">
+                                                        {{ form_row(formBailleur.mo_montant, {'label' : 'Montant', 'attr' : {'placeholder':"Montant"}}) }}                       
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        {{ form_row(formBailleur.mo_equivalent_usd, {'label' : 'Equivalent USD', 'attr' : {'placeholder':"Equivalent USD"}}) }}
+                                                    </div>                                                                          
+                                                </div>                                              
+                                            </div>
+                                        </fieldset>   
+                                    
+                                        <fieldset>
+                                            <legend>Décaissement cumulé</legend>                                   
+                                            {{ form_row(formBailleur.de_montant_accord, {'label' : 'Montant Accord', 'attr' : {'placeholder':"Montant Accord"}}) }}
+                                        </fieldset> 
+
+                                        <fieldset>
+                                            <legend>Dépenses Inéligibles</legend>   
+                                            <div class="form-row align-items-end">
+                                                <div class="col-md-12">
+                                                    <div class="col-md-6">
+                                                        {{ form_row(formBailleur.de_montant_mga, {'label' : 'Montant MGA', 'attr' : {'placeholder':"Montant MGA"}}) }}
+                                                        </div>
+                                                    <div class="col-md-6">
+                                                        {{ form_row(formBailleur.di_montant_usd, {'label' : 'Montant en USD', 'attr' : {'placeholder':"Montant en USD"}}) }}
+                                                    </div>                             
+                                                </div>
+                                            </div>
+                                        </fieldset> 
+
+                                        <div class="form-row align-items-end">
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.di_date_notification, {'label' : 'Date de notification', 'attr' : {'placeholder':"Date de notification"}}) }}
+                                                    </div>
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.di_nature_depenses, {'label' : 'Nature des dépenses', 'attr' : {'placeholder':"Nature des dépenses"}}) }}
+                                                </div>                             
+                                            </div>
+                                        </div>
+
+                                         {{ form_row(formBailleur.di_situation, {'label' : 'Situation', 'attr' : {'placeholder':"Situation"}}) }}
+                                        
+                                        <div><center> ___________________________________ </center></div>
+                                        
+                                        {{ form_row(formBailleur.pricipaux_problemes, {'label' : 'Principaux Problèmes', 'attr' : {'placeholder':"Principaux Problèmes"}}) }}
+                                        {{ form_row(formBailleur.mesures_prises, {'label' : 'Mesures prises', 'attr' : {'placeholder':"Mesures prises"}}) }}
+
+                                        <div class="form-row align-items-end">
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.concessionalite, {'label' : 'Concessionalité', 'attr' : {'placeholder':"Concessionalité"}}) }}
+                                                    </div>
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.statut, {'label' : 'statut', 'attr' : {'placeholder':"statut"}}) }}
+                                                </div>                             
+                                            </div>
+                                        </div>
+
+                                        {{ form_row(formBailleur.observations, {'label' : 'Observations', 'attr' : {'placeholder':"Observations"}}) }}
+
 
                                         <button type="Submit" class="btn btn-info pull-right" name="" id="" value="">
-                                        <span class="glyphicon glyphicon-floppy-saved">&nbsp;</span>Enregistrer
+                                        <span class="glyphicon glyphicon-floppy-saved">&nbsp;</span>Modifier
                                         </button>
                                         
                                         {{ form_end(formBailleur) }}
