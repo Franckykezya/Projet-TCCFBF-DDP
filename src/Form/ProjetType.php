@@ -55,6 +55,33 @@ class ProjetType extends AbstractType
                  'required' => false
              ]
              )
+
+             // New
+             ->add('description')
+             ->add('signature')
+             ->add('date_mise_vigueur')
+             ->add('date_limite_decaissement')
+             ->add('type')
+             ->add('situation')
+             ->add('mo_monnaie')
+             ->add('mo_montant')
+            //  ->add('mo_equivalent_usd')
+             ->add('de_montant_accord')
+            //  ->add('de_equivalent_usd')
+            //  ->add('de_taux')
+            //  ->add('de_reste_decaisser')
+            //  ->add('de_rest_decaisser_usd')
+             ->add('de_montant_mga')
+             ->add('di_montant_usd')
+             ->add('di_date_notification')
+             ->add('di_nature_depenses')
+             ->add('di_situation')
+             ->add('pricipaux_problemes')
+             ->add('mesures_prises')
+             ->add('concessionalite')
+             ->add('statut')
+             ->add('observations')
+
                      ;
     }
 

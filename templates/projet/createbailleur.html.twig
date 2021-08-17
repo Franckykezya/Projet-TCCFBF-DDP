@@ -145,11 +145,7 @@ function onlyNumber()
                                                 </div>
                                             </div>
                                         </div>
-                                    
-                                    </div>  
- 
-                                    <div class="col-md-6">
-                                        
+
                                          <div class="form-row align-items-end">
                                             <div class="col-md-12">
                                                 <div class="col-md-6">
@@ -190,6 +186,7 @@ function onlyNumber()
                                                 </div>
                                             </div>
                                         </div>
+
                                          <div class="form-row align-items-end">
                                             <div class="col-md-12">
                                                 <div class="col-md-6">
@@ -200,6 +197,7 @@ function onlyNumber()
                                                  </div>
                                             </div>
                                         </div>
+
                                          <div class="form-row align-items-end">
                                             <div class="col-md-12">
                                                 <div class="col-md-6">
@@ -209,9 +207,112 @@ function onlyNumber()
                                                     {{ form_row(formBailleur.prime_assurance_et_frais_garantie, {'label' : 'Prime d\'assurance / Frais garantie (en %)', 'attr' : {'placeholder':"Prime d'assurance / Frais de garantie (en %)"}}) }}
                                                 </div>
                                             </div>
+                                        </div>                                      
+                                    
+                                    </div>  
+ 
+                                    <div class="col-md-6">                                     
+                                        
+                                         {{ form_row(formBailleur.prime_attenuation_risque_credit, {'label' : 'Prime d\'attenuation du risque de credit (en %)', 'attr' : {'placeholder':"Prime d'attenuation du risque de credit (en %)"}}) }}
+
+                                        {# New #}
+
+                                        {{ form_row(formBailleur.description, {'label' : 'Déscritpion', 'attr' : {'placeholder':"Déscritpion"}}) }}
+                                        {{ form_row(formBailleur.signature, {'label' : 'Signature', 'attr' : {'placeholder':"Signature"}}) }}
+
+                                        <div class="form-row align-items-end">
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.date_mise_vigueur, {'label' : 'Date mise en vigueur', 'attr' : {'placeholder':"Date mise en vigueur"}}) }}
+                                                    </div>
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.date_limite_decaissement, {'label' : 'Date limite décaissement', 'attr' : {'placeholder':"Date limite décaissement"}}) }}
+                                                </div>
+                                            </div>
                                         </div>
 
-                                        {{ form_row(formBailleur.prime_attenuation_risque_credit, {'label' : 'Prime d\'attenuation du risque de credit (en %)', 'attr' : {'placeholder':"Prime d'attenuation du risque de credit (en %)"}}) }}
+                                        <div class="form-row align-items-end">
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.type, {'label' : 'Type', 'attr' : {'placeholder':"Type"}}) }}
+                                                    </div>
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.situation, {'label' : 'Situation', 'attr' : {'placeholder':"Situation"}}) }}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row align-items-end">
+                                            <div>
+                                                <h5>Montant accord</h5>
+                                            </div>
+                                        </div></br>
+                                        
+                                        <div class="form-row align-items-end">
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.mo_monnaie, {'label' : 'Monnaie', 'attr' : {'placeholder':"Monnaie"}}) }}
+                                                    </div>
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.mo_montant, {'label' : 'Montant', 'attr' : {'placeholder':"Montant"}}) }}
+                                                </div>                             
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row align-items-end">
+                                            <div>
+                                                <h5>Décaissement cumulé à fin Juin 2021</h5>
+                                            </div>
+                                        </div></br>
+                                         {{ form_row(formBailleur.de_montant_accord, {'label' : 'Montant Accord', 'attr' : {'placeholder':"Montant Accord"}}) }}
+                                     
+                                        <div class="form-row align-items-end">
+                                            <div>
+                                                <h5>Dépenses Inéligibles</h5>
+                                            </div>
+                                        </div></br>
+
+                                         <div class="form-row align-items-end">
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.de_montant_mga, {'label' : 'Montant MGA', 'attr' : {'placeholder':"Montant MGA"}}) }}
+                                                    </div>
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.di_montant_usd, {'label' : 'Montant en USD', 'attr' : {'placeholder':"Montant en USD"}}) }}
+                                                </div>                             
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row align-items-end">
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.di_date_notification, {'label' : 'Date de notification', 'attr' : {'placeholder':"Date de notification"}}) }}
+                                                    </div>
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.di_nature_depenses, {'label' : 'Nature des dépenses', 'attr' : {'placeholder':"Nature des dépenses"}}) }}
+                                                </div>                             
+                                            </div>
+                                        </div>
+
+                                         {{ form_row(formBailleur.di_situation, {'label' : 'Situation', 'attr' : {'placeholder':"Situation"}}) }}
+                                        
+                                        <div><center> ___________________________________ </center></div>
+                                        
+                                        {{ form_row(formBailleur.pricipaux_problemes, {'label' : 'Principaux Problèmes', 'attr' : {'placeholder':"Principaux Problèmes"}}) }}
+                                        {{ form_row(formBailleur.mesures_prises, {'label' : 'Mesures prises', 'attr' : {'placeholder':"Mesures prises"}}) }}
+
+                                        <div class="form-row align-items-end">
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.concessionalite, {'label' : 'Concessionalité', 'attr' : {'placeholder':"Concessionalité"}}) }}
+                                                    </div>
+                                                <div class="col-md-6">
+                                                    {{ form_row(formBailleur.statut, {'label' : 'statut', 'attr' : {'placeholder':"statut"}}) }}
+                                                </div>                             
+                                            </div>
+                                        </div>
+
+                                        {{ form_row(formBailleur.observations, {'label' : 'Observations', 'attr' : {'placeholder':"Observations"}}) }}
 
                                         <button type="Submit" class="btn btn-info pull-right" name="" id="" value="">
                                         <span class="glyphicon glyphicon-floppy-saved">&nbsp;</span>Enregistrer
