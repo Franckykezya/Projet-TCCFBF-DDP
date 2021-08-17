@@ -93,13 +93,14 @@ class ProjetController extends AbstractController
             //calcule decaissement
 
              $de_taux =  $projet->getDeMontantAccord()*100 /$projet->getMoMontant() ;
-             $de_equivalent_usd = $projet->getMoEquivalentUsd() * $de_taux;
-             $de_reste_decaisser = $projet->getMoMontant() - $projet->getDeMontantAccord();
-             $de_reste_decaisser_usd = $projet->getMoEquivalentUsd() - $projet->getDeEquivalentUsd();
-
              $projet->setDeTaux($de_taux);
+
+             $de_equivalent_usd =  ($projet->getMoEquivalentUsd() * $de_taux ) / 100;
              $projet->setDeEquivalentUsd($de_equivalent_usd);
+
+             $de_reste_decaisser = $projet->getMoMontant() - $projet->getDeMontantAccord();
              $projet->setDeResteDecaisser($de_reste_decaisser);
+             $de_reste_decaisser_usd = $projet->getMoEquivalentUsd() - $projet->getDeEquivalentUsd();
              $projet->setDeRestDecaisserUsd($de_reste_decaisser_usd);
 
             
@@ -191,14 +192,20 @@ class ProjetController extends AbstractController
             //calcule decaissement
 
             $de_taux =  $projet->getDeMontantAccord()*100 /$projet->getMoMontant() ;
-            $de_equivalent_usd = $projet->getMoEquivalentUsd() * $de_taux;
-            $de_reste_decaisser = $projet->getMoMontant() - $projet->getDeMontantAccord();
-            $de_reste_decaisser_usd = $projet->getMoEquivalentUsd() - $projet->getDeEquivalentUsd();
-
             $projet->setDeTaux($de_taux);
+
+            $de_equivalent_usd =  ($projet->getMoEquivalentUsd() * $de_taux ) / 100;
             $projet->setDeEquivalentUsd($de_equivalent_usd);
+
+            $de_reste_decaisser = $projet->getMoMontant() - $projet->getDeMontantAccord();
             $projet->setDeResteDecaisser($de_reste_decaisser);
+            $de_reste_decaisser_usd = $projet->getMoEquivalentUsd() - $projet->getDeEquivalentUsd();
             $projet->setDeRestDecaisserUsd($de_reste_decaisser_usd);
+
+
+
+
+
 
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', 'Le groupe a bien été modifié');
