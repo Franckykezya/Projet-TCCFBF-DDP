@@ -248,13 +248,15 @@ function onlyNumber()
                                             </div>
                                         </div></br>
                                         
+                                        {{ form_row(formBailleur.mo_monnaie, {'label' : 'Monnaie', 'attr' : {'placeholder':"Monnaie"}}) }}
+
                                         <div class="form-row align-items-end">
                                             <div class="col-md-12">
                                                 <div class="col-md-6">
-                                                    {{ form_row(formBailleur.mo_monnaie, {'label' : 'Monnaie', 'attr' : {'placeholder':"Monnaie"}}) }}
+                                                    {{ form_row(formBailleur.mo_montant, {'label' : 'Montant', 'attr' : {'placeholder':"Montant"}}) }}                       
                                                     </div>
                                                 <div class="col-md-6">
-                                                    {{ form_row(formBailleur.mo_montant, {'label' : 'Montant', 'attr' : {'placeholder':"Montant"}}) }}
+                                                    {{ form_row(formBailleur.mo_equivalent_usd, {'label' : 'Equivalent USD', 'attr' : {'placeholder':"Equivalent USD"}}) }}
                                                 </div>                             
                                             </div>
                                         </div>

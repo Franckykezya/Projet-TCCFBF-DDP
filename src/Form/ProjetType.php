@@ -65,7 +65,7 @@ class ProjetType extends AbstractType
              ->add('situation')
              ->add('mo_monnaie')
              ->add('mo_montant')
-            //  ->add('mo_equivalent_usd')
+             ->add('mo_equivalent_usd')
              ->add('de_montant_accord')
             //  ->add('de_equivalent_usd')
             //  ->add('de_taux')
