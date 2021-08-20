@@ -3,9 +3,235 @@
 {% block title %}Affiche projet{% endblock %}
 
 {% block body %}
+    <div class="col-md-12">
+
+        <div class="col-md-3">
+
+        </div>
+
+        <div class="col-md-6">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{projet.nom}}</td>
+                </tr>
+                <tr>
+                    <th>Bailleur(s) </th>
+                    <td>{% for blr in bailleurs %} {{blr.nom}},  {% endfor %}  </br> </td>
+                </tr>
+                <tr>
+                    <th>Secteur d'intervention</th>
+                    <td>{% for secteur in secteurs %} {{secteur.nom}},  {% endfor %}</td>
+                </tr>
+                <tr>
+                    <th>Type de financement</th>
+                    <td>{% for financement in financements %} {{financement.nom}},  {% endfor %}</td>
+                </tr>
+                <tr>
+                    <th>Part finance par le bailleurs de fond</th>
+                    <td>{{projet.PartFinance}} % du coût du projet</td>
+                </tr>
+                <tr>
+                    <th>Maturite de la facilite</th>
+                    <td>{{projet.MaturiteFacilite}} ans</td>
+                </tr>
+                <tr>
+                    <th>Periode de grace de la facilite</th>
+                    <td>{{projet.PeriodeGrace}} ans</td>
+                </tr>
+                <tr>
+                    <th>Taux d'interet</th>
+                    <td>>>> Taux d'interet fixe : </b>{% for tauxinteretfixe in tauxinteretfixes %}
+                        {{tauxinteretfixe.valeur}}% </br>
+                    Valeur pour l'élément don : {{tauxinteretfixe.valeur_element_don}}%
+                    {% endfor %}</br>
+                    Taux d'interet variable : </b>{% for tauxinteretvariable in tauxinteretvariables %}
+                    {{tauxinteretvariable.base}} +{{tauxinteretvariable.valeur}}%,
+                    soit ({{tauxinteretvariable.total}}%) </br>
+                    &nbsp; &nbsp;&nbsp; &nbsp;  Valeur pour l'élément don : {{tauxinteretvariable.valeur_calcul_element_don}}%
+                    {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Differentiel d'interet</th>
+                    <td>{{projet.DifferentielInteret}}</td>
+                </tr>
+                <tr>
+                    <th>Frais de gestion</th>
+                    <td>{{projet.FraisGestion}}</td>
+                </tr>
+                <tr>
+                    <th>Commission d'engagement</th>
+                    <td>{{projet.commissionEngagement}} %</td>
+                </tr>
+                <tr>
+                    <th>Commission de service</th>
+                    <td>{{projet.CommissionService}} %</td>
+                </tr>
+                <tr>
+                    <th>Commission initiale</th>
+                    <td>{{projet.CommissionInitiale}}</td>
+                </tr>
+                <tr>
+                    <th>Commission d'arrangement</th>
+                    <td>{{projet.CommissionArrangement}}</td>
+                </tr>
+                <tr>
+                    <th>Commission d'agent</th>
+                    <td>{{projet.commissionAgent}}</td>
+                </tr>
+                <tr>
+                    <th>Maturite de la lettre de credit</th>
+                    <td>{{projet.MaturiteLettreCredit}}</td>
+                </tr>
+                <tr>
+                    <th>Frais lies a la mise en place de la lettre de credit</th>
+                    <td>{{projet.FraisLiesLettreCredit}}</td>
+                </tr>
+                <tr>
+                    <th>Frais lies au refinancement de la lettre de credit</th>
+                    <td>{{projet.FraisLiesRefinancement}}</td>
+                </tr>
+                <tr>
+                    <th> Element-don</th>
+                    <td>{{projet.Elementdon}} %</td>
+                </tr>
+                <tr>
+                    <th> Frais et debours</th>
+                    <td>{{projet.FraisEtDebours}}</td>
+                </tr>
+                <tr>
+                    <th> Prime d'assurance / frais de garantie</th>
+                    <td>{{projet.PrimeAssuranceEtFraisGarantie}}</td>
+                </tr>
+                <tr>
+                    <th> Prime d'attenuation du risque de credit</th>
+                    <td>{{projet.PrimeAttenuationRisqueCredit}}</td>
+                </tr>
+                <tr>
+                    <th>Element-don (Teneant compte frais et debours et si assurance payée par l'emprunteur)</th>
+                    <td>{{projet.Elementdon}} %</td>
+                </tr>
+                <tr>
+                    <th> Taux d'interet effectif</th>
+                    <td></td>
+                </tr>
+                <!--eto le vao2-->
+                <tr>
+                    <th>Déscription</th>
+                    <td>{{ projet.Description }}</td>
+                </tr>
+                <tr>
+                    <th> Signature </th>
+                    <td> {{ projet.Signature.format('d-m-Y')}}</td>
+                </tr>
+                <tr>
+                    <th> Date de mise en vigeur </th>
+                    <td> {{ projet.DateMiseVigueur.format('d-m-Y')}}</td>
+                </tr>
+                <tr>
+                    <th> Date limite décaissement </th>
+                    <td> {{ projet.DateLimiteDecaissement.format('d-m-Y')}}</td>
+                </tr>
+                <tr>
+                    <th> Type </th>
+                    <td> {{ projet.Type}}</td>
+                </tr>
+                <tr>
+                    <th> Situation </th>
+                    <td> {{ projet.Situation}}</td>
+                </tr>
+                <tr>
+                    <th> Montant accord Monanaie </th>
+                    <td> {{ projet.MoMonnaie}}</td>
+                </tr>
+                <tr>
+                    <th> Montant accord </th>
+                    <td> {{ projet.MoMontant}}</td>
+                </tr>
+                <tr>
+                    <th> Montant accord équivalent en USD </th>
+                    <td> {{ projet.MoEquivalentUsd}}</td>
+                </tr>
+                <tr>
+                    <th> Décaissement Montant accord </th>
+                    <td> {{ projet.DeMontantAccord}}</td>
+                </tr>
+                <tr>
+                    <th> Décaissement Equivalent en USD </th>
+                    <td> {{ projet.DeEquivalentUsd}}</td>
+                </tr>
+                <tr>
+                    <th> Décaissement taux </th>
+                    <td> {{ projet.DeTaux|number_format(2)}} %</td>
+                </tr>
+                <tr>
+                    <th> Reste à décaisser </th>
+                    <td> {{ projet.DeResteDecaisser}}</td>
+                </tr>
+                <tr>
+                    <th> Reste à décaisser en USD </th>
+                    <td> {{ projet.DeRestDecaisserUsd}}</td>
+                </tr>
+                <tr>
+                    <th> Reste à décaisser en MGA </th>
+                    <td> {{ projet.DeMontantMga}}</td>
+                </tr>
+                <tr>
+                    <th> Dépense inéligible montan en USD </th>
+                    <td> {{ projet.DiMontantUsd}}</td>
+                </tr>
+                <tr>
+                    <th> Dépense inéligible date notification </th>
+                    <td> {{ projet.DiDateNotification.format('d-m-y')}}</td>
+                </tr>
+                <tr>
+                    <th> Dépense inéligible nature du dépense </th>
+                    <td> {{ projet.DiNatureDepenses}}</td>
+                </tr>
+                <tr>
+                    <th> Dépense inéligible situation </th>
+                    <td> {{ projet.DiSituation}}</td>
+                </tr>
+                <tr>
+                    <th> Principaux problèmes </th>
+                    <td> {{ projet.PricipauxProblemes}}</td>
+                </tr>
+                <tr>
+                    <th> Mesures prises </th>
+                    <td> {{ projet.MesuresPrises}}</td>
+                </tr>
+                <tr>
+                    <th> Concessionalite </th>
+                    <td> {{ projet.Concessionalite}}</td>
+                </tr>
+                <tr>
+                    <th> Statut</th>
+                    <td> {{ projet.Statut}}</td>
+                </tr>
+
+
+
+                </tbody>
+            </table>
+<!--{#
+            <div class="form-row align-items-end pull-right">
+                <a href="{{ path('bailleur_edit', {'id': bailleur.id}) }}" class="btn btn-primary"><span class="glyphicon glyphicon-edit">_</span>Modifier</a>
+                &nbsp; &nbsp; &nbsp;
+                {{ include('bailleur/_delete_form.html.twig') }}
+                &nbsp; &nbsp; &nbsp;
+                <a href="{{ path('bailleur_index') }}" class="btn btn-warning"><span class="glyphicon glyphicon-share-alt">_</span>Retour à la liste...</a></br>
+            </div>
+        </div>
+-->
+        <div class="col-md-3">
+
+        </div>
+    </div>
 {# <div id="wrapper">
         <!-- /. NAV SIDE  -->
-            <div id="page-wrapper" > #}
+            <div id="page-wrapper" >
                 <div id="page-inner">
 
                  <div class="col-md-1">
@@ -18,7 +244,7 @@
                             <h2>Information du projet " {{projet.nom}} " avec le bailleur de fond : " {% for blr in bailleurs %} {{blr.nom}} ".  {% endfor %}  </h2>
                         </div>
                     </div>
-                    <!-- /. ROW  -->
+                    /. ROW
                     <hr />
 
                         <div class="row">
@@ -39,7 +265,7 @@
                                         <p class="text-muted"> <b> Periode de grace de la facilite :</b>  {{projet.PeriodeGrace}} ans </br> </p>
 
                                         {# <p class="text-muted"> <b> Taux d'interet :</b>  {{tauxinteretfixe.base}} ans </br> </p> tauxinteretfixe' => $tauxinteretfixe,
-                'tauxinteretvariable #}
+                'tauxinteretvariable
                                         <p class="text-muted"><br><b> Taux d'interet : </b></br>
                                                 &nbsp; &nbsp;&nbsp; &nbsp; <b> >>> Taux d'interet fixe : </b>{% for tauxinteretfixe in tauxinteretfixes %}
                                                                         {{tauxinteretfixe.valeur}}% </br>
@@ -49,7 +275,7 @@
                                                                             {# {{tauxinteretvariable.base}},{{tauxinteretvariable.valeur}}%,
                                                                             {{tauxinteretvariable.marge}},{{tauxinteretvariable.total}},
                                                                             {{tauxinteretvariable.valeur_element_don}}%,{{tauxinteretvariable.valeur_element_don}}%,
-                                                                            {{tauxinteretvariable.valeur_calcul_element_don}}%  #}
+                                                                            {{tauxinteretvariable.valeur_calcul_element_don}}%
                                                                             {{tauxinteretvariable.base}} +{{tauxinteretvariable.valeur}}%,
                                                                             soit ({{tauxinteretvariable.total}}%) </br>
                                                                             &nbsp; &nbsp;&nbsp; &nbsp;  Valeur pour l'élément don : {{tauxinteretvariable.valeur_calcul_element_don}}% 
@@ -101,7 +327,7 @@
                                 </div>
                             </div>
                         </div>
-
+#}-->
                         <div class="form-row align-items-end pull-right">
                             <a href="{{path('modifier_bailleur', {'id': projet.id})}}" class="btn btn-info"><span class="glyphicon glyphicon-edit">_</span>Modifier</a>
                                 &nbsp; &nbsp; &nbsp;
