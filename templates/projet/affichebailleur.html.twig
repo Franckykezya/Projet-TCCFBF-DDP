@@ -123,16 +123,29 @@
                     <td>{{ projet.Description }}</td>
                 </tr>
                 <tr>
-                    <th> Signature </th>
-                    <td> {{ projet.Signature.format('d-m-Y')}}</td>
+                    <th> Signature </th>                 
+                    {% if projet.Signature == null %}
+                        <td> </td>                  
+                    {% else %}
+                         <td> {{ projet.Signature.format('Y-m-d')}}</td>
+                     {% endif %}
                 </tr>
                 <tr>
                     <th> Date de mise en vigeur </th>
-                    <td> {{ projet.DateMiseVigueur.format('d-m-Y')}}</td>
+                      {% if projet.DateMiseVigueur == null %}
+                        <td> </td>                  
+                    {% else %}
+                        <td> {{ projet.DateMiseVigueur.format('Y-m-d')}}</td>
+                     {% endif %}
+                    
                 </tr>
                 <tr>
-                    <th> Date limite décaissement </th>
-                    <td> {{ projet.DateLimiteDecaissement.format('d-m-Y')}}</td>
+                    <th> Date limite décaissement </th>                   
+                    {% if projet.DateLimiteDecaissement == null %}
+                        <td> </td>                  
+                    {% else %}
+                         <td> {{ projet.DateLimiteDecaissement.format('Y-m-d')}}</td>
+                     {% endif %}
                 </tr>
                 <tr>
                     <th> Type </th>
@@ -184,7 +197,11 @@
                 </tr>
                 <tr>
                     <th> Dépense inéligible date notification </th>
-                    <td> {{ projet.DiDateNotification.format('d-m-y')}}</td>
+                    {% if projet.DiDateNotification == null %}
+                        <td> </td>                  
+                    {% else %}
+                        <td> {{ projet.DiDateNotification.format('Y-m-d')}}</td>
+                     {% endif %}
                 </tr>
                 <tr>
                     <th> Dépense inéligible nature du dépense </th>
