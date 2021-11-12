@@ -97,18 +97,14 @@ class BailleurController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="bailleur_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, Bailleur $bailleur): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$bailleur->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($bailleur);
-            $entityManager->flush();
-        }
 
-        return $this->redirectToRoute('bailleur_index');
-    }
 
 }
+
+
+
+
+
+
+
+

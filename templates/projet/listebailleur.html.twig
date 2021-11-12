@@ -11,7 +11,7 @@
 
         <center>
             <h2>Liste des projets</h2>   
-            <h5>Cette carte represente la liste des projets</h5>
+           <!-- <h5>Cette carte represente la liste des projets</h5> -->
         </center>
 
         <!-- /. ROW  -->
@@ -42,23 +42,28 @@
                 <table class="table table-striped">
                     <thead>
                         <tr class="table-info">
-                            <th scope="col">Nom du pojet</th> 
-                            {# <th scope="col">Bailleur(s)</th>    #}
-                            <th scope="col">Actions</th> 
-                        
+                            <th scope="col"class="text-center">Nom du pojet</th>
+                            <th scope="col"class="text-center">Maturite de la facilite</th>
+                            <th scope="col"class="text-center">Type</th>
+                            <th scope="col"class="text-center">Statut</th>
+                            <th scope="col" class="text-center">Actions</th>
+
                         </tr>
                     </thead>
                     <tbody>
                         {% for pjt in projets %}
-                            <tr>
+                            <tr class="text-center">
                                 <td>{{pjt.nom}}</td>
                                 {# <td>Bailleur Tsy vita</td> #}
-                                {# {% for blr in bailleur %} {{blr.nom}},  {% endfor %} #}
+
+                                <td>{{ pjt.MaturiteFacilite }} ans</td>
+                                <td>{{ pjt.type }}</td>
+                                <td>{{ pjt.statut }}</td>
                                 <td>
                                     <div class="form-row align-items-end">
                                         <div class="col">
                                             <a href="{{ path('affiche_bailleur', {'id': pjt.id}) }}" class="btn btn-info"><span class="glyphicon glyphicon-align-justify">_</span>Détails</a>
-                                            <a href="{{path('grant_element',{'id':pjt.id}) }}" class ="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span>_Element don</a>
+                                            <a href="{{path('grant_element',{'id':pjt.id}) }}" class ="btn btn-primary"><span class="glyphicon glyphicon-calendar">_</span>calendrier de paiement</a>
                                         </div>
                                         
                                     </div> 

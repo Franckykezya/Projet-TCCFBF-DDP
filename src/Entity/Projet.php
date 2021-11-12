@@ -348,11 +348,17 @@ class Projet
      */
     private $observations;
 
+    /**
+     * @ORM\OneToMany(targetEntity=HistoriqueDecaissement::class, mappedBy="projet")
+     */
+    private $historiqueDecaissements;
+
     public function __construct()
     {
         $this->secteur = new ArrayCollection();
         $this->typefinancement = new ArrayCollection();
         $this->bailleur = new ArrayCollection();
+        $this->historiqueDecaissements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -977,6 +983,36 @@ class Projet
     public function setObservations(?string $observations): self
     {
         $this->observations = $observations;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|HistoriqueDecaissement[]
+     */
+    public function getHistoriqueDecaissements(): Collection
+    {
+        return $this->historiqueDecaissements;
+    }
+
+    public function addHistoriqueDecaissement(HistoriqueDecaissement $historiqueDecaissement): self
+    {
+        if (!$this->historiqueDecaissements->contains($historiqueDecaissement)) {
+            $this->historiqueDecaissements[] = $historiqueDecaissement;
+            $historiqueDecaissement->setProjet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistoriqueDecaissement(HistoriqueDecaissement $historiqueDecaissement): self
+    {
+        if ($this->historiqueDecaissements->removeElement($historiqueDecaissement)) {
+            // set the owning side to null (unless already changed)
+            if ($historiqueDecaissement->getProjet() === $this) {
+                $historiqueDecaissement->setProjet(null);
+            }
+        }
 
         return $this;
     }

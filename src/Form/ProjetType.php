@@ -39,7 +39,7 @@ class ProjetType extends AbstractType
             ->add('frais_et_debours')
             ->add('prime_assurance_et_frais_garantie')
             ->add('prime_attenuation_risque_credit')
-             ->add('secteur',EntityType::class, [
+            ->add('secteur',EntityType::class, [
                  'class' => SecteurIntervention::class,
                   'choice_label' => 'nom',
                   'multiple' => true

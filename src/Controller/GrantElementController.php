@@ -22,9 +22,12 @@ class GrantElementController extends AbstractController
         $d = 0; $dlumpsum = 0;$valiny = 0;
         $test = 0;
         if($request->request->count() > 0){
-            
-           $element = new GrantElement1(($_POST['interest']/100),$_POST['payments'],$_POST['periodeval'],$_POST['maturityval'],$_POST['management'], $_POST['val_management'],$_POST['commission']);
-           //$element = new GrantElement1(0.77,2,4,14,0,0,16.43);
+            dump($_POST['maturityval']);
+          $element = new GrantElement1(($_POST['interest']/100),$_POST['payments'],$_POST['periodeval'],$_POST['maturityval'],$_POST['management'], $_POST['val_management'],$_POST['commission']);
+           // $element = new GrantElement1(($_POST['interest']/100),$_POST['payments'],intval(5),intval(38),$_POST['management'], $_POST['val_management'],$_POST['commission']);
+
+            //$element = new GrantElement1(0.77,2,4,14,0,0,16.43);
+
             //$val = $element->calculElementDonSansCommission();
             $val = $element->calculeElementDon($_POST['face'],0);
             $d = $element->Calendrier_de_paiement($_POST['face']);

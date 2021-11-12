@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\HistoriqueDecaissement;
+use App\Form\HistoriqueDecaissementType;
+use App\Repository\HistoriqueDecaissementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -142,7 +145,7 @@ class ProjetController extends AbstractController
         $pjt = $paginator->paginate($this->projetRepository->findAll(), $request->query->getInt('page', 1), 13  );
         
         //$bailleurs = $bailleurRepository->findAll();
-        //dump($bailleurs);
+        dump($projets);
         return $this->render("projet/listebailleur.html.twig",[
             'projets' => $projets,
             'projet' => $pjt,
@@ -202,6 +205,19 @@ class ProjetController extends AbstractController
             $de_reste_decaisser_usd = $projet->getMoEquivalentUsd() - $projet->getDeEquivalentUsd();
             $projet->setDeRestDecaisserUsd($de_reste_decaisser_usd);
 
+            //add historique decaissement projet
+
+            /*
+                if($projet->getDeMontantAccord() != $_POST['']){
+                    $hi_decaiss = new HistoriqueDecaissement();
+                    $hi_decaiss->setHiDate();
+                    $hi_decaiss->setHiMontantAccord();
+                    $hi_decaiss->setHiTaux();
+                    $hi_decaiss->setHiResteDecaisser();
+                    $hi_decaiss->setHiResteDecaisserUsd();
+
+                }
+                */
 
 
 
@@ -220,6 +236,79 @@ class ProjetController extends AbstractController
             'formTauxFixe' => $formfixe->createView(),
             // 'formTauxVariable' => $formVariable->createView()
         ]);
+    }
+    //decaissement cummelé
+
+    /**
+     * @param Request $request
+     * @param Projet $projet
+     * @Route("nouveaudecaissement/{id}", name="nouveau_decaissement")
+     */
+    public function  decaissement(Request $request,  Projet $projet, HistoriqueDecaissementRepository $historiqueDecaissementRepository){
+        $historiqueDecaissement = new HistoriqueDecaissement();
+        $formhistorique = $this->createForm(HistoriqueDecaissementType::class,$historiqueDecaissement );
+        $formhistorique->handleRequest($request);
+        if($formhistorique->isSubmitted() && $formhistorique->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            /**
+             *  $de_taux =  $projet->getDeMontantAccord()*100 /$projet->getMoMontant() ;
+            $projet->setDeTaux($de_taux);
+
+            $de_equivalent_usd =  ($projet->getMoEquivalentUsd() * $de_taux ) / 100;
+            $projet->setDeEquivalentUsd($de_equivalent_usd);
+
+            $de_reste_decaisser = $projet->getMoMontant() - $projet->getDeMontantAccord();
+            $projet->setDeResteDecaisser($de_reste_decaisser);
+            $de_reste_decaisser_usd = $projet->getMoEquivalentUsd() - $projet->getDeEquivalentUsd();
+            $projet->setDeRestDecaisserUsd($de_reste_decaisser_usd);
+             */
+
+            $historiqueDecaissement->setProjet($projet);
+
+            $taux = $historiqueDecaissement->getHiMontantAccord()*100 / $projet->getMoMontant();
+            $historiqueDecaissement->setHiTaux($taux);
+
+            $equivUsd = ($projet->getMoEquivalentUsd()* $taux) / 100;
+            $historiqueDecaissement->setHiEquivalentUsd($equivUsd);
+            //mila manova le montant principale
+            $rest = $projet->getDeResteDecaisser() - $historiqueDecaissement->getHiMontantAccord();
+            $historiqueDecaissement->setHiResteDecaisser($rest);
+            $restdecaisserusd = $projet->getDeRestDecaisserUsd() - $historiqueDecaissement->getHiResteDecaisserUsd();
+            $historiqueDecaissement->setHiResteDecaisserUsd($restdecaisserusd);
+
+            //manova le ani @ projet actualisena
+            $Montantdecaisser = $projet->getDeMontantAccord() + $historiqueDecaissement->getHiMontantAccord();
+            $projet->setDeMontantAccord($Montantdecaisser);
+            $de_taux =  $projet->getDeMontantAccord()*100 /$projet->getMoMontant() ;
+            $projet->setDeTaux($de_taux);
+
+            $de_equivalent_usd =  ($projet->getMoEquivalentUsd() * $de_taux ) / 100;
+            $projet->setDeEquivalentUsd($de_equivalent_usd);
+
+            $de_reste_decaisser = $projet->getMoMontant() - $projet->getDeMontantAccord();
+            $projet->setDeResteDecaisser($de_reste_decaisser);
+            $de_reste_decaisser_usd = $projet->getMoEquivalentUsd() - $projet->getDeEquivalentUsd();
+            $projet->setDeRestDecaisserUsd($de_reste_decaisser_usd);
+
+
+            //bdb projet
+            $em->persist($projet);
+
+            //bdb historique
+            $em->persist($historiqueDecaissement);
+            $em->flush();
+
+        }
+        //liste des historiques
+        $historiquetabs = $historiqueDecaissementRepository->findProjetId($projet->getId());
+        //dump($historiquetab);
+
+        return $this->render('decaissement/nouveaudecaissement.html.twig',[
+            'historiquetabs' => $historiquetabs,
+            'projetId' => $projet->getId(),
+            'formhistorique' => $formhistorique->createView()
+        ]
+        );
     }
     /**
      * @Route("supprimerprojet/{id}", name="supprimer_bailleur", methods={"DELETE"})
