@@ -10,7 +10,7 @@
 
     <div class="row">
         <div class="col-md-3"><a href="{{ path('affiche_bailleur', {'id': projetId}) }}"> <center>Retour</center> </a></div>
-        <div class="col-md-9">  <h1> nouveau décaissement </h1> </div>
+        <div class="col-md-9">  <h1> Nouveau décaissement </h1> </div>
     </div>
     
 
@@ -24,8 +24,8 @@
             {#ato ni form#}
             {{ form_start(formhistorique) }}
 
-                {{ form_row(formhistorique.hi_montant_accord, {'label' : 'montant à décaisser'}) }}
-                {{ form_row(formhistorique.hi_date, {'label' : 'date de décaissement'}) }}
+                {{ form_row(formhistorique.hi_montant_accord, {'label' : 'Montant à décaisser'}) }}
+                {{ form_row(formhistorique.hi_date, {'label' : 'Date de décaissement'}) }}
 
             <div class="form-row align-items-end pull-right">
 
